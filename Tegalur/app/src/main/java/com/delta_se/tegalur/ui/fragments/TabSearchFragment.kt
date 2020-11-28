@@ -1,12 +1,14 @@
 package com.delta_se.tegalur.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.delta_se.tegalur.R
+import com.delta_se.tegalur.SearchActivity
 import com.delta_se.tegalur.data.dummy.DataDummy
 import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.data.model.DataPariwisata
@@ -21,6 +23,8 @@ class TabSearchFragment () : Fragment() {
 
     private var listBerita = ArrayList<DataBerita>()
     private var listPariwisata = ArrayList<DataPariwisata>()
+
+    companion object {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,19 +43,25 @@ class TabSearchFragment () : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentTabSearchBinding.bind(view)
-        val index = FragmentPagerItem.getPosition(arguments)
-        when(index){
+
+        var index = FragmentPagerItem.getPosition(arguments)
+        showFragment(index)
+    }
+
+    fun showFragment(indeks : Int){
+        Log.d("TabSearchFragment", "Jadi gini gan\t" + indeks)
+        when(indeks){
             0 -> {
                 getDataBerita()
                 dataRecycler.clear()
                 for (item in listBerita) {
                     dataRecycler.add(
-                        DataRecycler(
-                            item.title,
-                            item.image,
-                            item.date,
-                            item.isSaved
-                        )
+                            DataRecycler(
+                                    item.title,
+                                    item.image,
+                                    item.date,
+                                    item.isSaved
+                            )
                     )
                 }
                 binding.rvSearch.apply {
@@ -67,12 +77,12 @@ class TabSearchFragment () : Fragment() {
                 dataRecycler.clear()
                 for (item in listPariwisata) {
                     dataRecycler.add(
-                        DataRecycler(
-                            item.title,
-                            item.image,
-                            item.address,
-                            item.isSaved
-                        )
+                            DataRecycler(
+                                    item.title,
+                                    item.image,
+                                    item.address,
+                                    item.isSaved
+                            )
                     )
                 }
                 binding.rvSearch.apply {
@@ -105,5 +115,5 @@ class TabSearchFragment () : Fragment() {
     private fun getDataPenginapan(){}
 
 
-    companion object {}
+
 }
