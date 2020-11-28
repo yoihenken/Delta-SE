@@ -9,8 +9,9 @@
 
     <ImageView
         android:id="@+id/imageCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -26,7 +27,6 @@
         android:textColor="@color/black"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/descCategory"
         app:layout_constraintEnd_toStartOf="@id/imageSimpan"
         app:layout_constraintStart_toEndOf="@id/imageCategory"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,12 +42,13 @@
 
     <TextView
         android:id="@+id/descCategory"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Jl. Berdua sama kamu kusenang"
+        android:text="@string/Lorem_long"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/imageCategory" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

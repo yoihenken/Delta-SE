@@ -1,19 +1,40 @@
 package com.delta_se.tegalur
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
 import com.delta_se.tegalur.databinding.ActivitySearchBinding
+import com.delta_se.tegalur.ui.fragments.TabSearchFragment
+import com.ogaclejapan.smarttablayout.SmartTabLayout
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems
+import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.activity_search.view.*
+
 
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivitySearchBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
+        binding = ActivitySearchBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setNavigation()
     }
 
-
-
+    private fun setNavigation(){
+        var adapter = FragmentPagerItemAdapter(
+            supportFragmentManager, FragmentPagerItems.with(this)
+                .add("Berita", TabSearchFragment::class.java)
+                .add("Pariwisata", TabSearchFragment::class.java)
+                .create()
+        )
+        binding.apply {
+            viewPager.adapter = adapter
+            tabSearch.setViewPager(viewPager)
+        }
+    }
 }

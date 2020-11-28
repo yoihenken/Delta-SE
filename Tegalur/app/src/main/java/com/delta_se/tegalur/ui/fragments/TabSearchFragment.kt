@@ -1,11 +1,10 @@
 package com.delta_se.tegalur.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.dummy.DataDummy
@@ -13,10 +12,10 @@ import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.data.model.DataPariwisata
 import com.delta_se.tegalur.data.model.DataRecycler
 import com.delta_se.tegalur.databinding.FragmentTabSearchBinding
-import com.delta_se.tegalur.ui.adapter.ListBeritaAdapter
 import com.delta_se.tegalur.ui.adapter.ListCategoryAdapter
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem
 
-class TabSearchFragment (val modeCategory : String) : Fragment() {
+class TabSearchFragment () : Fragment() {
 
     private lateinit var binding: FragmentTabSearchBinding
 
@@ -40,19 +39,20 @@ class TabSearchFragment (val modeCategory : String) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentTabSearchBinding.bind(view)
-
-        when(modeCategory){
-            "BERITA" -> {
+        val index = FragmentPagerItem.getPosition(arguments)
+        when(index){
+            0 -> {
                 getDataBerita()
                 dataRecycler.clear()
-                for (item in listBerita){
+                for (item in listBerita) {
                     dataRecycler.add(
                         DataRecycler(
                             item.title,
                             item.image,
                             item.date,
                             item.isSaved
-                        ))
+                        )
+                    )
                 }
                 binding.rvSearch.apply {
                     layoutManager = LinearLayoutManager(activity)
@@ -62,17 +62,18 @@ class TabSearchFragment (val modeCategory : String) : Fragment() {
 
                 }
             }
-            "PARIWISATA" -> {
+            1 -> {
                 getDataPariwisata()
                 dataRecycler.clear()
-                for (item in listPariwisata){
+                for (item in listPariwisata) {
                     dataRecycler.add(
                         DataRecycler(
                             item.title,
                             item.image,
                             item.address,
                             item.isSaved
-                    ))
+                        )
+                    )
                 }
                 binding.rvSearch.apply {
                     layoutManager = LinearLayoutManager(activity)
