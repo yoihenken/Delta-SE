@@ -1,17 +1,16 @@
 package com.delta_se.tegalur.ui.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.delta_se.tegalur.DataBerita
+import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.databinding.ItemBeritaBinding
 
 class ListBeritaAdapter (
-        private val listData : ArrayList<DataBerita>,
+    private val listData : ArrayList<DataBerita>,
         ) : RecyclerView.Adapter<ListBeritaAdapter.ListViewHolder>(){
 
     private lateinit var binding : ItemBeritaBinding
@@ -33,20 +32,17 @@ class ListBeritaAdapter (
             dateBerita.text = data.date
 
             imageSimpan.setOnClickListener {
+                data.isSaved = true //get from Local Data
                 if(data.isSaved == true){
                     data.isSaved = false
-                    imageSimpan.load(R.drawable.ic_item_active_mark)
+                    imageSimpan.load(R.drawable.ic_item_active_mark){crossfade(true)}
                 }else{
                     data.isSaved = true
-                    imageSimpan.load(R.drawable.ic_item_mark)
+                    imageSimpan.load(R.drawable.ic_item_mark){crossfade(true)}
                 }
             }
-
         }
-
     }
 
     override fun getItemCount(): Int = listData.size
-
-
 }
