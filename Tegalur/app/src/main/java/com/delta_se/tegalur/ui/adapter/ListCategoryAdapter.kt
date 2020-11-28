@@ -5,33 +5,32 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.R
-import com.delta_se.tegalur.databinding.ItemBeritaBinding
+import com.delta_se.tegalur.data.model.DataRecycler
+import com.delta_se.tegalur.databinding.ItemCategoryBinding
 
-class ListBeritaAdapter (
-    private val listData : ArrayList<DataBerita>,
-        ) : RecyclerView.Adapter<ListBeritaAdapter.ListViewHolder>(){
+class ListCategoryAdapter(
+    val listData : ArrayList<DataRecycler>
+) : RecyclerView.Adapter<ListCategoryAdapter.ListViewHolder>() {
 
-    private lateinit var binding : ItemBeritaBinding
+    private lateinit var binding : ItemCategoryBinding
     class ListViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListBeritaAdapter.ListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_berita, parent, false)
-        binding = ItemBeritaBinding.bind(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
+        binding = ItemCategoryBinding.bind(view)
         return ListViewHolder(binding.root)
     }
 
-    override fun onBindViewHolder(holder: ListBeritaAdapter.ListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val data = listData[position]
         binding.apply {
-            imageBerita.load(data.image){
+            imageCategory.load(data.image){
                 crossfade(true)
             }
-            titleBerita.text = data.title
-            dateBerita.text = data.date
+            titleCategory.text = data.title
+            descCategory.text = data.desc
             data.isSaved = true //get from Local Data
-
             imageSimpan.setOnClickListener {
                 if(data.isSaved == true){
                     data.isSaved = false

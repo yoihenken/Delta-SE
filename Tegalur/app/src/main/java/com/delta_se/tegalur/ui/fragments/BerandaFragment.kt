@@ -1,5 +1,8 @@
 package com.delta_se.tegalur.ui.fragments
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,11 +11,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.R
+import com.delta_se.tegalur.SearchActivity
 import com.delta_se.tegalur.data.dummy.DataDummy
 import com.delta_se.tegalur.databinding.FragmentBerandaBinding
 import com.delta_se.tegalur.ui.adapter.ListBeritaAdapter
 
-class BerandaFragment : Fragment() {
+class BerandaFragment() : Fragment() {
 
     private lateinit var binding: FragmentBerandaBinding
     private val list = ArrayList<DataBerita>()
@@ -42,13 +46,22 @@ class BerandaFragment : Fragment() {
 
         getDataBerita()
 
-        binding.rvBeranda.apply {
-            layoutManager = LinearLayoutManager(activity)
-            setHasFixedSize(true)
-            adapter = ListBeritaAdapter(list)
+        binding.apply {
+            categoryMenu.apply {
+                categoryPariwisata.setOnClickListener {
+                    val intentIndex = 1
+                    val moveWithIntent = Intent(activity, SearchActivity::class.java)
+                    moveWithIntent.putExtra(SearchActivity.EXTRA_DATA, intentIndex)
+                    startActivity(moveWithIntent)
+                }
+            }
+
+            rvBeranda.apply {
+                layoutManager = LinearLayoutManager(activity)
+                setHasFixedSize(true)
+                adapter = ListBeritaAdapter(list)
+            }
         }
-
     }
-
     companion object {}
 }
