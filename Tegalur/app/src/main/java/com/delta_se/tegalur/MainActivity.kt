@@ -3,7 +3,10 @@ package com.delta_se.tegalur
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.databinding.ActivityMainBinding
+import com.delta_se.tegalur.ui.adapter.ListBeritaAdapter
 import com.delta_se.tegalur.ui.fragments.BerandaFragment
 import com.delta_se.tegalur.ui.fragments.BeritaFragment
 import com.delta_se.tegalur.ui.fragments.EventFragment
@@ -19,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         EventFragment(),
         SimpanFragment()
     )
+    private val list = ArrayList<DataBerita>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,4 +66,5 @@ class MainActivity : AppCompatActivity() {
         activeFragment = fragment
         return true
     }
+
 }

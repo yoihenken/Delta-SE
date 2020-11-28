@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.DetailPariwisata"
+    tools:showIn="@layout/activity_detail_pariwisata">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/titlePariwisata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:textStyle="bold"
+            android:text="Hotel Santika Guci"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/jmlRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="4.2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/titlePariwisata"/>
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="0"
+            android:stepSize="0.5"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintLeft_toRightOf="@id/jmlRating"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/garis_pertama"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titlePariwisata"/>
+
+        <TextView
+            android:id="@+id/titleAlamat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:textStyle="bold"
+            android:text="Alamat :"
+            app:layout_constraintTop_toBottomOf="@id/garis_pertama"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/isiAlamat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="Jalan Lingkar Barat No. 3, Ladang, Hutan, Bumijawa, Tegal 52466"
+            app:layout_constraintTop_toBottomOf="@id/garis_pertama"
+            app:layout_constraintLeft_toRightOf="@id/titleAlamat"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/titleTelepon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:textStyle="bold"
+            android:text="Telepon : "
+            app:layout_constraintTop_toBottomOf="@id/titleAlamat"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/isiTelepon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="0853-3517-5758"
+            app:layout_constraintTop_toBottomOf="@id/titleAlamat"
+            app:layout_constraintLeft_toRightOf="@id/titleTelepon"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/titleWebsite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:textStyle="bold"
+            android:text="Website :"
+            app:layout_constraintTop_toBottomOf="@id/titleTelepon"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/isiWebsite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:text="https://hotelsankitaguci.business.site/ "
+            app:layout_constraintTop_toBottomOf="@id/titleTelepon"
+            app:layout_constraintLeft_toRightOf="@id/titleWebsite"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <View
+            android:id="@+id/garis_kedua"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleWebsite"/>
+
+        <TextView
+            android:id="@+id/titleDeskripsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:textStyle="bold"
+            android:text="Deskripsi"
+            app:layout_constraintTop_toBottomOf="@id/garis_kedua"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/isiDeskripsi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Hotel Sankita bisa dikatakan sebagai hotel yang tergolong mewah di Guci. Belokasi di dataran tinggi Guci Tegal dan berada di kaki gunung Slamet, menyuguhkan pemandangan pegunungan yang eksotis sangat cocok untuk  melepas lelah setelah berwisata atau setelah menempuh perjalanan yang panjang."
+            app:layout_constraintTop_toBottomOf="@id/titleDeskripsi"
+            app:layout_constraintLeft_toLeftOf="@id/titleDeskripsi"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

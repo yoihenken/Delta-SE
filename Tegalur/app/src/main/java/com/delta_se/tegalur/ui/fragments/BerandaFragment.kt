@@ -1,5 +1,6 @@
 package com.delta_se.tegalur.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,9 @@ import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.dummy.DataDummy
 import com.delta_se.tegalur.databinding.FragmentBerandaBinding
+import com.delta_se.tegalur.ui.DetailBerita
+import com.delta_se.tegalur.ui.DetailPariwisata
+import com.delta_se.tegalur.ui.activity.PariwisataActivity
 import com.delta_se.tegalur.ui.adapter.ListBeritaAdapter
 
 class BerandaFragment : Fragment() {
@@ -45,7 +49,13 @@ class BerandaFragment : Fragment() {
         binding.rvBeranda.apply {
             layoutManager = LinearLayoutManager(activity)
             setHasFixedSize(true)
-            adapter = ListBeritaAdapter(list)
+            adapter = ListBeritaAdapter(list,context)
+        }
+
+        binding.categoryMenu.categoryPariwisata.apply {
+            setOnClickListener {
+                context.startActivity(Intent(context, PariwisataActivity::class.java))
+            }
         }
 
     }
