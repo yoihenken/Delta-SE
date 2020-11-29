@@ -8,6 +8,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import coil.load
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.delta_se.tegalur.R
@@ -15,36 +16,13 @@ import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.data.model.DataPariwisata
 import com.delta_se.tegalur.ui.activity.MapsActivity
 import kotlinx.android.synthetic.main.activity_detail_berita.*
+import kotlinx.android.synthetic.main.activity_detail_berita.iv_detail_photo
+import kotlinx.android.synthetic.main.activity_detail_pariwisata.*
 import kotlinx.android.synthetic.main.content_scrolling.*
+import kotlinx.android.synthetic.main.content_scrolling.detail_description
+import kotlinx.android.synthetic.main.content_scrolling_pariwisata.*
 
 class DetailPariwisata : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_pariwisata)
-        val myData by getParcelableExtra<DataPariwisata>(DetailPariwisata.EXTRA_MYDATA)
-        setSupportActionBar(findViewById(R.id.toolbar))
-        findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = title
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-
-            val moveWithObjectIntent = Intent(this,MapsActivity::class.java)
-            moveWithObjectIntent.putExtra(MapsActivity.EXTRA_MYDATA, myData)
-            startActivity(moveWithObjectIntent)
-        }
-
-
-        supportActionBar?.title = myData!!.title.toString()
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        detail_description.text = myData!!.description.toString()
-
-        Glide
-            .with(this)
-            .load(myData!!.image.toString())
-            .apply(RequestOptions().override(700, 700))
-            .into(iv_detail_photo)
-    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
@@ -57,5 +35,43 @@ class DetailPariwisata : AppCompatActivity() {
 
     inline fun <reified T : Parcelable> Activity.getParcelableExtra(key: String) = lazy {
         intent.getParcelableExtra<T>(key)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_detail_pariwisata)
+
+        val myData by getParcelableExtra<DataPariwisata>(DetailPariwisata.EXTRA_MYDATA)
+        setSupportActionBar(findViewById(R.id.toolbar))
+
+        supportActionBar?.title = myData?.title.toString()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = myData?.title.toString()
+
+        var buttonFloat = findViewById<FloatingActionButton>(R.id.fab)
+
+        buttonFloat.setOnClickListener { view ->
+
+//            if (myData?.isSaved == true) {
+//                myData?.isSaved = false
+//                buttonFloat.load(R.drawable.ic_item_active_mark) { crossfade(true) }
+//            } else {
+//                myData?.isSaved = true
+//                buttonFloat.load(R.drawable.ic_item_mark) { crossfade(true) }
+//            }
+
+            val moveWithObjectIntent = Intent(this,MapsActivity::class.java)
+            moveWithObjectIntent.putExtra(MapsActivity.EXTRA_MYDATA, myData)
+            startActivity(moveWithObjectIntent)
+        }
+
+        Glide
+            .with(this)
+            .load(myData?.image.toString())
+            .apply(RequestOptions().override(700, 700))
+            .into(iv_detail_photo)
+
+        isiDeskripsi.text = myData?.content
     }
 }

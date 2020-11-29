@@ -44,7 +44,7 @@ class ListCategoryAdapter(
 
         when (modeCategory) {
             "BERITA" -> {
-                var data = arrDataBerita[0]
+                var data = arrDataBerita[position]
                 binding.apply {
                     imageCategory.load(data.image) {
                         crossfade(true)
@@ -69,7 +69,7 @@ class ListCategoryAdapter(
                 }
             }
             "PARIWISATA" -> {
-                var data = arrDataPariwisata[0]
+                var data = arrDataPariwisata[position]
                 binding.apply {
                     imageCategory.load(data.image) {
                         crossfade(true)
@@ -103,7 +103,7 @@ class ListCategoryAdapter(
                 var dataDummy = DataDummy().getDataBerita()
                 val item = listData[position]
 
-                arrDataBerita!!.add(
+                arrDataBerita.add(
                     DataBerita(
                         item.title,
                         item.image,
@@ -116,7 +116,7 @@ class ListCategoryAdapter(
             "PARIWISATA" -> {
                 var dataDummy = DataDummy().getPariwisata()
                 val item = listData[position]
-                arrDataPariwisata!!.add(
+                arrDataPariwisata.add(
                     DataPariwisata(
                         item.title,
                         item.image,

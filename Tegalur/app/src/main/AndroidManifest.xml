@@ -27,7 +27,6 @@
         <activity
             android:name=".ui.activity.MapsActivity"
             android:label="@string/title_activity_maps"></activity>
-        <activity android:name=".ui.activity.PariwisataActivity" />
         <activity
             android:name=".ui.DetailPariwisata"
             android:label="@string/title_activity_detail_pariwisata"

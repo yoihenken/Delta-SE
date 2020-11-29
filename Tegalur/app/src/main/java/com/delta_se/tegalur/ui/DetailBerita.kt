@@ -29,7 +29,7 @@ class DetailBerita : AppCompatActivity() {
         val myData by getParcelableExtra<DataBerita>(DetailBerita.EXTRA_MYDATA)
         supportActionBar?.title = myData!!.title.toString()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        detail_description.text = myData!!.description.toString()
+        detail_description .text = myData!!.description.toString()
 
         Glide
             .with(this)

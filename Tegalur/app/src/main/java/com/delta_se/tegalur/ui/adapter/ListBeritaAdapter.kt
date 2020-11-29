@@ -28,11 +28,11 @@ class ListBeritaAdapter (
     override fun onBindViewHolder(holder: ListBeritaAdapter.ListViewHolder, position: Int) {
         val data = listData[position]
         binding.apply {
-            imageBerita.load(data.image){
+            imageList.load(data.image){
                 crossfade(true)
             }
-            titleBerita.text = data.title
-            dateBerita.text = data.date
+            titleList.text = data.title
+            descList.text = data.date
             data.isSaved = true //get from Local Data
 
             imageSimpan.setOnClickListener {
