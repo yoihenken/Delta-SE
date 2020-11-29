@@ -9,7 +9,7 @@ data class DataPariwisata (
     var image : String,
     var address : String,
     var content : String,
-    var isSaved : Boolean?
     val lat: Double,
     val lang: Double,
+    var isSaved : Boolean?
 ) : Parcelable

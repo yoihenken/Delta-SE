@@ -68,7 +68,7 @@ class TabSearchFragment () : Fragment() {
                     layoutManager = LinearLayoutManager(activity)
                     setHasFixedSize(true)
 //                    adapter = ListBeritaAdapter(listBerita)
-                    adapter = ListCategoryAdapter(dataRecycler)
+                    adapter = ListCategoryAdapter(dataRecycler, requireActivity(), "BERITA")
 
                 }
             }
@@ -88,7 +88,7 @@ class TabSearchFragment () : Fragment() {
                 binding.rvSearch.apply {
                     layoutManager = LinearLayoutManager(activity)
                     setHasFixedSize(true)
-                    adapter = ListCategoryAdapter(dataRecycler)
+                    adapter = ListCategoryAdapter(dataRecycler, requireActivity(), "PARIWISATA")
                 }
             }
         }

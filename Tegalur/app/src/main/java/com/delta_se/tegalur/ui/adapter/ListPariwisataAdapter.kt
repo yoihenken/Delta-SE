@@ -33,7 +33,7 @@ class ListPariwisataAdapter (
                     crossfade(true)
                 }
                 titleBerita.text = data.title
-                dateBerita.text = data.date
+                dateBerita.text = data.address
 
                 imageSimpan.setOnClickListener {
                     data.isSaved = true //get from Local Data
