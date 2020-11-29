@@ -2,6 +2,7 @@ package com.delta_se.tegalur.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.location.Geocoder
 import android.os.Bundle
 import android.os.Parcelable
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -48,6 +49,12 @@ class DetailPariwisata : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = myData?.title.toString()
+
+        val geoCoder = Geocoder(this)
+        var dataAddress = geoCoder.getFromLocationName(myData?.title.toString(),1)
+
+        myData?.lat = dataAddress[0].latitude
+        myData?.lang = dataAddress[0].longitude
 
         var buttonFloat = findViewById<FloatingActionButton>(R.id.fab)
         buttonFloat.setOnClickListener { view ->
