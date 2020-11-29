@@ -51,6 +51,7 @@
         android:layout_margin="@dimen/fab_margin"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
+        app:tint="@android:color/white"
         app:srcCompat="@drawable/ic_place" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

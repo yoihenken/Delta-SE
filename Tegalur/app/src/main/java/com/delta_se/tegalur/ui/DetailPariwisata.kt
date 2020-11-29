@@ -50,17 +50,7 @@ class DetailPariwisata : AppCompatActivity() {
         findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = myData?.title.toString()
 
         var buttonFloat = findViewById<FloatingActionButton>(R.id.fab)
-
         buttonFloat.setOnClickListener { view ->
-
-//            if (myData?.isSaved == true) {
-//                myData?.isSaved = false
-//                buttonFloat.load(R.drawable.ic_item_active_mark) { crossfade(true) }
-//            } else {
-//                myData?.isSaved = true
-//                buttonFloat.load(R.drawable.ic_item_mark) { crossfade(true) }
-//            }
-
             val moveWithObjectIntent = Intent(this,MapsActivity::class.java)
             moveWithObjectIntent.putExtra(MapsActivity.EXTRA_MYDATA, myData)
             startActivity(moveWithObjectIntent)
