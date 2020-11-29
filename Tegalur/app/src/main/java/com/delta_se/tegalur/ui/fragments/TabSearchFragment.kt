@@ -49,7 +49,6 @@ class TabSearchFragment () : Fragment() {
     }
 
     fun showFragment(indeks : Int){
-        Log.d("TabSearchFragment", "Jadi gini gan\t" + indeks)
         when(indeks){
             0 -> {
                 getDataBerita()
