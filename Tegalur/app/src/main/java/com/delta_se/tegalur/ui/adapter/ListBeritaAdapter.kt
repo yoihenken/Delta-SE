@@ -33,9 +33,9 @@ class ListBeritaAdapter (
             }
             titleBerita.text = data.title
             dateBerita.text = data.date
+            data.isSaved = true //get from Local Data
 
             imageSimpan.setOnClickListener {
-                data.isSaved = true //get from Local Data
                 if(data.isSaved == true){
                     data.isSaved = false
                     imageSimpan.load(R.drawable.ic_item_active_mark){crossfade(true)}

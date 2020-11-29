@@ -4,12 +4,9 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class DataPariwisata (
+data class DataRecycler (
     var title : String,
     var image : String,
-    var address : String,
-    var content : String,
+    var desc : String,
     var isSaved : Boolean?
-    val lat: Double,
-    val lang: Double,
 ) : Parcelable
