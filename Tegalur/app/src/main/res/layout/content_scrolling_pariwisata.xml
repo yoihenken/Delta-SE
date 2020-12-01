@@ -37,8 +37,9 @@
             android:layout_height="wrap_content"
             android:numStars="5"
             android:rating="0"
-            android:stepSize="0.5"
-            android:layout_marginLeft="10dp"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:layout_marginEnd="0.7in"
             app:layout_constraintLeft_toRightOf="@id/jmlRating"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
