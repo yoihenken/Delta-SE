@@ -71,7 +71,8 @@ class TabSearchFragment () : Fragment() {
 
                 }
             }
-            1 -> {
+            1 -> {}
+            2 -> {
                 getDataPariwisata()
                 dataRecycler.clear()
                 for (item in listPariwisata) {
@@ -90,6 +91,7 @@ class TabSearchFragment () : Fragment() {
                     adapter = ListCategoryAdapter(dataRecycler, requireActivity(), "PARIWISATA")
                 }
             }
+
         }
     }
 
