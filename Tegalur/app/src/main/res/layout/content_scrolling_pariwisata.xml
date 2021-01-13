@@ -7,7 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.DetailPariwisata"
     tools:showIn="@layout/activity_detail_pariwisata"
-    android:paddingTop="30dp">
+    android:paddingTop="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,37 +17,18 @@
             android:id="@+id/titlePariwisata"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginLeft="16dp"
             android:textStyle="bold"
+            android:textSize="20sp"
             android:text="Hotel Santika Guci"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
-
-        <TextView
-            android:id="@+id/jmlRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="4.2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/titlePariwisata"/>
-
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numStars="5"
-            android:rating="0"
-            android:stepSize="0.5"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintLeft_toRightOf="@id/jmlRating"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/garis_pertama"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:background="@color/black"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -57,64 +38,41 @@
             android:id="@+id/titleAlamat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
             android:textStyle="bold"
-            android:text="Alamat :"
+            android:text="Alamat"
             app:layout_constraintTop_toBottomOf="@id/garis_pertama"
-            app:layout_constraintLeft_toLeftOf="parent"/>
+            app:layout_constraintEnd_toStartOf="@id/titik_pertama"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/titik_pertama"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@id/garis_pertama"
+            app:layout_constraintStart_toEndOf="@id/titleAlamat"
+            app:layout_constraintEnd_toStartOf="@id/isiAlamat"
+            android:textStyle="bold"
+            android:text=" : "/>
 
         <TextView
             android:id="@+id/isiAlamat"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
             android:text="Jalan Lingkar Barat No. 3, Ladang, Hutan, Bumijawa, Tegal 52466"
             app:layout_constraintTop_toBottomOf="@id/garis_pertama"
-            app:layout_constraintLeft_toRightOf="@id/titleAlamat"
+            app:layout_constraintLeft_toRightOf="@id/titik_pertama"
             app:layout_constraintRight_toRightOf="parent"
             />
 
-        <TextView
-            android:id="@+id/titleTelepon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:textStyle="bold"
-            android:text="Telepon : "
-            app:layout_constraintTop_toBottomOf="@id/titleAlamat"
-            app:layout_constraintLeft_toLeftOf="parent"/>
 
-        <TextView
-            android:id="@+id/isiTelepon"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="0853-3517-5758"
-            app:layout_constraintTop_toBottomOf="@id/titleAlamat"
-            app:layout_constraintLeft_toRightOf="@id/titleTelepon"
-            app:layout_constraintRight_toRightOf="parent"
-            />
-
-        <TextView
-            android:id="@+id/titleWebsite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:textStyle="bold"
-            android:text="Website :"
-            app:layout_constraintTop_toBottomOf="@id/titleTelepon"
-            app:layout_constraintLeft_toLeftOf="parent"/>
-
-        <TextView
-            android:id="@+id/isiWebsite"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="https://hotelsankitaguci.business.site/ "
-            app:layout_constraintTop_toBottomOf="@id/titleTelepon"
-            app:layout_constraintLeft_toRightOf="@id/titleWebsite"
-            app:layout_constraintRight_toRightOf="parent"
-            />
 
         <View
             android:id="@+id/garis_kedua"
@@ -124,7 +82,8 @@
             android:background="@color/black"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleWebsite"/>
+            app:layout_constraintTop_toBottomOf="@id/titleAlamat"/>
+
 
         <TextView
             android:id="@+id/titleDeskripsi"
@@ -135,6 +94,7 @@
             android:text="Deskripsi"
             app:layout_constraintTop_toBottomOf="@id/garis_kedua"
             app:layout_constraintLeft_toLeftOf="parent"/>
+
 
         <TextView
             android:id="@+id/isiDeskripsi"

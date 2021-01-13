@@ -12,6 +12,7 @@
         android:layout_width="120dp"
         android:layout_height="100dp"
         android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -24,7 +25,7 @@
         android:layout_marginEnd="8dp"
         android:lines="3"
         android:text="@string/Lorem_long"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@id/imageSimpan"

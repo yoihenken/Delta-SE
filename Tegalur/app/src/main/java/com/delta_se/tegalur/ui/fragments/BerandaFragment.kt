@@ -12,11 +12,13 @@ import com.delta_se.tegalur.R
 import com.delta_se.tegalur.SearchActivity
 import com.delta_se.tegalur.data.dummy.DataDummy
 import com.delta_se.tegalur.databinding.FragmentBerandaBinding
+import com.delta_se.tegalur.databinding.LayoutCategoryBinding
 import com.delta_se.tegalur.ui.adapter.ListBeritaAdapter
 
 class BerandaFragment : Fragment() {
 
     private lateinit var binding: FragmentBerandaBinding
+    private lateinit var bindingLayoutCategory : LayoutCategoryBinding
     private val list = ArrayList<DataBerita>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,37 +43,37 @@ class BerandaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentBerandaBinding.bind(view)
-
+        bindingLayoutCategory = LayoutCategoryBinding.bind(view)
         getDataBerita()
 
-        binding.apply {
-            categoryMenu.apply {
-                categoryPariwisata.setOnClickListener {
-                    val intentIndex = 2
-                    val moveWithIntent = Intent(activity, SearchActivity::class.java)
-                    moveWithIntent.putExtra(SearchActivity.EXTRA_DATA, intentIndex)
-                    activity?.startActivity(moveWithIntent)
-                }
-                categoryKuliner.setOnClickListener {
-                    val intentIndex = 3
-                    val moveWithIntent = Intent(activity, SearchActivity::class.java)
-                    moveWithIntent.putExtra(SearchActivity.EXTRA_DATA, intentIndex)
-                    activity?.startActivity(moveWithIntent)
-                }
-                categoryOleh.setOnClickListener {
-                    val intentIndex = 4
-                    val moveWithIntent = Intent(activity, SearchActivity::class.java)
-                    moveWithIntent.putExtra(SearchActivity.EXTRA_DATA, intentIndex)
-                    activity?.startActivity(moveWithIntent)
-                }
-                categoryPenginapan.setOnClickListener {
-                    val intentIndex = 5
-                    val moveWithIntent = Intent(activity, SearchActivity::class.java)
-                    moveWithIntent.putExtra(SearchActivity.EXTRA_DATA, intentIndex)
-                    activity?.startActivity(moveWithIntent)
-                }
+        bindingLayoutCategory.apply {
+            categoryPariwisata.setOnClickListener {
+                val intentIndex = 2
+                val moveWithIntent = Intent(activity, SearchActivity::class.java)
+                moveWithIntent.putExtra(SearchActivity.EXTRA_DATA, intentIndex)
+                activity?.startActivity(moveWithIntent)
             }
+            categoryKuliner.setOnClickListener {
+                val intentIndex = 3
+                val moveWithIntent = Intent(activity, SearchActivity::class.java)
+                moveWithIntent.putExtra(SearchActivity.EXTRA_DATA, intentIndex)
+                activity?.startActivity(moveWithIntent)
+            }
+            categoryOleh.setOnClickListener {
+                val intentIndex = 4
+                val moveWithIntent = Intent(activity, SearchActivity::class.java)
+                moveWithIntent.putExtra(SearchActivity.EXTRA_DATA, intentIndex)
+                activity?.startActivity(moveWithIntent)
+            }
+            categoryPenginapan.setOnClickListener {
+                val intentIndex = 5
+                val moveWithIntent = Intent(activity, SearchActivity::class.java)
+                moveWithIntent.putExtra(SearchActivity.EXTRA_DATA, intentIndex)
+                activity?.startActivity(moveWithIntent)
+            }
+        }
 
+        binding.apply {
             rvBeranda.apply {
                 layoutManager = LinearLayoutManager(activity)
                 setHasFixedSize(true)

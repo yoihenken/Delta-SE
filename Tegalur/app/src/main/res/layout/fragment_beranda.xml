@@ -11,6 +11,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -62,7 +63,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
         android:text="@string/berita_terkini"
-        android:textColor="@color/black"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="14dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/nestedScrollView"
@@ -89,7 +90,8 @@
             android:clipToPadding="false"
             android:nestedScrollingEnabled="false"
             android:paddingTop="8dp"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="8dp"
+            tools:listitem="@layout/item_list"/>
 
     </androidx.core.widget.NestedScrollView>
 

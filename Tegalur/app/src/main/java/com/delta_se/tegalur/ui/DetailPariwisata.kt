@@ -15,15 +15,13 @@ import com.bumptech.glide.request.RequestOptions
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.data.model.DataPariwisata
+import com.delta_se.tegalur.databinding.ActivityDetailPariwisataBinding
 import com.delta_se.tegalur.ui.activity.MapsActivity
-import kotlinx.android.synthetic.main.activity_detail_berita.*
-import kotlinx.android.synthetic.main.activity_detail_berita.iv_detail_photo
-import kotlinx.android.synthetic.main.activity_detail_pariwisata.*
-import kotlinx.android.synthetic.main.content_scrolling.*
-import kotlinx.android.synthetic.main.content_scrolling.detail_description
 import kotlinx.android.synthetic.main.content_scrolling_pariwisata.*
 
 class DetailPariwisata : AppCompatActivity() {
+
+    private lateinit var binding : ActivityDetailPariwisataBinding
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
@@ -40,15 +38,14 @@ class DetailPariwisata : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_pariwisata)
+        binding = ActivityDetailPariwisataBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val myData by getParcelableExtra<DataPariwisata>(DetailPariwisata.EXTRA_MYDATA)
         setSupportActionBar(findViewById(R.id.toolbar))
 
         supportActionBar?.title = myData?.title.toString()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = myData?.title.toString()
 
         val geoCoder = Geocoder(this)
         var dataAddress = geoCoder.getFromLocationName(myData?.title.toString(),1)
@@ -63,12 +60,14 @@ class DetailPariwisata : AppCompatActivity() {
             startActivity(moveWithObjectIntent)
         }
 
-        Glide
-            .with(this)
-            .load(myData?.image.toString())
-            .apply(RequestOptions().override(700, 700))
-            .into(iv_detail_photo)
-
-        isiDeskripsi.text = myData?.content
+        binding.apply {
+            toolbarLayoutPariwisata.setExpandedTitleTextAppearance(R.style.ExpandedAppBar)
+            titlePariwisata.text = myData?.title
+            ivDetailPhoto.load(myData?.image){
+                crossfade(true)
+            }
+            isiAlamat.text = myData?.address
+            isiDeskripsi.text = myData?.content
+        }
     }
 }
