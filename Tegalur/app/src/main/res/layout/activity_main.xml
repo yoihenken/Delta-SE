@@ -19,9 +19,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="?android:attr/windowBackground"
-        app:itemBackground="@color/white"
-        app:itemIconTint="@color/grey"
-        app:itemTextColor="@color/grey"
+        app:itemBackground="?android:attr/background"
+        app:itemIconTint="@drawable/bottom_nav_color"
+        app:itemTextColor="@drawable/bottom_nav_color"
         style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         app:menu="@menu/nav_menu_bottom"/>
 

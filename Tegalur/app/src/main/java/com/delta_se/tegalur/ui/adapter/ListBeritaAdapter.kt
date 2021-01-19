@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.CircleCropTransformation
+import coil.transform.RoundedCornersTransformation
 import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.databinding.ItemListBinding
@@ -30,6 +32,7 @@ class ListBeritaAdapter (
         binding.apply {
             imageList.load(data.image){
                 crossfade(true)
+                transformations(RoundedCornersTransformation(10f))
             }
             titleList.text = data.title
             descList.text = data.date
@@ -50,7 +53,21 @@ class ListBeritaAdapter (
             moveWithObjectIntent.putExtra(DetailBerita.EXTRA_MYDATA, data)
             context.startActivity(moveWithObjectIntent)
         }
+
     }
 
     override fun getItemCount(): Int = listData.size
+
+    override fun getItemViewType(position: Int): Int {
+        return super.getItemViewType(position)
+    }
+
+    override fun getItemId(position: Int): Long {
+        return super.getItemId(position)
+    }
+
+    init {
+        setHasStableIds(true);
+    }
+
 }

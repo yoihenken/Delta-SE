@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ui.DetailPenginapan"
+    tools:showIn="@layout/activity_detail_penginapan"
+    android:paddingTop="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/titlePenginapan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:text="Hotel Santika Guci"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <View
+            android:id="@+id/garis_pertama"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titlePenginapan"/>
+
+        <TextView
+            android:id="@+id/titleAlamat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:textStyle="bold"
+            android:text="Alamat"
+            app:layout_constraintTop_toBottomOf="@id/garis_pertama"
+            app:layout_constraintEnd_toStartOf="@id/titik_pertama"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/titik_pertama"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toBottomOf="@id/garis_pertama"
+            app:layout_constraintStart_toEndOf="@id/titleAlamat"
+            app:layout_constraintEnd_toStartOf="@id/isiAlamat"
+            android:textStyle="bold"
+            android:text=" : "/>
+
+        <TextView
+            android:id="@+id/isiAlamat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="Jalan Lingkar Barat No. 3, Ladang, Hutan, Bumijawa, Tegal 52466"
+            app:layout_constraintTop_toBottomOf="@id/garis_pertama"
+            app:layout_constraintLeft_toRightOf="@id/titik_pertama"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/titleTelepon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:text="Telepon"
+            app:layout_constraintTop_toBottomOf="@id/isiAlamat"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/titik_kedua"/>
+
+        <TextView
+            android:id="@+id/titik_kedua"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintTop_toBottomOf="@id/isiAlamat"
+            app:layout_constraintStart_toEndOf="@id/titleTelepon"
+            app:layout_constraintEnd_toStartOf="@id/isiTelepon"
+            android:textStyle="bold"
+            android:text=" : "/>
+
+        <View
+            android:id="@+id/garis_kedua"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleHarga"/>
+
+        <TextView
+            android:id="@+id/isiTelepon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="0853-3517-5758"
+            app:layout_constraintTop_toBottomOf="@id/isiAlamat"
+            app:layout_constraintStart_toEndOf="@id/titik_kedua"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/titleWebsite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:text="Website"
+            app:layout_constraintTop_toBottomOf="@id/titleTelepon"
+            app:layout_constraintEnd_toStartOf="@id/titik_ketiga"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/titik_ketiga"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintTop_toBottomOf="@id/isiTelepon"
+            app:layout_constraintStart_toEndOf="@id/titleWebsite"
+            app:layout_constraintEnd_toStartOf="@id/isiWebsite"
+            android:textStyle="bold"
+            android:text=" : "/>
+
+        <TextView
+            android:id="@+id/isiWebsite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="https://hotelsankitaguci.business.site/ "
+            app:layout_constraintTop_toBottomOf="@id/isiTelepon"
+            app:layout_constraintStart_toEndOf="@id/titik_ketiga"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+    <TextView
+            android:id="@+id/titleHarga"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:textStyle="bold"
+            android:text="Harga"
+            app:layout_constraintTop_toBottomOf="@id/titleWebsite"
+            app:layout_constraintEnd_toStartOf="@id/titik_keempat"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/titik_keempat"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="23dp"
+            app:layout_constraintTop_toBottomOf="@id/isiWebsite"
+            app:layout_constraintStart_toEndOf="@id/titleHarga"
+            app:layout_constraintEnd_toStartOf="@id/isiHarga"
+            android:textStyle="bold"
+            android:text=" : "/>
+
+        <TextView
+            android:id="@+id/isiHarga"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="100.00 "
+            app:layout_constraintTop_toBottomOf="@id/isiWebsite"
+            app:layout_constraintStart_toEndOf="@id/titik_keempat"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+
+
+        <TextView
+            android:id="@+id/titleDeskripsi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:textStyle="bold"
+            android:text="Deskripsi"
+            app:layout_constraintTop_toBottomOf="@id/garis_kedua"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+        <TextView
+            android:id="@+id/isiDeskripsi"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Hotel Sankita bisa dikatakan sebagai hotel yang tergolong mewah di Guci. Belokasi di dataran tinggi Guci Tegal dan berada di kaki gunung Slamet, menyuguhkan pemandangan pegunungan yang eksotis sangat cocok untuk  melepas lelah setelah berwisata atau setelah menempuh perjalanan yang panjang."
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toBottomOf="@id/titleDeskripsi"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>
