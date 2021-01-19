@@ -21,7 +21,12 @@ import com.delta_se.tegalur.databinding.FragmentBerandaBinding
 import com.delta_se.tegalur.databinding.LayoutCategoryBinding
 import com.delta_se.tegalur.ui.adapter.ListBeritaAdapter
 import com.delta_se.tegalur.utils.Helpers.toDataBerita
+import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout
+import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection
 import kotlinx.android.synthetic.main.fragment_beranda.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class BerandaFragment : Fragment() {
 
@@ -34,12 +39,6 @@ class BerandaFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
-
-    private fun getDataBerita() : ArrayList<DataBerita>{
-        val dataBerita : ArrayList<DataBerita> = DataDummy().getDataBerita()
-        list.addAll(dataBerita)
-        return list
     }
 
 
@@ -93,14 +92,21 @@ class BerandaFragment : Fragment() {
                 moveWithIntent.putExtra(SearchActivity.EXTRA_DATA, intentIndex)
                 activity?.startActivity(moveWithIntent)
             }
-            nestedScrollView.setOnScrollChangeListener{ v: NestedScrollView?, _: Int, scrollY: Int, _: Int, _: Int -> val diff = v!!.getChildAt(0)!!.measuredHeight - v.measuredHeight
-                if (diff - scrollY < 1000) {
+
+            swipeRefresh.setOnRefreshListener {
+                swipeRefresh.direction = SwipyRefreshLayoutDirection.BOTTOM
+
+                if (swipeRefresh.isRefreshing){
                     page++
                     model.getBerita(page)
                     Log.d("BerandaFragment", "onViewCreated: Load More")
                 }
+                swipeRefresh.isRefreshing = false
             }
 
+            nestedScrollView.setOnScrollChangeListener{ v: NestedScrollView?, _: Int, scrollY: Int, _: Int, _: Int -> val diff = v!!.getChildAt(0)!!.measuredHeight - v.measuredHeight
+                if (diff - scrollY < 7000 && swipeRefresh.isRefreshing) swipeRefresh.isRefreshing = false
+            }
         }
     }
 

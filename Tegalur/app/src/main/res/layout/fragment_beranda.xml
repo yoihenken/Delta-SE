@@ -66,9 +66,19 @@
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="14dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/nestedScrollView"
+        app:layout_constraintBottom_toTopOf="@+id/swipeRefresh"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/category"/>
+
+    <com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout
+        android:id="@+id/swipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:srl_direction="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textBerita">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
@@ -95,7 +105,7 @@
                 tools:listitem="@layout/item_list" />
 
         </androidx.core.widget.NestedScrollView>
-
+    </com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout>
 
 
 

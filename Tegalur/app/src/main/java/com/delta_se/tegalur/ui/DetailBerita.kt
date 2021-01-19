@@ -3,6 +3,7 @@ package com.delta_se.tegalur.ui
 import android.app.Activity
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
 import androidx.activity.viewModels
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -83,13 +84,12 @@ class DetailBerita : AppCompatActivity() {
 
     private fun getPageId(position : Int){
         if (position >= 15){
-            page += (position/15)
-            id  = position - 15
-            while (id >= 15){
-                id -= 15
-            }
+            page = (position / 15) + 1
+            id  = position % 15
+
         }else id = position
 
+        Log.d("DetailBerita", "getBeritaDetail: $id , $page, $position")
 
     }
 }
