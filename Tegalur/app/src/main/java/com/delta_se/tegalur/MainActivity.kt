@@ -67,4 +67,23 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+<<<<<<< Updated upstream
+=======
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        supportFragmentManager.beginTransaction().remove(fragments[fragmentIndex]).commit()
+        outState.putInt(FRAGMENT_STATE, fragmentIndex)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        fragmentIndex = savedInstanceState.getInt(FRAGMENT_STATE)
+    }
+
+    companion object{
+        private const val FRAGMENT_STATE = "fragment_state"
+    }
+
+>>>>>>> Stashed changes
 }
