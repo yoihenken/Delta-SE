@@ -2,6 +2,7 @@ package com.delta_se.tegalur
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.delta_se.tegalur.data.model.DataBerita
@@ -14,6 +15,8 @@ import com.delta_se.tegalur.ui.fragments.SimpanFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private var fragmentIndex = 0
 
     private lateinit var binding: ActivityMainBinding
     private val fragments = listOf(
@@ -67,8 +70,6 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-<<<<<<< Updated upstream
-=======
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState, outPersistentState)
         supportFragmentManager.beginTransaction().remove(fragments[fragmentIndex]).commit()
@@ -84,6 +85,4 @@ class MainActivity : AppCompatActivity() {
     companion object{
         private const val FRAGMENT_STATE = "fragment_state"
     }
-
->>>>>>> Stashed changes
 }
