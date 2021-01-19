@@ -8,20 +8,22 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class DestinationServices {
+object DestinationServices {
+    private const val TAG = "DestinationServices"
     fun getBeritaPage(page: Int?, callback: (ListResponse) -> Unit){
+        Log.d(TAG, "getBeritaPage: runn")
         RetrofitInstance.getClient().getBeritaPage(page ?: 1).enqueue(
             object : Callback<ListResponse>{
                 override fun onResponse(
                     call: Call<ListResponse>,
                     response: Response<ListResponse>
                 ) {
-                    Log.d("TAG", "onResponse: ${response.body()}")
+                    Log.d(TAG, "onResponse: ${response.body()}")
                     callback(response.body()!!)
                 }
 
                 override fun onFailure(call: Call<ListResponse>, t: Throwable) {
-                    Log.d("TAG", "onFailure: ${t.message}")
+                    Log.d(TAG, "onFailure: ${t.message}")
                 }
             }
         )
@@ -34,12 +36,12 @@ class DestinationServices {
                     call: Call<DetailResponse>,
                     response: Response<DetailResponse>
                 ) {
-                    Log.d("TAG", "onResponse: ${response.body()}")
+                    Log.d(TAG, "onResponse: ${response.body()}")
                     callback(response.body()!!)
                 }
 
                 override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
-                    Log.d("TAG", "onFailure: ${t.message}")
+                    Log.d(TAG, "onFailure: ${t.message}")
                 }
             }
         )
@@ -52,12 +54,12 @@ class DestinationServices {
                     call: Call<ListResponse>,
                     response: Response<ListResponse>
                 ) {
-                    Log.d("TAG", "onResponse: ${response.body()}")
+                    Log.d(TAG, "onResponse: ${response.body()}")
                     callback(response.body()!!)
                 }
 
                 override fun onFailure(call: Call<ListResponse>, t: Throwable) {
-                    Log.d("TAG", "onFailure: ${t.message}")
+                    Log.d(TAG, "onFailure: ${t.message}")
                 }
             }
         )
@@ -70,12 +72,12 @@ class DestinationServices {
                     call: Call<DetailResponse>,
                     response: Response<DetailResponse>
                 ) {
-                    Log.d("TAG", "onResponse: ${response.body()}")
+                    Log.d(TAG, "onResponse: ${response.body()}")
                     callback(response.body()!!)
                 }
 
                 override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
-                    Log.d("TAG", "onFailure: ${t.message}")
+                    Log.d(TAG, "onFailure: ${t.message}")
                 }
             }
         )
@@ -88,12 +90,12 @@ class DestinationServices {
                     call: Call<ListResponse>,
                     response: Response<ListResponse>
                 ) {
-                    Log.d("TAG", "onResponse: ${response.body()}")
+                    Log.d(TAG, "onResponse: ${response.body()}")
                     callback(response.body()!!)
                 }
 
                 override fun onFailure(call: Call<ListResponse>, t: Throwable) {
-                    Log.d("TAG", "onFailure: ${t.message}")
+                    Log.d(TAG, "onFailure: ${t.message}")
                 }
             }
         )
@@ -106,12 +108,12 @@ class DestinationServices {
                     call: Call<DetailResponse>,
                     response: Response<DetailResponse>
                 ) {
-                    Log.d("TAG", "onResponse: ${response.body()}")
+                    Log.d(TAG, "onResponse: ${response.body()}")
                     callback(response.body()!!)
                 }
 
                 override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
-                    Log.d("TAG", "onFailure: ${t.message}")
+                    Log.d(TAG, "onFailure: ${t.message}")
                 }
             }
         )
@@ -124,12 +126,12 @@ class DestinationServices {
                     call: Call<ListResponse>,
                     response: Response<ListResponse>
                 ) {
-                    Log.d("TAG", "onResponse: ${response.body()}")
+                    Log.d(TAG, "onResponse: ${response.body()}")
                     callback(response.body()!!)
                 }
 
                 override fun onFailure(call: Call<ListResponse>, t: Throwable) {
-                    Log.d("TAG", "onFailure: ${t.message}")
+                    Log.d(TAG, "onFailure: ${t.message}")
                 }
             }
         )
@@ -142,12 +144,12 @@ class DestinationServices {
                     call: Call<DetailResponse>,
                     response: Response<DetailResponse>
                 ) {
-                    Log.d("TAG", "onResponse: ${response.body()}")
+                    Log.d(TAG, "onResponse: ${response.body()}")
                     callback(response.body()!!)
                 }
 
                 override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
-                    Log.d("TAG", "onFailure: ${t.message}")
+                    Log.d(TAG, "onFailure: ${t.message}")
                 }
             }
         )
@@ -160,12 +162,12 @@ class DestinationServices {
                     call: Call<ListResponse>,
                     response: Response<ListResponse>
                 ) {
-                    Log.d("TAG", "onResponse: ${response.body()}")
+                    Log.d(TAG, "onResponse: ${response.body()}")
                     callback(response.body()!!)
                 }
 
                 override fun onFailure(call: Call<ListResponse>, t: Throwable) {
-                    Log.d("TAG", "onFailure: ${t.message}")
+                    Log.d(TAG, "onFailure: ${t.message}")
                 }
             }
         )
@@ -178,12 +180,12 @@ class DestinationServices {
                     call: Call<DetailResponse>,
                     response: Response<DetailResponse>
                 ) {
-                    Log.d("TAG", "onResponse: ${response.body()}")
+                    Log.d(TAG, "onResponse: ${response.body()}")
                     callback(response.body()!!)
                 }
 
                 override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
-                    Log.d("TAG", "onFailure: ${t.message}")
+                    Log.d(TAG, "onFailure: ${t.message}")
                 }
             }
         )
@@ -196,12 +198,12 @@ class DestinationServices {
                     call: Call<ListResponse>,
                     response: Response<ListResponse>
                 ) {
-                    Log.d("TAG", "onResponse: ${response.body()}")
+                    Log.d(TAG, "onResponse: ${response.body()}")
                     callback(response.body()!!)
                 }
 
                 override fun onFailure(call: Call<ListResponse>, t: Throwable) {
-                    Log.d("TAG", "onFailure: ${t.message}")
+                    Log.d(TAG, "onFailure: ${t.message}")
                 }
             }
         )
@@ -214,12 +216,12 @@ class DestinationServices {
                     call: Call<DetailResponse>,
                     response: Response<DetailResponse>
                 ) {
-                    Log.d("TAG", "onResponse: ${response.body()}")
+                    Log.d(TAG, "onResponse: ${response.body()}")
                     callback(response.body()!!)
                 }
 
                 override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
-                    Log.d("TAG", "onFailure: ${t.message}")
+                    Log.d(TAG, "onFailure: ${t.message}")
                 }
             }
         )

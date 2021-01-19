@@ -111,6 +111,7 @@ class ListCategoryAdapter(
                         item.title,
                         item.image,
                         item.desc,
+                        dataDummy[listData.indexOf(item)].writer,
                         dataDummy[listData.indexOf(item)].description,
                         dataDummy[listData.indexOf(item)].isSaved
                     )

@@ -15,7 +15,7 @@ import com.delta_se.tegalur.databinding.ItemListBinding
 import com.delta_se.tegalur.ui.DetailBerita
 
 class ListBeritaAdapter (
-    private val listData : ArrayList<DataBerita>, val context: Context
+    private val listData : List<DataBerita>, val context: Context
         ) : RecyclerView.Adapter<ListBeritaAdapter.ListViewHolder>(){
 
     private lateinit var binding : ItemListBinding
@@ -51,6 +51,7 @@ class ListBeritaAdapter (
         holder.itemView.setOnClickListener {
             val moveWithObjectIntent = Intent(context, DetailBerita::class.java)
             moveWithObjectIntent.putExtra(DetailBerita.EXTRA_MYDATA, data)
+            moveWithObjectIntent.putExtra(DetailBerita.EXTRA_MYPOSITION, position)
             context.startActivity(moveWithObjectIntent)
         }
 

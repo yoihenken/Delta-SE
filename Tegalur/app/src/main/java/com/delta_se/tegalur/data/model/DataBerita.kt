@@ -5,9 +5,10 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DataBerita (
-    var title : String,
-    var image : String,
-    var date : String,
-    var description : String,
-    var isSaved : Boolean?
+    var title : String? = null,
+    var image : String? = null,
+    var date : String? = null,
+    var writer : String? = null,
+    var description : String? = null,
+    var isSaved : Boolean = false
 ) : Parcelable

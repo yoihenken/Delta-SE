@@ -17,6 +17,7 @@ class DataDummy {
                 "https://asset.kompas.com/crops/XEJpFatHzpPZFfF8RyECq2chxNk=/0x0:0x0/230x153/data/photo/2020/11/23/5fbb7cbd12bba.jpg",
                 "23/11/2020",
                 "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                "",
                 false
             )
         )
@@ -27,7 +28,8 @@ class DataDummy {
                 "https://asset.kompas.com/crops/u-Vmiz6oZhFw88BPvQalRREBcjQ=/18x0:1176x773/230x153/data/photo/2020/10/26/5f96484e623bf.jpg",
                 "20/11/2020",
                 "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                false
+                "",
+                        false
             )
         )
 
@@ -37,76 +39,7 @@ class DataDummy {
                 "https://asset.kompas.com/crops/XEJpFatHzpPZFfF8RyECq2chxNk=/0x0:0x0/230x153/data/photo/2020/11/23/5fbb7cbd12bba.jpg",
                 "23/11/2020",
                 "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                false
-            )
-        )
-
-        listBerita.add(
-            DataBerita(
-                "Zona Merah Covid-19, IDI Sarankan Pemkot Tegal Karantina Wilayah Tingkat RT/RW",
-                "https://asset.kompas.com/crops/u-Vmiz6oZhFw88BPvQalRREBcjQ=/18x0:1176x773/230x153/data/photo/2020/10/26/5f96484e623bf.jpg",
-                "20/11/2020",
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                false
-            )
-        )
-
-        listBerita.add(
-            DataBerita(
-                "Kasus Covid-19 Melonjak, GOR dan Rusunawa di Tegal Jadi Tempat Isolasi Pasien",
-                "https://asset.kompas.com/crops/XEJpFatHzpPZFfF8RyECq2chxNk=/0x0:0x0/230x153/data/photo/2020/11/23/5fbb7cbd12bba.jpg",
-                "23/11/2020",
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                false
-            )
-        )
-
-        listBerita.add(
-            DataBerita(
-                "Zona Merah Covid-19, IDI Sarankan Pemkot Tegal Karantina Wilayah Tingkat RT/RW",
-                "https://asset.kompas.com/crops/u-Vmiz6oZhFw88BPvQalRREBcjQ=/18x0:1176x773/230x153/data/photo/2020/10/26/5f96484e623bf.jpg",
-                "20/11/2020",
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                false
-            )
-        )
-
-        listBerita.add(
-            DataBerita(
-                "Kasus Covid-19 Melonjak, GOR dan Rusunawa di Tegal Jadi Tempat Isolasi Pasien",
-                "https://asset.kompas.com/crops/XEJpFatHzpPZFfF8RyECq2chxNk=/0x0:0x0/230x153/data/photo/2020/11/23/5fbb7cbd12bba.jpg",
-                "23/11/2020",
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                false
-            )
-        )
-
-        listBerita.add(
-            DataBerita(
-                "Zona Merah Covid-19, IDI Sarankan Pemkot Tegal Karantina Wilayah Tingkat RT/RW",
-                "https://asset.kompas.com/crops/u-Vmiz6oZhFw88BPvQalRREBcjQ=/18x0:1176x773/230x153/data/photo/2020/10/26/5f96484e623bf.jpg",
-                "20/11/2020",
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                false
-            )
-        )
-
-        listBerita.add(
-            DataBerita(
-                "Kasus Covid-19 Melonjak, GOR dan Rusunawa di Tegal Jadi Tempat Isolasi Pasien",
-                "https://asset.kompas.com/crops/XEJpFatHzpPZFfF8RyECq2chxNk=/0x0:0x0/230x153/data/photo/2020/11/23/5fbb7cbd12bba.jpg",
-                "23/11/2020",
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                false
-            )
-        )
-
-        listBerita.add(
-            DataBerita(
-                "Zona Merah Covid-19, IDI Sarankan Pemkot Tegal Karantina Wilayah Tingkat RT/RW",
-                "https://asset.kompas.com/crops/u-Vmiz6oZhFw88BPvQalRREBcjQ=/18x0:1176x773/230x153/data/photo/2020/10/26/5f96484e623bf.jpg",
-                "20/11/2020",
-                "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                "",
                 false
             )
         )

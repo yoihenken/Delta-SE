@@ -56,10 +56,10 @@ class TabSearchFragment () : Fragment() {
                 for (item in listBerita) {
                     dataRecycler.add(
                             DataRecycler(
-                                    item.title,
-                                    item.image,
-                                    item.date,
-                                    item.isSaved
+                                    item.title ?: "",
+                                    item.image?: "",
+                                    item.date?: "",
+                                    item.isSaved ?: false
                             )
                     )
                 }

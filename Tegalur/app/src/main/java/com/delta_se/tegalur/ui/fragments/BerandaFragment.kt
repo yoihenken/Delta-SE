@@ -2,24 +2,35 @@ package com.delta_se.tegalur.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.NestedScrollView
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.SearchActivity
 import com.delta_se.tegalur.data.dummy.DataDummy
+import com.delta_se.tegalur.data.response.ListItem
+import com.delta_se.tegalur.data.response.ListResponse
 import com.delta_se.tegalur.databinding.FragmentBerandaBinding
 import com.delta_se.tegalur.databinding.LayoutCategoryBinding
 import com.delta_se.tegalur.ui.adapter.ListBeritaAdapter
+import com.delta_se.tegalur.utils.Helpers.toDataBerita
+import kotlinx.android.synthetic.main.fragment_beranda.*
 
 class BerandaFragment : Fragment() {
 
     private lateinit var binding: FragmentBerandaBinding
     private lateinit var bindingLayoutCategory : LayoutCategoryBinding
     private val list = ArrayList<DataBerita>()
+    private val model: BerandaViewModel by viewModels()
+    private var page = 1
+//    private var isLoading = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +55,18 @@ class BerandaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentBerandaBinding.bind(view)
         bindingLayoutCategory = LayoutCategoryBinding.bind(view)
-        getDataBerita()
+        model.getBerita(page)
+
+        binding.rvBeranda.apply {
+            layoutManager = LinearLayoutManager(activity)
+            setHasFixedSize(true)
+        }
+
+        model.berita.observe(viewLifecycleOwner, {
+            Log.d("BerandaFragment", "Berita : $it")
+            populateDataBerita(it)
+        })
+
 
         bindingLayoutCategory.apply {
             categoryPariwisata.setOnClickListener {
@@ -71,16 +93,22 @@ class BerandaFragment : Fragment() {
                 moveWithIntent.putExtra(SearchActivity.EXTRA_DATA, intentIndex)
                 activity?.startActivity(moveWithIntent)
             }
-        }
-
-        binding.apply {
-            rvBeranda.apply {
-                layoutManager = LinearLayoutManager(activity)
-                setHasFixedSize(true)
-                adapter = ListBeritaAdapter(list, context)
+            nestedScrollView.setOnScrollChangeListener{ v: NestedScrollView?, _: Int, scrollY: Int, _: Int, _: Int -> val diff = v!!.getChildAt(0)!!.measuredHeight - v.measuredHeight
+                if (diff - scrollY < 1000) {
+                    page++
+                    model.getBerita(page)
+                    Log.d("BerandaFragment", "onViewCreated: Load More")
+                }
             }
-        }
 
+        }
+    }
+
+    private fun populateDataBerita(it: List<ListItem>?) = with(binding) {
+        Log.d("BerandaFragment", "populateDataBerita: $page")
+        rvBeranda.apply {
+            adapter = ListBeritaAdapter(it?.toDataBerita() ?: listOf(), context)
+        }
     }
 
     companion object {}
