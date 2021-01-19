@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.RoundedCornersTransformation
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.SearchActivity
 import com.delta_se.tegalur.data.dummy.DataDummy
@@ -48,6 +49,7 @@ class ListCategoryAdapter(
                 binding.apply {
                     imageCategory.load(data.image) {
                         crossfade(true)
+                        transformations(RoundedCornersTransformation(10f))
                     }
                     titleCategory.text = data.title
                     descCategory.text = data.date
@@ -73,6 +75,7 @@ class ListCategoryAdapter(
                 binding.apply {
                     imageCategory.load(data.image) {
                         crossfade(true)
+                        transformations(RoundedCornersTransformation(10f))
                     }
                     titleCategory.text = data.title
                     descCategory.text = data.address

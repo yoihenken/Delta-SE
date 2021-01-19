@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tegalur">
-
+        <activity
+            android:name=".ui.DetailPenginapan"
+            android:label="@string/title_activity_detail_penginapan"
+            android:theme="@style/Theme.Tegalur.NoActionBar"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -26,7 +29,7 @@
 
         <activity
             android:name=".ui.activity.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".ui.DetailPariwisata"
             android:label="@string/title_activity_detail_pariwisata"
@@ -35,7 +38,7 @@
             android:name=".ui.DetailBerita"
             android:label="@string/title_activity_detail_berita"
             android:theme="@style/Theme.Tegalur.NoActionBar" />
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".SearchActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
