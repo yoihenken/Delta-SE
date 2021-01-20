@@ -78,9 +78,9 @@ class TabSearchFragment () : Fragment() {
                 for (item in listPariwisata) {
                     dataRecycler.add(
                             DataRecycler(
-                                    item.title,
-                                    item.image,
-                                    item.address,
+                                    item.title!!,
+                                    item.image!!,
+                                    item.address!!,
                                     item.isSaved
                             )
                     )

@@ -1,6 +1,7 @@
 package com.delta_se.tegalur.utils
 
 import com.delta_se.tegalur.data.model.DataBerita
+import com.delta_se.tegalur.data.model.DataEvent
 import com.delta_se.tegalur.data.response.ListItem
 import com.delta_se.tegalur.data.response.ObjectDetail
 
@@ -21,6 +22,20 @@ object Helpers {
             DataBerita(title, img, tanggal, penulis, isi, false)
         )
         return berita
+    }
+
+    fun List<ListItem>.toDataEvent(): MutableList<DataEvent>{
+        val event = mutableListOf<DataEvent>()
+        this.forEach {
+            event.add(DataEvent(it.title, it.date, it.image, null, false))
+        }
+        return event
+    }
+
+    fun ObjectDetail.toDataEvent(): MutableList<DataEvent>{
+        val event = mutableListOf<DataEvent>()
+        event.add(DataEvent(title, image, null, content, false))
+        return event
     }
 
 }

@@ -8,10 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.delta_se.tegalur.R
-import com.delta_se.tegalur.data.dummy.DataDummy
-import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.data.response.ListItem
 import com.delta_se.tegalur.databinding.FragmentBeritaBinding
 import com.delta_se.tegalur.ui.adapter.ListBeritaAdapter
@@ -21,7 +20,6 @@ import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutD
 class BeritaFragment : Fragment() {
 
     private lateinit var binding: FragmentBeritaBinding
-    private val list = ArrayList<DataBerita>()
     private val model: BeritaViewModel by viewModels()
     private var page = 1
 
@@ -67,9 +65,8 @@ class BeritaFragment : Fragment() {
             Log.d("Berita Fragment", "populateDataBerita: $page")
             layoutManager = LinearLayoutManager(activity)
             setHasFixedSize(true)
+            itemAnimator = DefaultItemAnimator()
             adapter = ListBeritaAdapter(it?.toDataBerita() ?: listOf(), context)
         }
     }
-
-    companion object {}
 }

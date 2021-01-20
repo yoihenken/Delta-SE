@@ -20,4 +20,13 @@ class DetailBeritaViewModel : ViewModel(){
         }
     }
 
+    private val _event = MutableLiveData<ObjectDetail>()
+    val event: LiveData<ObjectDetail> get() = _event
+
+    fun getEventDetail(page : Int, id: Int) = viewModelScope.launch {
+        DestinationServices.getEventDetail(page,id){
+            if (it.status == true) _event.value = it.objectData
+        }
+    }
+
 }

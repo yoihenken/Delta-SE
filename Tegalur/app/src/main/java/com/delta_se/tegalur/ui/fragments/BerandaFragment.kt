@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.R
@@ -113,6 +114,7 @@ class BerandaFragment : Fragment() {
     private fun populateDataBerita(it: List<ListItem>?) = with(binding) {
         Log.d("BerandaFragment", "populateDataBerita: $page")
         rvBeranda.apply {
+            itemAnimator = DefaultItemAnimator()
             adapter = ListBeritaAdapter(it?.toDataBerita() ?: listOf(), context)
         }
     }

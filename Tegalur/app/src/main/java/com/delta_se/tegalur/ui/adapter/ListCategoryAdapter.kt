@@ -21,7 +21,7 @@ import com.delta_se.tegalur.ui.DetailBerita
 import com.delta_se.tegalur.ui.DetailPariwisata
 
 class ListCategoryAdapter(
-    val listData: ArrayList<DataRecycler>,
+    val listData: List<DataRecycler>,
     val activity: Activity,
     val modeCategory: String
 ) : RecyclerView.Adapter<ListCategoryAdapter.ListViewHolder>() {
@@ -66,7 +66,7 @@ class ListCategoryAdapter(
                 }
                 holder.itemView.setOnClickListener {
                     val moveWithObjectIntent = Intent(activity, DetailBerita::class.java)
-                    moveWithObjectIntent.putExtra(DetailBerita.EXTRA_MYDATA, data)
+                    moveWithObjectIntent.putExtra(DetailBerita.EXTRA_DATABERITA, data)
                     activity?.startActivity(moveWithObjectIntent)
                 }
             }

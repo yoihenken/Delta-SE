@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.model.DataBerita
+import com.delta_se.tegalur.data.model.DataEvent
 import com.delta_se.tegalur.data.response.ObjectDetail
 import com.delta_se.tegalur.databinding.ActivityDetailBeritaBinding
 import com.delta_se.tegalur.ui.adapter.ListBeritaAdapter
@@ -33,8 +34,10 @@ class DetailBerita : AppCompatActivity() {
     }
 
     companion object {
-        const val EXTRA_MYDATA = "extra_mydata"
+        const val EXTRA_DATABERITA = "extra_databerita"
+        const val EXTRA_DATAEVENT = "extra_dataevent"
         const val EXTRA_MYPOSITION = "extra_myposition"
+        const val EXTRA_TYPE = "extra_type"
     }
 
     inline fun <reified T : Parcelable> Activity.getParcelableExtra(key: String) = lazy {
@@ -46,50 +49,99 @@ class DetailBerita : AppCompatActivity() {
         binding = ActivityDetailBeritaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val myData by getParcelableExtra<DataBerita>(DetailBerita.EXTRA_MYDATA)
+        val modeAdapter = intent.getStringExtra(EXTRA_TYPE)
+        val dataBerita by getParcelableExtra<DataBerita>(DetailBerita.EXTRA_DATABERITA)
+        val dataEvent by getParcelableExtra<DataEvent>(DetailBerita.EXTRA_DATAEVENT)
         val position = intent.getIntExtra(EXTRA_MYPOSITION, 0)
-        setSupportActionBar(findViewById(R.id.toolbar))
 
-        supportActionBar?.title = myData?.title.toString()
+        setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        getPageId(position)
+        if (dataBerita!=null){
 
-        model.getBeritaDetail(page, id)
-        model.berita.observe(this, {
-            populateDataBerita(it)
-        })
+            supportActionBar?.title = dataBerita?.title.toString()
 
-        var buttonFloat = findViewById<FloatingActionButton>(R.id.fab)
-        buttonFloat.setOnClickListener { view ->
-            if (myData?.isSaved == true) {
-                myData?.isSaved = false
-                buttonFloat.load(R.drawable.ic_item_active_mark) { crossfade(true) }
-            } else {
-                myData?.isSaved = true
-                buttonFloat.load(R.drawable.ic_item_mark) { crossfade(true) }
+            if (modeAdapter != null) firstChooseType(modeAdapter, position, dataBerita, null)
+
+            var buttonFloat = findViewById<FloatingActionButton>(R.id.fab)
+            buttonFloat.setOnClickListener { view ->
+                if (dataBerita?.isSaved == true) {
+                    dataBerita?.isSaved = false
+                    buttonFloat.load(R.drawable.ic_item_active_mark) { crossfade(true) }
+                } else {
+                    dataBerita?.isSaved = true
+                    buttonFloat.load(R.drawable.ic_item_mark) { crossfade(true) }
+                }
+            }
+        }else {
+
+            supportActionBar?.title = dataEvent?.title.toString()
+
+            if (modeAdapter != null) firstChooseType(modeAdapter, position, null, dataEvent)
+
+            var buttonFloat = findViewById<FloatingActionButton>(R.id.fab)
+            buttonFloat.setOnClickListener { view ->
+                if (dataEvent?.isSaved == true) {
+                    dataEvent?.isSaved = false
+                    buttonFloat.load(R.drawable.ic_item_active_mark) { crossfade(true) }
+                } else {
+                    dataEvent?.isSaved = true
+                    buttonFloat.load(R.drawable.ic_item_mark) { crossfade(true) }
+                }
             }
         }
     }
 
-    private fun populateDataBerita(it: ObjectDetail?) = with(binding) {
+    private fun populateDataAdapter(it: ObjectDetail?, dataBerita: DataBerita ?= null, dataEvent: DataEvent?= null) = with(binding) {
         toolbarLayoutBerita.setExpandedTitleTextAppearance(R.style.ExpandedAppBar)
-        titleBerita.text = it?.title
-        datePublish.text = it?.tanggal
-        iv_detail_photo.load(it?.img){
-            crossfade(true)
+
+        when(intent.getStringExtra(EXTRA_TYPE)){
+            "BERITA" -> {
+                titleBerita.text = it?.title
+                datePublish.text = it?.tanggal
+                iv_detail_photo.load(it?.img){
+                    crossfade(true)
+                }
+                detailDescription.text = it?.isi
+            }
+            "EVENT" -> {
+                titleBerita.text = it?.title
+                ivDetailPhoto.load(it?.image){
+                    crossfade(true)
+                }
+                datePublish.text = it?.tanggal
+                detailDescription.text = it?.content
+            }
         }
-        detailDescription.text = it?.isi
     }
 
-    private fun getPageId(position : Int){
-        if (position >= 15){
-            page = (position / 15) + 1
-            id  = position % 15
+    private fun getPageId(position : Int, total : Int){
+        if (position >= total){
+            page = (position / total) + 1
+            id  = position % total
 
         }else id = position
 
         Log.d("DetailBerita", "getBeritaDetail: $id , $page, $position")
 
+    }
+
+    private fun firstChooseType(modeAdapter : String, position: Int, dataBerita: DataBerita ?= null, dataEvent: DataEvent?= null) = when(modeAdapter){
+
+        "BERITA" -> {
+            getPageId(position, 15)
+            model.getBeritaDetail(page, id)
+            model.berita.observe(this, {
+                populateDataAdapter(it)
+            })
+        }
+        "EVENT" -> {
+            getPageId(position, 12)
+            model.getEventDetail(page, id)
+            model.event.observe(this, {
+                populateDataAdapter(it)
+            })
+        }
+        else -> {}
     }
 }
