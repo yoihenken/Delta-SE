@@ -27,14 +27,14 @@ object Helpers {
     fun List<ListItem>.toDataEvent(): MutableList<DataEvent>{
         val event = mutableListOf<DataEvent>()
         this.forEach {
-            event.add(DataEvent(it.title, it.date, it.image, null, false))
+            event.add(DataEvent(0, 0,  it.title, it.date, it.image, null, false))
         }
         return event
     }
 
     fun ObjectDetail.toDataEvent(): MutableList<DataEvent>{
         val event = mutableListOf<DataEvent>()
-        event.add(DataEvent(title, image, null, content, false))
+        event.add(DataEvent(0, 0, title, image, null, content, false))
         return event
     }
 

@@ -17,6 +17,7 @@ import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.data.model.DataPariwisata
 import com.delta_se.tegalur.databinding.ActivityDetailPariwisataBinding
 import com.delta_se.tegalur.ui.activity.MapsActivity
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import kotlinx.android.synthetic.main.content_scrolling_pariwisata.*
 
 class DetailPariwisata : AppCompatActivity() {
@@ -53,12 +54,24 @@ class DetailPariwisata : AppCompatActivity() {
         myData?.lat = dataAddress[0].latitude
         myData?.lang = dataAddress[0].longitude
 
-        var buttonFloat = findViewById<FloatingActionButton>(R.id.fab)
-        buttonFloat.setOnClickListener { view ->
+        var buttonExFloat = findViewById<ExtendedFloatingActionButton>(R.id.efabPariwisata)
+        buttonExFloat.setOnClickListener { view ->
             val moveWithObjectIntent = Intent(this,MapsActivity::class.java)
             moveWithObjectIntent.putExtra(MapsActivity.EXTRA_MYDATA, myData)
             startActivity(moveWithObjectIntent)
         }
+
+        var buttonFloat = findViewById<FloatingActionButton>(R.id.fab)
+        buttonFloat.setOnClickListener { view ->
+            if (myData?.isSaved == true) {
+                myData?.isSaved = false
+                buttonFloat.load(R.drawable.ic_item_active_mark) { crossfade(true) }
+            } else {
+                myData?.isSaved = true
+                buttonFloat.load(R.drawable.ic_item_mark) { crossfade(true) }
+            }
+        }
+
 
         binding.apply {
             toolbarLayoutPariwisata.setExpandedTitleTextAppearance(R.style.ExpandedAppBar)

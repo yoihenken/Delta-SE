@@ -5,6 +5,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DataEvent(
+    var page : Int? = 0,
+    var id : Int? = 0,
     var title : String? = null,
     var date : String? = null,
     var image : String? = null,

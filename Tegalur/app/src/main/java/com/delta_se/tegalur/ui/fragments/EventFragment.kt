@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,7 @@ import com.delta_se.tegalur.databinding.FragmentEventBinding
 import com.delta_se.tegalur.ui.adapter.ListBeritaAdapter
 import com.delta_se.tegalur.ui.adapter.ListEventAdapter
 import com.delta_se.tegalur.utils.Helpers.toDataEvent
+import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection
 
 class EventFragment : Fragment() {
 
@@ -41,12 +43,29 @@ class EventFragment : Fragment() {
         model.event.observe(viewLifecycleOwner, {
             populateDataEvent(it)
         })
+
+        binding.apply {
+            swipyEvent.setOnRefreshListener {
+                swipyEvent.direction = SwipyRefreshLayoutDirection.BOTTOM
+
+                if (swipyEvent.isRefreshing){
+                    page++
+                    model.getEvent(page)
+                }
+                swipyEvent.isRefreshing = false
+            }
+            nsvEvent.setOnScrollChangeListener { view: NestedScrollView, _:Int, scrollY: Int, _:Int, _:Int   ->
+                val diff = view.getChildAt(0)!!.measuredHeight - view.measuredHeight
+                if (diff - scrollY<8000 && swipyEvent.isRefreshing) swipyEvent.isRefreshing = false
+            }
+        }
     }
 
     private fun populateDataEvent(it: List<ListItem>?) = with(binding){
         rvEvent.apply {
             layoutManager = LinearLayoutManager(activity)
             itemAnimator = DefaultItemAnimator()
+            setHasFixedSize(true)
             adapter = ListEventAdapter(it?.toDataEvent() ?: listOf(), context)
 
         }

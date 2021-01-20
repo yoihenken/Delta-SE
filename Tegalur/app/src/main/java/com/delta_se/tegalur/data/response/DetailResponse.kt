@@ -63,5 +63,9 @@ data class ObjectDetail(
     val isi: String? = null,
 
     @field:SerializedName("content")
-    val content: String? = null
+    val content: String? = null,
+
+    val page : Int? = 0,
+
+    val id : Int? = 0
 )
