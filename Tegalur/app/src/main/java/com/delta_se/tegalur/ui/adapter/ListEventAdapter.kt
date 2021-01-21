@@ -20,15 +20,12 @@ class ListEventAdapter (
     private val listData : List<Any>, val context: Context
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private lateinit var binding : ItemListBinding
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
         val layout  = getLayout(viewType)
         val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
-//        binding = ItemListBinding.bind(view)
         return getViewHolder(viewType, view)
     }
 

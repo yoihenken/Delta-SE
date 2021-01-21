@@ -3,26 +3,22 @@ package com.delta_se.tegalur.ui.activity
 import android.app.Activity
 import android.os.Bundle
 import android.os.Parcelable
-import android.util.Log
 import androidx.activity.viewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginTop
 import coil.load
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.data.model.DataEvent
 import com.delta_se.tegalur.data.response.ObjectDetail
 import com.delta_se.tegalur.databinding.ActivityDetailBeritaBinding
-import com.delta_se.tegalur.utils.Helpers.toDataEvent
 import kotlinx.android.synthetic.main.activity_detail_berita.*
 import kotlinx.android.synthetic.main.content_scrolling.*
 
 class DetailBerita : AppCompatActivity() {
     private val model: DetailBeritaViewModel by viewModels()
     private lateinit var binding : ActivityDetailBeritaBinding
-
-    private var page = 1
-    private var id = 1
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
@@ -59,7 +55,7 @@ class DetailBerita : AppCompatActivity() {
 
             if (modeAdapter != null) firstChooseType(modeAdapter, position, dataBerita, null)
 
-            var buttonFloat = findViewById<FloatingActionButton>(R.id.fab)
+            val buttonFloat = findViewById<FloatingActionButton>(R.id.fab)
             buttonFloat.setOnClickListener { view ->
                 if (dataBerita?.isSaved == true) {
                     dataBerita?.isSaved = false
@@ -75,7 +71,7 @@ class DetailBerita : AppCompatActivity() {
 
             if (modeAdapter != null) firstChooseType(modeAdapter, position, null, dataEvent)
 
-            var buttonFloat = findViewById<FloatingActionButton>(R.id.fab)
+            val buttonFloat = findViewById<FloatingActionButton>(R.id.fab)
             buttonFloat.setOnClickListener { view ->
                 if (dataEvent?.isSaved == true) {
                     dataEvent?.isSaved = false
@@ -95,6 +91,7 @@ class DetailBerita : AppCompatActivity() {
             "BERITA" -> {
                 titleBerita.text = it?.title
                 datePublish.text = it?.tanggal
+                writerNews.text = it?.penulis
                 iv_detail_photo.load(it?.img){
                     crossfade(true)
                 }
@@ -111,22 +108,10 @@ class DetailBerita : AppCompatActivity() {
         }
     }
 
-    private fun getPageId(position : Int, total : Int){
-        if (position >= total){
-            page = (position / total) + 1
-            id  = position % total
-
-        }else id = position
-
-        Log.d("DetailBerita", "getBeritaDetail: $id , $page, $position")
-
-    }
-
     private fun firstChooseType(modeAdapter : String, position: Int, dataBerita: DataBerita ?= null, dataEvent: DataEvent ?= null) = when(modeAdapter){
 
         "BERITA" -> {
-            getPageId(position, 15)
-            model.getBeritaDetail(page, id)
+            model.getBeritaDetail(dataBerita?.page!!, dataBerita.id!!)
             model.berita.observe(this, {
                 populateDataAdapter(it)
             })

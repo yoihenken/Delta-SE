@@ -5,14 +5,22 @@ import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.data.model.DataEvent
 import com.delta_se.tegalur.data.response.ListItem
 import com.delta_se.tegalur.data.response.ObjectDetail
+import java.text.SimpleDateFormat
 
 object Helpers {
-    fun List<ListItem>.toDataBerita(): MutableList<DataBerita> {
-        val berita = mutableListOf<DataBerita>()
+    fun List<ListItem>.toDataBerita(): MutableList<Any> {
+        val berita = mutableListOf<Any>()
+        var currentDate = ""
+        var position = 0
         this.forEach {
+            if (!currentDate.equals(getMonthYearfromDMYT(it.date!!))){
+                currentDate = getMonthYearfromDMYT(it.date)
+                berita.add(currentDate)
+            }
             berita.add(
-                DataBerita(it.title, it.img, it.date, null, null, false)
+                DataBerita(getPage(position, 15), getId(position, 15), it.title, it.img, it.date, null, null, false)
             )
+            position++
         }
         return berita
     }
@@ -20,7 +28,7 @@ object Helpers {
     fun ObjectDetail.toDataBerita(): MutableList<DataBerita>{
         val berita = mutableListOf<DataBerita>()
         berita.add(
-            DataBerita(title, img, tanggal, penulis, isi, false)
+            DataBerita(0, 0, title, img, tanggal, penulis, isi, false)
         )
         return berita
     }
@@ -31,7 +39,7 @@ object Helpers {
         var position = 0
         this.forEach {
             if (!currentDate.equals(getMontYear(it.date!!))){
-                currentDate = getMontYear(it.date!!)
+                currentDate = getMontYear(it.date)
                 event.add(currentDate)
             }
             event.add(DataEvent(getPage(position,12), getId(position, 12),  it.title, it.date, it.image, null, false))
@@ -63,4 +71,10 @@ object Helpers {
         return "${clear[1].toString()} ${clear[2].toString()}"
     }
 
+    fun getMonthYearfromDMYT(date : String): String {
+        val clear = date.split("/", ",").toTypedArray()
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy").parse(clear[0] + "-" + clear[1] + "-" + clear[2])
+        val dateFormated = SimpleDateFormat("dd MMMM yyyy").format(dateFormat)
+        return dateFormated.toString()
+    }
 }

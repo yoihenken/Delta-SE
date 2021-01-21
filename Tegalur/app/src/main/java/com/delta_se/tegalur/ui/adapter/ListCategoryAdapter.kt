@@ -105,6 +105,8 @@ class ListCategoryAdapter(
 
                 arrDataBerita.add(
                     DataBerita(
+                        dataDummy[listData.indexOf(item)].page,
+                        dataDummy[listData.indexOf(item)].id,
                         item.title,
                         item.image,
                         item.desc,
