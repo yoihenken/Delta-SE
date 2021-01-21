@@ -2,23 +2,20 @@ package com.delta_se.tegalur.ui.adapter
 
 import android.app.Activity
 import android.content.Intent
-import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.delta_se.tegalur.R
-import com.delta_se.tegalur.SearchActivity
 import com.delta_se.tegalur.data.dummy.DataDummy
 import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.data.model.DataPariwisata
 import com.delta_se.tegalur.data.model.DataRecycler
 import com.delta_se.tegalur.databinding.ItemCategoryBinding
-import com.delta_se.tegalur.ui.DetailBerita
-import com.delta_se.tegalur.ui.DetailPariwisata
+import com.delta_se.tegalur.ui.activity.DetailBerita
+import com.delta_se.tegalur.ui.activity.DetailPariwisata
 
 class ListCategoryAdapter(
     val listData: List<DataRecycler>,

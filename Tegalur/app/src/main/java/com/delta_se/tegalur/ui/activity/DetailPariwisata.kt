@@ -1,27 +1,22 @@
-package com.delta_se.tegalur.ui
+package com.delta_se.tegalur.ui.activity
 
 import android.app.Activity
+import android.content.Intent
+import android.location.Geocoder
 import android.os.Bundle
 import android.os.Parcelable
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
 import com.delta_se.tegalur.R
-import com.delta_se.tegalur.data.model.DataBerita
-import com.delta_se.tegalur.data.model.DataPenginapan
-import com.delta_se.tegalur.databinding.ActivityDetailPenginapanBinding
-import kotlinx.android.synthetic.main.content_detail_penginapan.*
-import kotlinx.android.synthetic.main.content_detail_penginapan.isiAlamat
-import kotlinx.android.synthetic.main.content_detail_penginapan.isiDeskripsi
-import kotlinx.android.synthetic.main.content_detail_penginapan.isiTelepon
-import kotlinx.android.synthetic.main.content_detail_penginapan.isiWebsite
+import com.delta_se.tegalur.data.model.DataPariwisata
+import com.delta_se.tegalur.databinding.ActivityDetailPariwisataBinding
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import kotlinx.android.synthetic.main.content_scrolling_pariwisata.*
 
-class DetailPenginapan : AppCompatActivity() {
+class DetailPariwisata : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDetailPenginapanBinding
+    private lateinit var binding : ActivityDetailPariwisataBinding
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
@@ -38,15 +33,27 @@ class DetailPenginapan : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailPenginapanBinding.inflate(layoutInflater)
+        binding = ActivityDetailPariwisataBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val myData by getParcelableExtra<DataPenginapan>(DetailPenginapan.EXTRA_MYDATA)
+        val myData by getParcelableExtra<DataPariwisata>(EXTRA_MYDATA)
         setSupportActionBar(findViewById(R.id.toolbar))
 
         supportActionBar?.title = myData?.title.toString()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val geoCoder = Geocoder(this)
+        var dataAddress = geoCoder.getFromLocationName(myData?.title.toString(),1)
+
+        myData?.lat = dataAddress[0].latitude
+        myData?.lang = dataAddress[0].longitude
+
+        var buttonExFloat = findViewById<ExtendedFloatingActionButton>(R.id.efabPariwisata)
+        buttonExFloat.setOnClickListener { view ->
+            val moveWithObjectIntent = Intent(this,MapsActivity::class.java)
+            moveWithObjectIntent.putExtra(MapsActivity.EXTRA_MYDATA, myData)
+            startActivity(moveWithObjectIntent)
+        }
 
         var buttonFloat = findViewById<FloatingActionButton>(R.id.fab)
         buttonFloat.setOnClickListener { view ->
@@ -59,15 +66,14 @@ class DetailPenginapan : AppCompatActivity() {
             }
         }
 
+
         binding.apply {
-            toolbarLayoutPenginapan.setExpandedTitleTextAppearance(R.style.ExpandedAppBar)
-            titlePenginapan.text = myData?.title
-            photoPenginapan.load(myData?.image){
+            toolbarLayoutPariwisata.setExpandedTitleTextAppearance(R.style.ExpandedAppBar)
+            titlePariwisata.text = myData?.title
+            ivDetailPhoto.load(myData?.image){
                 crossfade(true)
             }
             isiAlamat.text = myData?.address
-            isiTelepon.text = myData?.phone.toString()
-            isiWebsite.text = myData?.website
             isiDeskripsi.text = myData?.content
         }
     }

@@ -7,12 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
 import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.databinding.ItemListBinding
-import com.delta_se.tegalur.ui.DetailBerita
+import com.delta_se.tegalur.ui.activity.DetailBerita
 
 class ListBeritaAdapter (
     private val listData : List<DataBerita>, val context: Context

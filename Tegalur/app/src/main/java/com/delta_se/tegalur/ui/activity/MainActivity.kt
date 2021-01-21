@@ -1,14 +1,12 @@
-package com.delta_se.tegalur
+package com.delta_se.tegalur.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.databinding.ActivityMainBinding
-import com.delta_se.tegalur.ui.adapter.ListBeritaAdapter
 import com.delta_se.tegalur.ui.fragments.BerandaFragment
 import com.delta_se.tegalur.ui.fragments.BeritaFragment
 import com.delta_se.tegalur.ui.fragments.EventFragment

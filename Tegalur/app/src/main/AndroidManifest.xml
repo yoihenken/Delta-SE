@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tegalur">
         <activity
-            android:name=".ui.DetailPenginapan"
+            android:name=".ui.activity.DetailPenginapan"
             android:label="@string/title_activity_detail_penginapan"
             android:theme="@style/Theme.Tegalur.NoActionBar"></activity>
         <!--
@@ -31,15 +31,15 @@
             android:name=".ui.activity.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".ui.DetailPariwisata"
+            android:name=".ui.activity.DetailPariwisata"
             android:label="@string/title_activity_detail_pariwisata"
             android:theme="@style/Theme.Tegalur.NoActionBar" />
         <activity
-            android:name=".ui.DetailBerita"
+            android:name=".ui.activity.DetailBerita"
             android:label="@string/title_activity_detail_berita"
             android:theme="@style/Theme.Tegalur.NoActionBar" />
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.activity.SearchActivity" />
+        <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

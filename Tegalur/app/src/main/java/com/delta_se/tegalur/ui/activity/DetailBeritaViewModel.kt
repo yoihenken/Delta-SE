@@ -1,4 +1,4 @@
-package com.delta_se.tegalur.ui
+package com.delta_se.tegalur.ui.activity
 
 import android.util.Log
 import androidx.lifecycle.LiveData

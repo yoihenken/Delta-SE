@@ -1,23 +1,19 @@
-package com.delta_se.tegalur.ui
+package com.delta_se.tegalur.ui.activity
 
 import android.app.Activity
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
 import androidx.activity.viewModels
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.data.model.DataEvent
 import com.delta_se.tegalur.data.response.ObjectDetail
 import com.delta_se.tegalur.databinding.ActivityDetailBeritaBinding
-import com.delta_se.tegalur.ui.adapter.ListBeritaAdapter
+import com.delta_se.tegalur.utils.Helpers.toDataEvent
 import kotlinx.android.synthetic.main.activity_detail_berita.*
 import kotlinx.android.synthetic.main.content_scrolling.*
 
@@ -50,8 +46,8 @@ class DetailBerita : AppCompatActivity() {
         setContentView(binding.root)
 
         val modeAdapter = intent.getStringExtra(EXTRA_TYPE)
-        val dataBerita by getParcelableExtra<DataBerita>(DetailBerita.EXTRA_DATABERITA)
-        val dataEvent by getParcelableExtra<DataEvent>(DetailBerita.EXTRA_DATAEVENT)
+        val dataBerita by getParcelableExtra<DataBerita>(EXTRA_DATABERITA)
+        val dataEvent by getParcelableExtra<DataEvent>(EXTRA_DATAEVENT)
         val position = intent.getIntExtra(EXTRA_MYPOSITION, 0)
 
         setSupportActionBar(findViewById(R.id.toolbar))
@@ -92,7 +88,7 @@ class DetailBerita : AppCompatActivity() {
         }
     }
 
-    private fun populateDataAdapter(it: ObjectDetail?, dataBerita: DataBerita ?= null, dataEvent: DataEvent?= null) = with(binding) {
+    private fun populateDataAdapter(it: ObjectDetail?, dataBerita: DataBerita ?= null, dataEvent: DataEvent ?= null) = with(binding) {
         toolbarLayoutBerita.setExpandedTitleTextAppearance(R.style.ExpandedAppBar)
 
         when(intent.getStringExtra(EXTRA_TYPE)){
@@ -109,7 +105,7 @@ class DetailBerita : AppCompatActivity() {
                 ivDetailPhoto.load(it?.image){
                     crossfade(true)
                 }
-                datePublish.text = it?.tanggal
+                datePublish.text = dataEvent?.date
                 detailDescription.text = it?.content
             }
         }
@@ -126,7 +122,7 @@ class DetailBerita : AppCompatActivity() {
 
     }
 
-    private fun firstChooseType(modeAdapter : String, position: Int, dataBerita: DataBerita ?= null, dataEvent: DataEvent?= null) = when(modeAdapter){
+    private fun firstChooseType(modeAdapter : String, position: Int, dataBerita: DataBerita ?= null, dataEvent: DataEvent ?= null) = when(modeAdapter){
 
         "BERITA" -> {
             getPageId(position, 15)
@@ -136,10 +132,9 @@ class DetailBerita : AppCompatActivity() {
             })
         }
         "EVENT" -> {
-            getPageId(position, 12)
-            model.getEventDetail(page, id)
+            model.getEventDetail(dataEvent?.page!!, dataEvent.id!!)
             model.event.observe(this, {
-                populateDataAdapter(it)
+                populateDataAdapter(it, null, dataEvent)
             })
         }
         else -> {}

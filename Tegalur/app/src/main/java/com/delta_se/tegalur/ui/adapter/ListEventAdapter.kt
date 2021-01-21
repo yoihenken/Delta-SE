@@ -11,56 +11,65 @@ import coil.transform.RoundedCornersTransformation
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.model.DataEvent
 import com.delta_se.tegalur.databinding.ItemListBinding
-import com.delta_se.tegalur.ui.DetailBerita
+import com.delta_se.tegalur.ui.activity.DetailBerita
+import com.delta_se.tegalur.ui.holder.HeaderHolder
+import com.delta_se.tegalur.ui.holder.ListEventHolder
+import java.lang.IllegalArgumentException
 
 class ListEventAdapter (
-    private val listData : List<DataEvent>, val context: Context
-) : RecyclerView.Adapter<ListEventAdapter.ListViewHolder>() {
-    class ListViewHolder (view: View) : RecyclerView.ViewHolder(view){}
+    private val listData : List<Any>, val context: Context
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var binding : ItemListBinding
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ListEventAdapter.ListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list, parent, false)
-        binding = ItemListBinding.bind(view)
-        return ListViewHolder(binding.root)
+    ): RecyclerView.ViewHolder {
+        val layout  = getLayout(viewType)
+        val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
+//        binding = ItemListBinding.bind(view)
+        return getViewHolder(viewType, view)
     }
 
-    override fun onBindViewHolder(holder: ListEventAdapter.ListViewHolder, position: Int) {
-        val data = listData[position]
-        binding.apply {
-            imageList.load(data.image){
-                crossfade(true)
-                transformations(RoundedCornersTransformation(10f))
-            }
-            titleList.text = data.title
-            descList.text = data.date
-            data.isSaved = true
-
-            imageSimpan.setOnClickListener {
-                if (data.isSaved == true){
-                    data.isSaved = false
-                    imageSimpan.load(R.drawable.ic_item_active_mark){crossfade(true)}
-                }else{
-                    data.isSaved = true
-                    imageList.load(R.drawable.ic_item_mark){crossfade(true)}
-                }
-            }
+    private fun getViewHolder(viewType: Int, view: View): RecyclerView.ViewHolder {
+        return when(viewType){
+            ITEM_HEADER -> HeaderHolder(view)
+            ITEM_LIST -> ListEventHolder(view)
+            else -> throw IllegalArgumentException("Undefined viewtype")
         }
+    }
 
-        holder.itemView.setOnClickListener {
-            val moveWithObjectIntent = Intent(context, DetailBerita::class.java)
-            moveWithObjectIntent.putExtra(DetailBerita.EXTRA_DATAEVENT, data)
-            moveWithObjectIntent.putExtra(DetailBerita.EXTRA_MYPOSITION, position)
-            moveWithObjectIntent.putExtra(DetailBerita.EXTRA_TYPE, "EVENT")
-            context.startActivity(moveWithObjectIntent)
+    private fun getLayout(viewType: Int): Int {
+        return when(viewType) {
+            ITEM_HEADER-> R.layout.item_header
+            ITEM_LIST -> R.layout.item_list
+            else -> throw IllegalArgumentException("Undefined viewtype")
         }
+    }
 
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+       when(val type = getItemViewType(position)){
+           ITEM_HEADER -> (holder as HeaderHolder).bindContent(listData[position] as String)
+           ITEM_LIST -> (holder as ListEventHolder).bindView(listData[position] as DataEvent, context)
+           else -> throw IllegalArgumentException("Undefined viewtype")
+       }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when(listData[position]) {
+            is String -> ITEM_HEADER
+            is DataEvent -> ITEM_LIST
+            else -> throw IllegalArgumentException("Undefined viewtype")
+        }
     }
 
     override fun getItemCount(): Int = listData.size
+
+    companion object{
+        private val ITEM_HEADER = 0
+        private val ITEM_LIST = 1
+    }
 
     init {
         setHasStableIds(true)

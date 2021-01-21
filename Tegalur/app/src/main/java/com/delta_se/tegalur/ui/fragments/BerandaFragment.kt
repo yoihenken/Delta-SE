@@ -8,26 +8,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.R
-import com.delta_se.tegalur.SearchActivity
-import com.delta_se.tegalur.data.dummy.DataDummy
+import com.delta_se.tegalur.ui.activity.SearchActivity
 import com.delta_se.tegalur.data.response.ListItem
-import com.delta_se.tegalur.data.response.ListResponse
 import com.delta_se.tegalur.databinding.FragmentBerandaBinding
 import com.delta_se.tegalur.databinding.LayoutCategoryBinding
 import com.delta_se.tegalur.ui.adapter.ListBeritaAdapter
 import com.delta_se.tegalur.utils.Helpers.toDataBerita
-import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection
 import kotlinx.android.synthetic.main.fragment_beranda.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class BerandaFragment : Fragment() {
 

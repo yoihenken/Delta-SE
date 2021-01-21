@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.DetailPariwisata"
+    tools:context=".ui.activity.DetailPariwisata"
     tools:showIn="@layout/activity_detail_pariwisata"
     android:paddingTop="16dp">
 

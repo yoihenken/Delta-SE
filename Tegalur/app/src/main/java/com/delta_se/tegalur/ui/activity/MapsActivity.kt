@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.model.DataPariwisata
 import com.delta_se.tegalur.databinding.ActivityMapsBinding
-import com.delta_se.tegalur.ui.DetailPariwisata
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback

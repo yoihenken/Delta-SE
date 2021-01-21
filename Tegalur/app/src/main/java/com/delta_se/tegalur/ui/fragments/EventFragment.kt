@@ -67,8 +67,6 @@ class EventFragment : Fragment() {
             itemAnimator = DefaultItemAnimator()
             setHasFixedSize(true)
             adapter = ListEventAdapter(it?.toDataEvent() ?: listOf(), context)
-
         }
     }
-
 }
