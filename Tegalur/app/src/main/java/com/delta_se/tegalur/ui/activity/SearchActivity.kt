@@ -26,8 +26,6 @@ class SearchActivity : AppCompatActivity() {
         val intentIndex = intent.getIntExtra(EXTRA_DATA, -1)
         var adapter = FragmentPagerItemAdapter(
             supportFragmentManager, FragmentPagerItems.with(this)
-                .add("Berita", TabSearchFragment::class.java)
-                .add("Event", TabSearchFragment::class.java)
                 .add("Pariwisata", TabSearchFragment::class.java)
                 .add("Kuliner", TabSearchFragment::class.java)
                 .add("Oleh-oleh", TabSearchFragment::class.java)

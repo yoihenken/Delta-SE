@@ -63,25 +63,25 @@ class BerandaFragment : Fragment() {
 
         bindingLayoutCategory.apply {
             categoryPariwisata.setOnClickListener {
-                val intentIndex = 2
+                val intentIndex = 0
                 val moveWithIntent = Intent(activity, SearchActivity::class.java)
                 moveWithIntent.putExtra(SearchActivity.EXTRA_DATA, intentIndex)
                 activity?.startActivity(moveWithIntent)
             }
             categoryKuliner.setOnClickListener {
-                val intentIndex = 3
+                val intentIndex = 1
                 val moveWithIntent = Intent(activity, SearchActivity::class.java)
                 moveWithIntent.putExtra(SearchActivity.EXTRA_DATA, intentIndex)
                 activity?.startActivity(moveWithIntent)
             }
             categoryOleh.setOnClickListener {
-                val intentIndex = 4
+                val intentIndex = 2
                 val moveWithIntent = Intent(activity, SearchActivity::class.java)
                 moveWithIntent.putExtra(SearchActivity.EXTRA_DATA, intentIndex)
                 activity?.startActivity(moveWithIntent)
             }
             categoryPenginapan.setOnClickListener {
-                val intentIndex = 5
+                val intentIndex = 3
                 val moveWithIntent = Intent(activity, SearchActivity::class.java)
                 moveWithIntent.putExtra(SearchActivity.EXTRA_DATA, intentIndex)
                 activity?.startActivity(moveWithIntent)
