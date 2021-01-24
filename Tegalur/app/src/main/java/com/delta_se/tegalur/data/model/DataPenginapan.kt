@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DataPenginapan(
+    val id : Int? = 0,
     var title : String,
     var image : String,
     var address : String,

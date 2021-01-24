@@ -56,6 +56,7 @@ class DataDummy {
 
         listPariwisata.add(
             DataPariwisata(
+                0,
                 "Pemandian Air Panas Guci",
                 "https://jejakpiknik.com/wp-content/uploads/2017/03/1@exploretegal-630x380.jpg",
                 "Jl. Objek Wisata Guci, Sigedong, Bumijawa, Tegal, Jawa Tengah 52466, Indonesia",
@@ -67,6 +68,7 @@ class DataDummy {
         )
         listPariwisata.add(
             DataPariwisata(
+                1,
                 "Guciku Hot Waterboom",
                 "https://1.bp.blogspot.com/-JM-THWzra-g/WIwC-TauDmI/AAAAAAAAEmQ/RdSa68EWpn8cpF3fZDVEqZwRlgX9ryGoACLcB/s640/Sulaku%2BBumijawa%2BPark.jpg",
                 "Jalan Lingkar Barat, Desa Guci, Kecamatan Bumijawa 52466",
@@ -78,6 +80,7 @@ class DataDummy {
         )
         listPariwisata.add(
             DataPariwisata(
+                2,
                 "Pemandian Air Panas Guci",
                 "https://jejakpiknik.com/wp-content/uploads/2017/03/1@exploretegal-630x380.jpg",
                 "Jl. Objek Wisata Guci, Sigedong, Bumijawa, Tegal, Jawa Tengah 52466, Indonesia",
@@ -89,6 +92,7 @@ class DataDummy {
         )
         listPariwisata.add(
             DataPariwisata(
+                3,
                 "Guciku Hot Waterboom",
                 "https://1.bp.blogspot.com/-JM-THWzra-g/WIwC-TauDmI/AAAAAAAAEmQ/RdSa68EWpn8cpF3fZDVEqZwRlgX9ryGoACLcB/s640/Sulaku%2BBumijawa%2BPark.jpg",
                 "Jalan Lingkar Barat, Desa Guci, Kecamatan Bumijawa 52466",
@@ -100,6 +104,7 @@ class DataDummy {
         )
         listPariwisata.add(
             DataPariwisata(
+                4,
                 "Pemandian Air Panas Guci",
                 "https://jejakpiknik.com/wp-content/uploads/2017/03/1@exploretegal-630x380.jpg",
                 "Jl. Objek Wisata Guci, Sigedong, Bumijawa, Tegal, Jawa Tengah 52466, Indonesia",
@@ -111,6 +116,7 @@ class DataDummy {
         )
         listPariwisata.add(
             DataPariwisata(
+                5,
                 "Guciku Hot Waterboom",
                 "https://1.bp.blogspot.com/-JM-THWzra-g/WIwC-TauDmI/AAAAAAAAEmQ/RdSa68EWpn8cpF3fZDVEqZwRlgX9ryGoACLcB/s640/Sulaku%2BBumijawa%2BPark.jpg",
                 "Jalan Lingkar Barat, Desa Guci, Kecamatan Bumijawa 52466",

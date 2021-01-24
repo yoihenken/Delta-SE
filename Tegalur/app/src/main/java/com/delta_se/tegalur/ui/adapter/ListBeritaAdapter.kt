@@ -44,7 +44,7 @@ class ListBeritaAdapter (
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-       when(val type = getItemViewType(position)){
+       when(getItemViewType(position)){
            ITEM_HEADER -> (holder as HeaderHolder).bindContent(listData[position] as String)
            ITEM_LIST -> (holder as ListBeritaHolder).bindView(listData[position] as DataBerita, context)
            else -> throw IllegalArgumentException("Undefined viewtype")

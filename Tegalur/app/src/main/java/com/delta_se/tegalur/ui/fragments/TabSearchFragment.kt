@@ -54,6 +54,7 @@ class TabSearchFragment () : Fragment() {
                 for (item in listBerita) {
                     dataRecycler.add(
                             DataRecycler(
+                                    item.id ?: 0,
                                     item.title ?: "",
                                     item.image?: "",
                                     item.date?: "",
@@ -76,6 +77,7 @@ class TabSearchFragment () : Fragment() {
                 for (item in listPariwisata) {
                     dataRecycler.add(
                             DataRecycler(
+                                    item.id,
                                     item.title!!,
                                     item.image!!,
                                     item.address!!,

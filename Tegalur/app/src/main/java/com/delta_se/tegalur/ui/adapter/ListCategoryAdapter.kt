@@ -121,6 +121,7 @@ class ListCategoryAdapter(
                 val item = listData[position]
                 arrDataPariwisata.add(
                     DataPariwisata(
+                        item.id,
                         item.title,
                         item.image,
                         item.desc,

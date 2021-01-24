@@ -5,6 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DataPariwisata (
+    val id : Int? = 0,
     var title : String? = null,
     var image : String? = null,
     var address : String? = null,

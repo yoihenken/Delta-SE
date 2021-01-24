@@ -1,0 +1,26 @@
+package com.delta_se.tegalur.ui.fragments
+
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import com.delta_se.tegalur.data.model.DataSave
+import com.delta_se.tegalur.repository.local.SaveService
+import kotlinx.coroutines.flow.Flow
+
+class SimpanViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val service = SaveService(application)
+
+    suspend fun getAllSimpan() : Flow<LiveData<List<DataSave>>> {
+        return service.getAllSaved()
+    }
+
+    suspend fun addToSave(dataSave: DataSave){
+        service.addToSave(dataSave)
+    }
+
+    suspend fun removeFromSave(dataSave: DataSave){
+        service.removeFromSave(dataSave)
+    }
+
+}
