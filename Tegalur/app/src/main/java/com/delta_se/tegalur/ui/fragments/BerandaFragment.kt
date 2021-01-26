@@ -28,13 +28,12 @@ class BerandaFragment : Fragment() {
     private lateinit var bindingLayoutCategory : LayoutCategoryBinding
     private val list = ArrayList<DataBerita>()
     private val model: BerandaViewModel by viewModels()
+    private lateinit var modelBerita : BeritaViewModel
     private var page = 1
-//    private var isLoading = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +47,9 @@ class BerandaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentBerandaBinding.bind(view)
         bindingLayoutCategory = LayoutCategoryBinding.bind(view)
+
+        modelBerita = BeritaViewModel()
+        modelBerita.getSavedNews(requireActivity().application, requireActivity())
         model.getBerita(page)
 
         binding.rvBeranda.apply {
@@ -59,7 +61,6 @@ class BerandaFragment : Fragment() {
             Log.d("BerandaFragment", "Berita : $it")
             populateDataBerita(it)
         })
-
 
         bindingLayoutCategory.apply {
             categoryPariwisata.setOnClickListener {
@@ -108,7 +109,7 @@ class BerandaFragment : Fragment() {
         Log.d("BerandaFragment", "populateDataBerita: $page")
         rvBeranda.apply {
             itemAnimator = DefaultItemAnimator()
-            adapter = ListBeritaAdapter(it?.toDataBerita() ?: listOf(), context)
+            adapter = ListBeritaAdapter(it?.toDataBerita() ?: listOf(), context, modelBerita)
         }
     }
 

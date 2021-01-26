@@ -38,6 +38,7 @@ class BeritaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentBeritaBinding.bind(view)
+        model.getSavedNews(requireActivity().application, requireActivity())
 
         model.getBerita(page)
         model.berita.observe(viewLifecycleOwner, {
@@ -66,7 +67,7 @@ class BeritaFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()
-            adapter = ListBeritaAdapter(it?.toDataBerita() ?: listOf(), context)
+            adapter = ListBeritaAdapter(it?.toDataBerita() ?: listOf(), context, model)
         }
     }
 }

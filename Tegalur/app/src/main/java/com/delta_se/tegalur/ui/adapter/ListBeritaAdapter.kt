@@ -1,24 +1,22 @@
 package com.delta_se.tegalur.ui.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import coil.transform.RoundedCornersTransformation
 import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.R
-import com.delta_se.tegalur.databinding.ItemListBinding
-import com.delta_se.tegalur.ui.activity.DetailBerita
+import com.delta_se.tegalur.ui.fragments.BeritaViewModel
 import com.delta_se.tegalur.ui.holder.HeaderHolder
 import com.delta_se.tegalur.ui.holder.ListBeritaHolder
 import java.lang.IllegalArgumentException
 
-class ListBeritaAdapter (
-    private val listData : List<Any>, val context: Context
+class ListBeritaAdapter(
+    private val listData: List<Any>,
+    private val context: Context,
+    private val model: BeritaViewModel
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -46,8 +44,8 @@ class ListBeritaAdapter (
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
        when(getItemViewType(position)){
            ITEM_HEADER -> (holder as HeaderHolder).bindContent(listData[position] as String)
-           ITEM_LIST -> (holder as ListBeritaHolder).bindView(listData[position] as DataBerita, context)
-           else -> throw IllegalArgumentException("Undefined viewtype")
+           ITEM_LIST -> (holder as ListBeritaHolder).bindView(listData[position] as DataBerita, context, model)
+           else -> throw IllegalArgumentException("Undefined view type")
        }
     }
 

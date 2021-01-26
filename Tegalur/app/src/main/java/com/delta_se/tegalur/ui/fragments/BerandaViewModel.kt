@@ -1,12 +1,13 @@
 package com.delta_se.tegalur.ui.fragments
 
+import android.app.Activity
+import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.delta_se.tegalur.data.model.DataSave
 import com.delta_se.tegalur.data.response.ListItem
 import com.delta_se.tegalur.repository.network.DestinationServices
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class BerandaViewModel : ViewModel() {
@@ -25,4 +26,16 @@ class BerandaViewModel : ViewModel() {
     }
 
     fun getCurrentNews(): List<ListItem> = currentBerita
+
+    private val _saved = MutableLiveData<List<DataSave>>()
+    val saved : LiveData<List<DataSave>> get() = _saved
+
+    fun getSavedNews(application: Application, activity: Activity) = viewModelScope.launch {
+        SimpanViewModel(application).getAllSimpan().collect {
+            it.observe(activity as LifecycleOwner, { saved ->
+                _saved.value = saved
+            })
+        }
+    }
+
 }

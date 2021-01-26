@@ -3,6 +3,7 @@ package com.delta_se.tegalur.utils
 import android.util.Log
 import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.data.model.DataEvent
+import com.delta_se.tegalur.data.model.DataSave
 import com.delta_se.tegalur.data.response.ListItem
 import com.delta_se.tegalur.data.response.ObjectDetail
 import java.text.SimpleDateFormat
@@ -77,4 +78,39 @@ object Helpers {
         val dateFormated = SimpleDateFormat("dd MMMM yyyy").format(dateFormat)
         return dateFormated.toString()
     }
+
+    fun DataBerita.toSimpan() : DataSave{
+        Log.d("Helpers", "toSimpan: ${this.id}")
+        return DataSave(
+            pageid = buildString {append( this@toSimpan.page , " ", this@toSimpan.id )} ?: "",
+            type = "BERITA"
+        )
+    }
+
+    fun DataBerita.toSimpanHolder(id: Int?) : DataSave{
+        Log.d("Helpers", "toSimpan: ${id}")
+        return DataSave(
+            id,
+            pageid = buildString {append( this@toSimpanHolder.page , " ", this@toSimpanHolder.id )} ?: "",
+            type = "BERITA"
+        )
+    }
+
+    fun DataEvent.toSimpan() : DataSave{
+        return DataSave(
+            pageid = buildString { append(this@toSimpan.page, " ", this@toSimpan.id) } ?: "",
+            type = "EVENT"
+        )
+    }
+
+    fun DataEvent.toSimpanHolder(id: Int?) : DataSave{
+        Log.d("Helpers", "toSimpan: ${id}")
+        return DataSave(
+            id,
+            pageid = buildString {append( this@toSimpanHolder.page , " ", this@toSimpanHolder.id )} ?: "",
+            type = "EVENT"
+        )
+    }
+
+
 }

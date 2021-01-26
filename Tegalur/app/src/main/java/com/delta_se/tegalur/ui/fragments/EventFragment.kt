@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.response.ListItem
 import com.delta_se.tegalur.databinding.FragmentEventBinding
-import com.delta_se.tegalur.ui.adapter.ListBeritaAdapter
 import com.delta_se.tegalur.ui.adapter.ListEventAdapter
 import com.delta_se.tegalur.utils.Helpers.toDataEvent
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection
@@ -38,6 +37,7 @@ class EventFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentEventBinding.bind(view)
+        model.getSavedEvent(requireActivity().application, requireActivity())
 
         model.getEvent(page)
         model.event.observe(viewLifecycleOwner, {
@@ -66,7 +66,7 @@ class EventFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             itemAnimator = DefaultItemAnimator()
             setHasFixedSize(true)
-            adapter = ListEventAdapter(it?.toDataEvent() ?: listOf(), context)
+            adapter = ListEventAdapter(it?.toDataEvent() ?: listOf(), context, model)
         }
     }
 }

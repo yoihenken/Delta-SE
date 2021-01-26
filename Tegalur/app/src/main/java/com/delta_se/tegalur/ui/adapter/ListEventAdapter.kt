@@ -1,23 +1,21 @@
 package com.delta_se.tegalur.ui.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import coil.transform.RoundedCornersTransformation
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.model.DataEvent
-import com.delta_se.tegalur.databinding.ItemListBinding
-import com.delta_se.tegalur.ui.activity.DetailBerita
+import com.delta_se.tegalur.ui.fragments.EventViewModel
 import com.delta_se.tegalur.ui.holder.HeaderHolder
 import com.delta_se.tegalur.ui.holder.ListEventHolder
 import java.lang.IllegalArgumentException
 
-class ListEventAdapter (
-    private val listData : List<Any>, val context: Context
+class ListEventAdapter(
+    private val listData: List<Any>,
+    val context: Context,
+    private val model: EventViewModel
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -46,9 +44,9 @@ class ListEventAdapter (
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-       when(val type = getItemViewType(position)){
+       when(getItemViewType(position)){
            ITEM_HEADER -> (holder as HeaderHolder).bindContent(listData[position] as String)
-           ITEM_LIST -> (holder as ListEventHolder).bindView(listData[position] as DataEvent, context)
+           ITEM_LIST -> (holder as ListEventHolder).bindView(listData[position] as DataEvent, context, model)
            else -> throw IllegalArgumentException("Undefined viewtype")
        }
     }
