@@ -44,11 +44,11 @@ class ListEventHolder (itemView : View) : RecyclerView.ViewHolder(itemView) {
         })
 
 //        imageSimpan.setOnClickListener {
-//            if (data.isSaved){
-//                data.isSaved = false
+//            if (!data.isSaved){
+//                data.isSaved = true
 //                imageSimpan.load(R.drawable.ic_item_active_mark){crossfade(true)}
 //            }else{
-//                data.isSaved = true
+//                data.isSaved = false
 //                imageSimpan.load(R.drawable.ic_item_mark){crossfade(true)}
 //            }
 //        }

@@ -26,7 +26,6 @@ class BerandaFragment : Fragment() {
 
     private lateinit var binding: FragmentBerandaBinding
     private lateinit var bindingLayoutCategory : LayoutCategoryBinding
-    private val list = ArrayList<DataBerita>()
     private val model: BerandaViewModel by viewModels()
     private lateinit var modelBerita : BeritaViewModel
     private var page = 1
@@ -51,11 +50,6 @@ class BerandaFragment : Fragment() {
         modelBerita = BeritaViewModel()
         modelBerita.getSavedNews(requireActivity().application, requireActivity())
         model.getBerita(page)
-
-        binding.rvBeranda.apply {
-            layoutManager = LinearLayoutManager(activity)
-            setHasFixedSize(true)
-        }
 
         model.berita.observe(viewLifecycleOwner, {
             Log.d("BerandaFragment", "Berita : $it")
@@ -104,10 +98,11 @@ class BerandaFragment : Fragment() {
             }
         }
     }
-
     private fun populateDataBerita(it: List<ListItem>?) = with(binding) {
         Log.d("BerandaFragment", "populateDataBerita: $page")
         rvBeranda.apply {
+            layoutManager = LinearLayoutManager(activity)
+            setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()
             adapter = ListBeritaAdapter(it?.toDataBerita() ?: listOf(), context, modelBerita)
         }

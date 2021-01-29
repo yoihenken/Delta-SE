@@ -6,8 +6,6 @@ import com.delta_se.tegalur.databinding.ActivitySearchBinding
 import com.delta_se.tegalur.ui.fragments.TabSearchFragment
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems
-import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.android.synthetic.main.activity_search.view.*
 
 
 class SearchActivity : AppCompatActivity() {
@@ -24,13 +22,12 @@ class SearchActivity : AppCompatActivity() {
 
     private fun setNavigation(){
         val intentIndex = intent.getIntExtra(EXTRA_DATA, -1)
-        var adapter = FragmentPagerItemAdapter(
+        val adapter = FragmentPagerItemAdapter(
             supportFragmentManager, FragmentPagerItems.with(this)
                 .add("Pariwisata", TabSearchFragment::class.java)
                 .add("Kuliner", TabSearchFragment::class.java)
                 .add("Oleh-oleh", TabSearchFragment::class.java)
                 .add("Penginapan", TabSearchFragment::class.java)
-
                 .create()
         )
 

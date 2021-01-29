@@ -15,13 +15,17 @@ class BerandaViewModel : ViewModel() {
     val berita: LiveData<List<ListItem>> get() = _berita
 
     private val currentBerita = mutableListOf<ListItem>()
+    private var pageIndex = 1
 
     fun getBerita(page: Int) = viewModelScope.launch {
         DestinationServices.getBeritaPage(page) {
-            currentBerita.addAll(it.list ?: listOf())
-            Log.d("BerandaViewModel", "getBerita: $it")
-            Log.d("BerandaViewModel", "size: ${currentBerita.size}")
-            _berita.value = currentBerita
+            if (page >= pageIndex){
+                currentBerita.addAll(it.list ?: listOf())
+                Log.d("BerandaViewModel", "getBerita: $it")
+                Log.d("BerandaViewModel", "size: ${currentBerita.size}")
+                _berita.value = currentBerita
+                pageIndex++
+            }
         }
     }
 
@@ -29,7 +33,6 @@ class BerandaViewModel : ViewModel() {
 
     private val _saved = MutableLiveData<List<DataSave>>()
     val saved : LiveData<List<DataSave>> get() = _saved
-
     fun getSavedNews(application: Application, activity: Activity) = viewModelScope.launch {
         SimpanViewModel(application).getAllSimpan().collect {
             it.observe(activity as LifecycleOwner, { saved ->
@@ -37,5 +40,4 @@ class BerandaViewModel : ViewModel() {
             })
         }
     }
-
 }

@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.model.DataSave
 import com.delta_se.tegalur.databinding.FragmentSimpanBinding
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems
 
 class SimpanFragment : Fragment() {
 
@@ -31,8 +34,25 @@ class SimpanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSimpanBinding.bind(view)
 
+        setNavigation()
+    }
 
+    private fun setNavigation(){
+        val adapter = FragmentPagerItemAdapter( childFragmentManager, FragmentPagerItems.with(requireContext())
+            .add("Berita", TabSimpankFragment::class.java)
+            .add("Event", TabSimpankFragment::class.java)
+            .add("Pariwisata", TabSimpankFragment::class.java)
+            .add("Kuliner", TabSimpankFragment::class.java)
+            .add("Oleh-oleh", TabSimpankFragment::class.java)
+            .add("Penginapan", TabSimpankFragment::class.java)
+            .create()
+        )
 
+        binding.apply {
+            viewPagerSimpan.adapter = adapter
+            viewPagerSimpan.setCurrentItem(0, true)
+            tabSave.setViewPager(viewPagerSimpan)
+        }
     }
 
     companion object {}

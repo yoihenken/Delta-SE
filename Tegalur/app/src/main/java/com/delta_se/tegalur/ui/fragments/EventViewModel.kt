@@ -14,11 +14,15 @@ class EventViewModel : ViewModel() {
     val event : LiveData<List<ListItem>> get() = _event
 
     private val currentEvent = mutableListOf<ListItem>()
+    private var pageIndex = 1
 
     fun getEvent(page : Int) = viewModelScope.launch {
         DestinationServices.getEvent(page) {
-            currentEvent.addAll(it.list ?: listOf())
-            _event.value = currentEvent
+            if (page >= pageIndex){
+                currentEvent.addAll(it.list ?: listOf())
+                _event.value = currentEvent
+                pageIndex++
+            }
         }
     }
 

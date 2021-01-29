@@ -16,13 +16,17 @@ class BeritaViewModel : ViewModel() {
     val berita: LiveData<List<ListItem>> get() = _berita
 
     private val currentBerita = mutableListOf<ListItem>()
+    private var pageIndex = 1
 
     fun getBerita(page: Int) = viewModelScope.launch {
         DestinationServices.getBeritaPage(page) {
-            currentBerita.addAll(it.list ?: listOf())
-            Log.d("BeritaViewModel", "getBerita: $it")
-            Log.d("BeritaViewModel", "size: ${currentBerita.size}")
-            _berita.value = currentBerita
+            if (page >= pageIndex) {
+                currentBerita.addAll(it.list ?: listOf())
+                Log.d("BeritaViewModel", "getBerita: $it")
+                Log.d("BeritaViewModel", "size: ${currentBerita.size}")
+                _berita.value = currentBerita
+                pageIndex++
+            }
         }
     }
 

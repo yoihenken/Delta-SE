@@ -9,6 +9,8 @@ import com.delta_se.tegalur.data.response.ObjectDetail
 import java.text.SimpleDateFormat
 
 object Helpers {
+
+//    RETROFIT
     fun List<ListItem>.toDataBerita(): MutableList<Any> {
         val berita = mutableListOf<Any>()
         var currentDate = ""
@@ -22,6 +24,16 @@ object Helpers {
                 DataBerita(getPage(position, 15), getId(position, 15), it.title, it.img, it.date, null, null, false)
             )
             position++
+        }
+        return berita
+    }
+
+    fun List<ListItem>.toDataBeritaFromRoom(page : Int?, id: Int?) : MutableList<Any>{
+        val berita = mutableListOf<Any>()
+        this.forEach {
+            berita.add(
+                DataBerita(page, id, it.title, it.img, it.date, null, null, true)
+            )
         }
         return berita
     }
@@ -46,6 +58,14 @@ object Helpers {
             event.add(DataEvent(getPage(position,12), getId(position, 12),  it.title, it.date, it.image, null, false))
             position++
             Log.d("Helpers", "toDataEvent: $position")
+        }
+        return event
+    }
+
+    fun List<ListItem>.toDataEventFromRoom(page: Int?, id: Int?) : MutableList<Any>{
+        val event = mutableListOf<Any>()
+        this.forEach {
+            event.add(DataEvent(page, id, it.title, it.date, it.image, null,true))
         }
         return event
     }
@@ -78,6 +98,8 @@ object Helpers {
         val dateFormated = SimpleDateFormat("dd MMMM yyyy").format(dateFormat)
         return dateFormated.toString()
     }
+
+//    ROOM
 
     fun DataBerita.toSimpan() : DataSave{
         Log.d("Helpers", "toSimpan: ${this.id}")
