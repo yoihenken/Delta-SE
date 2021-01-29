@@ -11,10 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tegalur">
+        <activity android:name=".ui.activity.ActivitySplashscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.activity.DetailPenginapan"
             android:label="@string/title_activity_detail_penginapan"
-            android:theme="@style/Theme.Tegalur.NoActionBar"></activity>
+            android:theme="@style/Theme.Tegalur.NoActionBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -40,11 +47,6 @@
             android:theme="@style/Theme.Tegalur.NoActionBar" />
         <activity android:name=".ui.activity.SearchActivity" />
         <activity android:name=".ui.activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
