@@ -53,6 +53,7 @@ class DetailBerita : AppCompatActivity() {
 
         val modeAdapter = intent.getStringExtra(EXTRA_TYPE)
         val dataBerita by getParcelableExtra<DataBerita>(EXTRA_DATABERITA)
+        Log.d("DetailBerita", "dataBerita : $dataBerita ")
         val dataEvent by getParcelableExtra<DataEvent>(EXTRA_DATAEVENT)
         val position = intent.getIntExtra(EXTRA_MYPOSITION, 0)
 

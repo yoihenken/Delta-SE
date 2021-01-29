@@ -41,7 +41,7 @@ class TabSimpankFragment : Fragment() {
 
         model.getSavedData(requireActivity().application, requireActivity())
 
-        var index = FragmentPagerItem.getPosition(arguments)
+        val index = FragmentPagerItem.getPosition(arguments)
         showFragment(index)
     }
 
@@ -59,46 +59,48 @@ class TabSimpankFragment : Fragment() {
         when(index){
             0 -> {
                 val modeAdapter = "BERITA"
-                var page: Int? = null
-                var id: Int? = null
+                var pageBerita: Int? = null
+                var idBerita: Int? = null
 
                 model.saved.observe(viewLifecycleOwner, {
-                    Log.d("TabSimpankFragment", "model.saved: ${it}")
+                    Log.d("TabSimpankFragment", "BERITA model.saved: ${it}")
                     it.forEach { dataSave ->
                         Log.d("TabSimpankFragment", "dataSave: $dataSave")
                         if (dataSave.type.equals(modeAdapter)) {
-                            page = convertPageIdToPage(dataSave.pageid!!)
-                            id = convertPageIdToId(dataSave.pageid!!)
-                            model.getBeritaFromRoom(
-                                convertPageIdToPage(dataSave.pageid!!),
-                                convertPageIdToId(dataSave.pageid!!)
-                            )
-                            Log.d("TabSimpankFragment", "model.berita: ${model.beritaSimpan.toString()}")
+                            pageBerita = convertPageIdToPage(dataSave.pageid!!)
+                            idBerita = convertPageIdToId(dataSave.pageid!!)
+                            Log.d("TabSimpankFragment", "Page : $pageBerita, Id : $idBerita ===================>")
+                            model.getBeritaFromRoom(pageBerita!!, idBerita!!)
+//                            Log.d("TabSimpankFragment", "model.berita: ${model.beritaSimpan.observe(viewLifecycleOwner,{})}")
                         }
                     }
                 })
 
                 Log.d("TabSimpankFragment", "isNull:")
                 model.beritaSimpan.observe(viewLifecycleOwner, { listItem ->
-                    if (listItem != null) populateData(listItem.toDataBeritaFromRoom(page, id), modeAdapter)
+                    if (listItem != null){
+                        populateData(
+                        listItem.toDataBeritaFromRoom(),
+                        modeAdapter)
+                    }
                 })
             }
             1->{
                 val modeAdapter = "EVENT"
-                var page : Int? = null
-                var id : Int? = null
+                var pageEvent : Int? = null
+                var idEvent : Int? = null
 
                 model.saved.observe(viewLifecycleOwner,{
                     it.forEach { dataSave ->
                         if (dataSave.type.equals(modeAdapter)){
-                            page = convertPageIdToPage(dataSave.pageid!!)
-                            id = convertPageIdToId(dataSave.pageid!!)
-                            model.getEventFromRoom(page!!, id!!)
+                            pageEvent = convertPageIdToPage(dataSave.pageid!!)
+                            idEvent = convertPageIdToId(dataSave.pageid!!)
+                            model.getEventFromRoom(pageEvent!!, idEvent!!)
                         }
                     }
                 })
                 model.eventSimpan.observe(viewLifecycleOwner,{listItem ->
-                    if (listItem != null) populateData(listItem.toDataEventFromRoom(page, id), modeAdapter)
+                    if (listItem != null) populateData(listItem.toDataEventFromRoom(), modeAdapter)
                 })
             }
             2->{}
@@ -113,7 +115,7 @@ class TabSimpankFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()
-            adapter = ListSimpanAdapter(it, context, modeAdapter)
+            adapter = ListSimpanAdapter(it, requireActivity(), modeAdapter)
             Log.d("TabSimpankFragment", "populateData: $it")
         }
     }

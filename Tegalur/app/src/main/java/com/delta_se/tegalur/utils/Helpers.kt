@@ -28,11 +28,12 @@ object Helpers {
         return berita
     }
 
-    fun List<ListItem>.toDataBeritaFromRoom(page : Int?, id: Int?) : MutableList<Any>{
+//    Change List to Berita Room
+    fun List<ListItem>.toDataBeritaFromRoom() : MutableList<Any>{
         val berita = mutableListOf<Any>()
         this.forEach {
             berita.add(
-                DataBerita(page, id, it.title, it.img, it.date, null, null, true)
+                DataBerita(it.page, it.id, it.title, it.img, it.date, null, null, true)
             )
         }
         return berita
@@ -62,10 +63,11 @@ object Helpers {
         return event
     }
 
-    fun List<ListItem>.toDataEventFromRoom(page: Int?, id: Int?) : MutableList<Any>{
+//    Change List to Event Room
+    fun List<ListItem>.toDataEventFromRoom() : MutableList<Any>{
         val event = mutableListOf<Any>()
         this.forEach {
-            event.add(DataEvent(page, id, it.title, it.date, it.image, null,true))
+            event.add(DataEvent(it.page, it.id, it.title, it.date, it.image, null,true))
         }
         return event
     }

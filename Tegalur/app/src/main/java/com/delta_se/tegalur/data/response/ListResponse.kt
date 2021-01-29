@@ -31,8 +31,8 @@ data class ListItem(
     @field:SerializedName("date")
     val date: String? = null,
 
-    val page : Int? = 0,
+    var page : Int? = 0,
 
-    val id : Int? = 0
+    var id : Int? = 0
 
 )

@@ -28,30 +28,19 @@ class ListEventHolder (itemView : View) : RecyclerView.ViewHolder(itemView) {
         }
         titleList.text = data.title
         descList.text = data.date
-        data.isSaved = true //get from local data
-
-        var isSaved = false
 
         model.saved.observe((context as Activity) as LifecycleOwner, {
-            it.forEachIndexed { index, dataSave ->
-                isSaved = it.contains(data.toSimpanHolder(it[index].id))
-                Log.d("ListEventHolder", "saved1: $it")
-                Log.d("ListEventHolder", "saved1: ${data.toSimpanHolder(index)}")
+            var isSaved : Boolean
+            it.forEach { dataSave ->
+                isSaved = it.contains(data.toSimpanHolder(dataSave.id))
+//                Log.d("ListEventHolder", "saved1: $it")
+//                Log.d("ListEventHolder", "saved1: ${data.toSimpanHolder(dataSave.id)}")
+//                Log.d("ListEventHolder", "bindView: $isSaved")
+                if (isSaved) data.isSaved = true
             }
-            Log.d("ListEventHolder", "bindView: $isSaved")
-            if (isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) { crossfade(true) }
+            if (data.isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) { crossfade(true) }
             else imageSimpan.load(R.drawable.ic_item_mark) { crossfade(true) }
         })
-
-//        imageSimpan.setOnClickListener {
-//            if (!data.isSaved){
-//                data.isSaved = true
-//                imageSimpan.load(R.drawable.ic_item_active_mark){crossfade(true)}
-//            }else{
-//                data.isSaved = false
-//                imageSimpan.load(R.drawable.ic_item_mark){crossfade(true)}
-//            }
-//        }
 
         itemView.setOnClickListener{
             val moveWithObjectIntent = Intent(context, DetailBerita::class.java)

@@ -22,25 +22,27 @@ class ListBeritaHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val binding = ItemListBinding.bind(itemView)
 
     fun bindView(data: DataBerita, context: Context, model: BeritaViewModel) = with(binding) {
+        Log.d("ListBeritaHolder", "bindView: $data")
         imageList.load(data.image) {
             crossfade(true)
             transformations(RoundedCornersTransformation(10f))
         }
         titleList.text = data.title
         descList.text = data.date
-        data.isSaved = true //get from Local Data
-
-        var isSaved = false
 
         model.saved.observe((context as Activity) as LifecycleOwner, {
-            it.forEachIndexed { index, dataSave ->
-                isSaved = it.contains(data.toSimpanHolder(it[index].id))
-                Log.d("ListBeritaHolder", "saved1: $it")
-                Log.d("ListBeritaHolder", "saved1: ${data.toSimpanHolder(index)}")
+            var isSaved : Boolean
+            it.forEach { dataSave ->
+                isSaved = it.contains(data.toSimpanHolder(dataSave.id))
+//                Log.d("ListBeritaHolder", "savedIT: $it")
+//                Log.d("ListBeritaHolder", "savedConv: ${data.toSimpanHolder(dataSave.id)}")
+//                Log.d("ListBeritaHolder", "savedConv2: ${dataSave.id}")
+//                Log.d("ListBeritaHolder", "savedCheck2: ${data.isSaved}")
+                if (isSaved) data.isSaved = true
             }
-            if (isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) { crossfade(true)}
+            if (data.isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) { crossfade(true)}
             else imageSimpan.load(R.drawable.ic_item_mark) { crossfade(true)}
-            Log.d("ListBeritaHolder", "saved1: $isSaved")
+//            Log.d("ListBeritaHolder", "savedCheck: ${data.isSaved} ================>")
         })
 
         itemView.setOnClickListener {

@@ -32,8 +32,11 @@ class TabSimpankViewModel : ViewModel() {
         roomBerita.removeAll(roomBerita)
         DestinationServices.getBeritaPage(page){
             it.list?.forEachIndexed { index, listItem ->
-                if (index == id && !roomBerita.contains(listItem)) roomBerita.add(listItem)
-
+                if (index == id && !roomBerita.contains(listItem)){
+                    listItem.page = page
+                    listItem.id = id
+                    roomBerita.add(listItem)
+                }
             }
             _berita.value = roomBerita
         }
@@ -48,7 +51,11 @@ class TabSimpankViewModel : ViewModel() {
         roomEvent.removeAll(roomEvent)
         DestinationServices.getEvent(page){
             it.list?.forEachIndexed { index, listItem ->
-                if (index == id && !roomEvent.contains(listItem)) roomEvent.add(listItem)
+                if (index == id && !roomEvent.contains(listItem)){
+                    listItem.page = page
+                    listItem.id = id
+                    roomEvent.add(listItem)
+                }
             }
             _event.value = roomEvent
         }

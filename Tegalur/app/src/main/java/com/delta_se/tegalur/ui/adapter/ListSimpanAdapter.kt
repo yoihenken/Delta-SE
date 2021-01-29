@@ -1,7 +1,9 @@
 package com.delta_se.tegalur.ui.adapter
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +19,7 @@ import com.delta_se.tegalur.ui.activity.DetailBerita
 
 class ListSimpanAdapter(
     private val listData: List<Any>,
-    private val context: Context,
+    private val activity : Activity,
     private val modeAdapter : String
 ) : RecyclerView.Adapter<ListSimpanAdapter.ListSimpanHolder>() {
 
@@ -26,15 +28,16 @@ class ListSimpanAdapter(
     private lateinit var binding : ItemCategoryBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListSimpanHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_category, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
         binding = ItemCategoryBinding.bind(view)
         return ListSimpanHolder(binding.root)
     }
 
     override fun onBindViewHolder(holder: ListSimpanHolder, position: Int) {
         when(modeAdapter){
-            "BERITA"-> {
-                var data : DataBerita = listData[position] as DataBerita
+            "BERITA" -> {
+                val data: DataBerita = listData[position] as DataBerita
+                Log.d("ListSimpanAdapter", "dataBerita: ${data}")
                 binding.apply {
                     imageCategory.load(data.image) {
                         crossfade(true)
@@ -42,14 +45,20 @@ class ListSimpanAdapter(
                     }
                     titleCategory.text = data.title
                     descCategory.text = data.date
-                    if (data.isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) { crossfade(true)}
-                    else imageSimpan.load(R.drawable.ic_item_mark) { crossfade(true)}
+                    if (data.isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) {
+                        crossfade(
+                            true
+                        )
+                    }
+                    else imageSimpan.load(R.drawable.ic_item_mark) { crossfade(true) }
 
-                    holder.itemView.setOnClickListener{
-                        val moveWithObjectIntent = Intent(context, DetailBerita::class.java)
+                    itemSelect.setOnClickListener {
+
+                        val moveWithObjectIntent = Intent(activity, DetailBerita::class.java)
                         moveWithObjectIntent.putExtra(DetailBerita.EXTRA_DATABERITA, data)
                         moveWithObjectIntent.putExtra(DetailBerita.EXTRA_TYPE, "BERITA")
-                        context.startActivity(moveWithObjectIntent)
+                        activity.startActivity(moveWithObjectIntent)
+                        Log.d("ListSimpanAdapter", "Clicked: $data")
                     }
                 }
             }
@@ -65,11 +74,11 @@ class ListSimpanAdapter(
                     if (data.isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) { crossfade(true)}
                     else imageSimpan.load(R.drawable.ic_item_mark) { crossfade(true)}
 
-                    holder.itemView.setOnClickListener{
-                        val moveWithObjectIntent = Intent(context, DetailBerita::class.java)
+                    itemSelect.setOnClickListener{
+                        val moveWithObjectIntent = Intent(activity, DetailBerita::class.java)
                         moveWithObjectIntent.putExtra(DetailBerita.EXTRA_DATAEVENT, data)
                         moveWithObjectIntent.putExtra(DetailBerita.EXTRA_TYPE, "EVENT")
-                        context.startActivity(moveWithObjectIntent)
+                        activity.startActivity(moveWithObjectIntent)
                     }
                 }
             }
