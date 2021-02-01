@@ -2,6 +2,7 @@ package com.delta_se.tegalur.ui.fragments
 
 import android.app.Activity
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.delta_se.tegalur.data.model.DataSave
 import com.delta_se.tegalur.data.response.ListItem
@@ -32,11 +33,9 @@ class TabSimpankViewModel : ViewModel() {
         roomBerita.removeAll(roomBerita)
         DestinationServices.getBeritaPage(page){
             it.list?.forEachIndexed { index, listItem ->
-                if (index == id && !roomBerita.contains(listItem)){
-                    listItem.page = page
-                    listItem.id = id
-                    roomBerita.add(listItem)
-                }
+                listItem.page = page
+                listItem.id = id
+                if (index == id && !roomBerita.contains(listItem)) roomBerita.add(listItem)
             }
             _berita.value = roomBerita
         }
@@ -51,15 +50,11 @@ class TabSimpankViewModel : ViewModel() {
         roomEvent.removeAll(roomEvent)
         DestinationServices.getEvent(page){
             it.list?.forEachIndexed { index, listItem ->
-                if (index == id && !roomEvent.contains(listItem)){
-                    listItem.page = page
-                    listItem.id = id
-                    roomEvent.add(listItem)
-                }
+                listItem.page = page
+                listItem.id = id
+                if (index == id && !roomEvent.contains(listItem)) roomEvent.add(listItem)
             }
             _event.value = roomEvent
         }
     }
-
-
 }

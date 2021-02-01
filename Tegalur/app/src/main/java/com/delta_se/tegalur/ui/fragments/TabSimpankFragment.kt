@@ -17,7 +17,6 @@ import com.delta_se.tegalur.utils.Helpers.toDataBeritaFromRoom
 import com.delta_se.tegalur.utils.Helpers.toDataEventFromRoom
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem
 
-
 class TabSimpankFragment : Fragment() {
 
     private val model : TabSimpankViewModel by viewModels()
@@ -64,6 +63,7 @@ class TabSimpankFragment : Fragment() {
 
                 model.saved.observe(viewLifecycleOwner, {
                     Log.d("TabSimpankFragment", "BERITA model.saved: ${it}")
+                    if (it.isEmpty()) removePopulateData()
                     it.forEach { dataSave ->
                         Log.d("TabSimpankFragment", "dataSave: $dataSave")
                         if (dataSave.type.equals(modeAdapter)) {
@@ -75,20 +75,12 @@ class TabSimpankFragment : Fragment() {
                             )
                             model.getBeritaFromRoom(pageBerita!!, idBerita!!)
 //                            Log.d("TabSimpankFragment", "model.berita: ${model.beritaSimpan.observe(viewLifecycleOwner,{})}")
-                        }
-                    }
-                    if (it.isEmpty()){
-                        binding.rvSimpan.adapter = null
+                        } else removePopulateData()
                     }
                 })
 
                 model.beritaSimpan.observe(viewLifecycleOwner, { listItem ->
-                    if (listItem != null) {
-                        populateData(
-                            listItem.toDataBeritaFromRoom(),
-                            modeAdapter
-                        )
-                    }
+                    if (listItem != null) populateData(listItem.toDataBeritaFromRoom(), modeAdapter)
                 })
             }
             1->{
@@ -97,15 +89,13 @@ class TabSimpankFragment : Fragment() {
                 var idEvent : Int? = null
 
                 model.saved.observe(viewLifecycleOwner,{
+                    if (it.isEmpty()) binding.rvSimpan.adapter = null
                     it.forEach { dataSave ->
                         if (dataSave.type.equals(modeAdapter)){
                             pageEvent = convertPageIdToPage(dataSave.pageid!!)
                             idEvent = convertPageIdToId(dataSave.pageid!!)
                             model.getEventFromRoom(pageEvent!!, idEvent!!)
-                        }
-                    }
-                    if (it.isEmpty()){
-                        binding.rvSimpan.adapter = null
+                        }else binding.rvSimpan.adapter = null
                     }
                 })
                 model.eventSimpan.observe(viewLifecycleOwner,{listItem ->
@@ -117,6 +107,10 @@ class TabSimpankFragment : Fragment() {
             4->{}
             5->{}
         }
+    }
+
+    private fun removePopulateData() = with(binding){
+        rvSimpan.adapter = null
     }
 
     private fun populateData(it: List<Any>, modeAdapter : String) = with(binding) {
