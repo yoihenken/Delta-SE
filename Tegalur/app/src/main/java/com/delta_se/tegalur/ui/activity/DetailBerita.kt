@@ -53,7 +53,6 @@ class DetailBerita : AppCompatActivity() {
 
         val modeAdapter = intent.getStringExtra(EXTRA_TYPE)
         val dataBerita by getParcelableExtra<DataBerita>(EXTRA_DATABERITA)
-        Log.d("DetailBerita", "dataBerita : $dataBerita ")
         val dataEvent by getParcelableExtra<DataEvent>(EXTRA_DATAEVENT)
         val position = intent.getIntExtra(EXTRA_MYPOSITION, 0)
 
@@ -62,17 +61,20 @@ class DetailBerita : AppCompatActivity() {
 
         when(modeAdapter){
             "BERITA" -> {
-                supportActionBar?.title = dataBerita?.title.toString()
                 if (modeAdapter != null) firstChooseType(modeAdapter, position, dataBerita, null)
+                supportActionBar?.title = dataBerita?.title.toString()
 
                 getDataFromDatabase {
                     val simpan = it.find { sim ->
+                        sim.type.equals(modeAdapter)
+                                &&
                         sim.pageid.equals(
                             buildString { append(dataBerita?.page, " ", dataBerita?.id) }
                         )
                     }
-
+                    Log.d("DetailBerita", "Hasil simpan Berita $simpan")
                     val isSaved = simpan != null
+                    Log.d("DetailBerita", "isSavedBerita $isSaved")
 
                     binding.apply {
                         if (isSaved) fab.load(R.drawable.ic_item_active_mark) { crossfade(true) }
@@ -85,7 +87,7 @@ class DetailBerita : AppCompatActivity() {
                                     fab.load(R.drawable.ic_item_active_mark) { crossfade(true) }
                                     lifecycleScope.launch {
                                         modelDataSave.addToSave(dataBerita!!.toSimpan())
-                                        Log.d("DetailBerita", "onCreate: $this")
+//                                        Log.d("DetailBerita", "onCreate: $this")
                                     }
                                 }
                                 false -> { //hapus
@@ -101,23 +103,36 @@ class DetailBerita : AppCompatActivity() {
                 }
             }
             "EVENT" -> {
-                supportActionBar?.title = dataEvent?.title.toString()
                 if (modeAdapter != null) firstChooseType(modeAdapter, position, null, dataEvent)
+                supportActionBar?.title = dataEvent?.title.toString()
+
+//                Log.d("DetailBerita", "onCreate: Event Data $dataEvent ")
 
                 getDataFromDatabase {
-                    val simpan = it.find { sim-> sim.pageid.equals(
-                        buildString { append(dataEvent?.page, " ", dataEvent?.id) }
-                    ) }
+                    val simpan = it.find { sim ->
+                        sim.pageid.equals(
+                            buildString { append(dataEvent?.page, " ", dataEvent?.id) }
+                        )
+                                &&
+                        sim.type.equals(modeAdapter)
+                    }
+                    Log.d("DetailBerita", "Hasil simpan Event $simpan")
 
-                    val isSaved = simpan != null
+                    val isSaved = simpan !=null
+
+                    Log.d("DetailBerita", "isSavedEvent $isSaved")
 
                     binding.apply {
-                        if (simpan != null) fab.load(R.drawable.ic_item_active_mark) { crossfade(true)}
-                        else fab.load(R.drawable.ic_item_mark) { crossfade(true)}
+                        if (isSaved) fab.load(R.drawable.ic_item_active_mark) {
+                            crossfade(
+                                true
+                            )
+                        }
+                        else fab.load(R.drawable.ic_item_mark) { crossfade(true) }
 
                         fab.setOnClickListener {
-                            when(!isSaved){
-                                true-> { //tambah
+                            when (!isSaved) {
+                                true -> { //tambah
                                     dataEvent?.isSaved = true
                                     fab.load(R.drawable.ic_item_active_mark) { crossfade(true) }
                                     lifecycleScope.launch {
@@ -185,7 +200,7 @@ class DetailBerita : AppCompatActivity() {
             modelDataSave.getAllSimpan().collect {
                 it.observe(this@DetailBerita, { data ->
                     onDataResult(data)
-                    Log.d("DetailBerita", "getDataFromDatabase: getDataFromDatabase")
+//                    Log.d("DetailBerita", "getDataFromDatabase: getDataFromDatabase")
                 })
             }
         }

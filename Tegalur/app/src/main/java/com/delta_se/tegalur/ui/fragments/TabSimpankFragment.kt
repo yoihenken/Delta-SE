@@ -69,19 +69,25 @@ class TabSimpankFragment : Fragment() {
                         if (dataSave.type.equals(modeAdapter)) {
                             pageBerita = convertPageIdToPage(dataSave.pageid!!)
                             idBerita = convertPageIdToId(dataSave.pageid!!)
-                            Log.d("TabSimpankFragment", "Page : $pageBerita, Id : $idBerita ===================>")
+                            Log.d(
+                                "TabSimpankFragment",
+                                "Page : $pageBerita, Id : $idBerita ===================>"
+                            )
                             model.getBeritaFromRoom(pageBerita!!, idBerita!!)
 //                            Log.d("TabSimpankFragment", "model.berita: ${model.beritaSimpan.observe(viewLifecycleOwner,{})}")
                         }
                     }
+                    if (it.isEmpty()){
+                        binding.rvSimpan.adapter = null
+                    }
                 })
 
-                Log.d("TabSimpankFragment", "isNull:")
                 model.beritaSimpan.observe(viewLifecycleOwner, { listItem ->
-                    if (listItem != null){
+                    if (listItem != null) {
                         populateData(
-                        listItem.toDataBeritaFromRoom(),
-                        modeAdapter)
+                            listItem.toDataBeritaFromRoom(),
+                            modeAdapter
+                        )
                     }
                 })
             }
@@ -98,6 +104,9 @@ class TabSimpankFragment : Fragment() {
                             model.getEventFromRoom(pageEvent!!, idEvent!!)
                         }
                     }
+                    if (it.isEmpty()){
+                        binding.rvSimpan.adapter = null
+                    }
                 })
                 model.eventSimpan.observe(viewLifecycleOwner,{listItem ->
                     if (listItem != null) populateData(listItem.toDataEventFromRoom(), modeAdapter)
@@ -113,8 +122,9 @@ class TabSimpankFragment : Fragment() {
     private fun populateData(it: List<Any>, modeAdapter : String) = with(binding) {
         binding.rvSimpan.apply {
             layoutManager = LinearLayoutManager(activity)
-            setHasFixedSize(true)
+//            setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()
+            adapter?.notifyDataSetChanged()
             adapter = ListSimpanAdapter(it, requireActivity(), modeAdapter)
             Log.d("TabSimpankFragment", "populateData: $it")
         }

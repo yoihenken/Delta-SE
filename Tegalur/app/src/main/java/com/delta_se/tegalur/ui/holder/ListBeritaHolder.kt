@@ -30,6 +30,8 @@ class ListBeritaHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         titleList.text = data.title
         descList.text = data.date
 
+        data.isSaved = false
+
         model.saved.observe((context as Activity) as LifecycleOwner, {
             var isSaved : Boolean
             it.forEach { dataSave ->
