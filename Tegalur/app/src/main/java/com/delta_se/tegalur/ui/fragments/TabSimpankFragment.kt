@@ -118,7 +118,6 @@ class TabSimpankFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
 //            setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()
-            adapter?.notifyDataSetChanged()
             adapter = ListSimpanAdapter(it, requireActivity(), modeAdapter)
             Log.d("TabSimpankFragment", "populateData: $it")
         }

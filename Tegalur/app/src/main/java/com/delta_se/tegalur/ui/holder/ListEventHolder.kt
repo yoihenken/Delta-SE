@@ -30,6 +30,7 @@ class ListEventHolder (itemView : View) : RecyclerView.ViewHolder(itemView) {
         descList.text = data.date
 
         model.saved.observe((context as Activity) as LifecycleOwner, {
+            data.isSaved = false
             var isSaved : Boolean
             it.forEach { dataSave ->
                 isSaved = it.contains(data.toSimpanHolder(dataSave.id))

@@ -38,8 +38,8 @@ class BeritaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentBeritaBinding.bind(view)
-        model.getSavedNews(requireActivity().application, requireActivity())
 
+        model.getSavedNews(requireActivity().application, requireActivity())
         model.getBerita(page)
         model.berita.observe(viewLifecycleOwner, {
             Log.d("BeritaFragment", "Berita : $it")
@@ -49,14 +49,13 @@ class BeritaFragment : Fragment() {
         binding.apply {
             sweepBerita.setOnRefreshListener {
                 sweepBerita.direction = SwipyRefreshLayoutDirection.BOTTOM
-
                 if (sweepBerita.isRefreshing){
                     page++
                     model.getBerita(page)
                 }
             }
             nestedScrollViewBerita.setOnScrollChangeListener { view: NestedScrollView, _:Int, scrollY: Int, _:Int, _:Int  -> val diff = view.getChildAt(0)!!.measuredHeight - view.measuredHeight
-            if (diff - scrollY<8000 && sweepBerita.isRefreshing) sweepBerita.isRefreshing = false
+            if (diff - scrollY < 8000 && sweepBerita.isRefreshing) sweepBerita.isRefreshing = false
             }
         }
     }

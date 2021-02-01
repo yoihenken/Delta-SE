@@ -35,9 +35,14 @@ class BeritaViewModel : ViewModel() {
     private val _saved = MutableLiveData<List<DataSave>>()
     val saved : LiveData<List<DataSave>> get() = _saved
 
+    val saveRoom = ArrayList<DataSave>()
+
     fun getSavedNews(application: Application, activity: Activity) = viewModelScope.launch {
         SimpanViewModel(application).getAllSimpan().collect {
             it.observe(activity as LifecycleOwner,{ saved ->
+                saved.forEach { item ->
+                    if (item.type.equals("BERITA")) saveRoom.add(item)
+                }
                 _saved.value = saved
             })
         }
