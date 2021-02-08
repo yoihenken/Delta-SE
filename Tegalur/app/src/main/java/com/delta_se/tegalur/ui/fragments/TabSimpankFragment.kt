@@ -16,6 +16,8 @@ import com.delta_se.tegalur.databinding.FragmentTabSimpankBinding
 import com.delta_se.tegalur.ui.adapter.ListSimpanAdapter
 import com.delta_se.tegalur.utils.Helpers.toDataBeritaFromRoom
 import com.delta_se.tegalur.utils.Helpers.toDataEventFromRoom
+import com.delta_se.tegalur.utils.Helpers.toDataPariwisataFromRoom
+import com.delta_se.tegalur.utils.Helpers.toDataPenginapanFromRoom
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem
 
 class TabSimpankFragment : Fragment() {
@@ -103,10 +105,42 @@ class TabSimpankFragment : Fragment() {
                     if (listItem != null) populateData(listItem.toDataEventFromRoom(), modeAdapter)
                 }
             }
-            2->{}
+            2->{
+                val modeAdapter = "PARIWISATA"
+                var idPariw : Int? = null
+
+                model.saved.observe(viewLifecycleOwner){
+                    if (it.isEmpty()) binding.rvSimpan.adapter = null
+                    it.forEach { dataSave->
+                        if (dataSave.type.equals(modeAdapter)){
+                            idPariw = convertPageIdToId(dataSave.pageid!!)
+                            model.getPariwisataFromRoom(idPariw!!)
+                        }else binding.rvSimpan.adapter = null
+                    }
+                }
+                model.pariwisataSimpan.observe(viewLifecycleOwner){ listItem ->
+                    if (listItem != null) populateData(listItem.toDataPariwisataFromRoom(), modeAdapter)
+                }
+            }
             3->{}
             4->{}
-            5->{}
+            5->{
+                val modeAdapter = "PENGINAPAN"
+                var idPeng : Int? = null
+
+                model.saved.observe(viewLifecycleOwner){
+                    if (it.isEmpty()) binding.rvSimpan.adapter = null
+                    it.forEach { dataSave->
+                        if (dataSave.type.equals(modeAdapter)){
+                            idPeng = convertPageIdToId(dataSave.pageid!!)
+                            model.getPenginapanFromRoom(idPeng!!)
+                        }else binding.rvSimpan.adapter = null
+                    }
+                }
+                model.penginapanSimpan.observe(viewLifecycleOwner){ listItem ->
+                    if (listItem != null) populateData(listItem.toDataPenginapanFromRoom(), modeAdapter)
+                }
+            }
         }
     }
 
@@ -115,9 +149,9 @@ class TabSimpankFragment : Fragment() {
     }
 
     private fun populateData(it: List<Any>, modeAdapter : String) = with(binding) {
-        binding.rvSimpan.apply {
+        rvSimpan.apply {
             layoutManager = LinearLayoutManager(activity)
-//            setHasFixedSize(true)
+            setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()
             adapter = ListSimpanAdapter(it, requireActivity(), modeAdapter)
             Log.d("TabSimpankFragment", "populateData: $it")

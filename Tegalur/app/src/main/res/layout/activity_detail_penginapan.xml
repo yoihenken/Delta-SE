@@ -46,7 +46,7 @@
     <include android:id="@+id/cdPenginapan" layout="@layout/content_detail_penginapan" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabMarkPeng"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -59,6 +59,7 @@
         app:backgroundTint="?attr/colorBackgroundFloating"/>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fabMapPeng"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

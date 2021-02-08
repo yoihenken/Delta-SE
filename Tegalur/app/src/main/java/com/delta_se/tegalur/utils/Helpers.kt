@@ -1,13 +1,11 @@
 package com.delta_se.tegalur.utils
 
 import android.util.Log
-import com.delta_se.tegalur.data.model.DataBerita
-import com.delta_se.tegalur.data.model.DataEvent
-import com.delta_se.tegalur.data.model.DataPariwisata
-import com.delta_se.tegalur.data.model.DataSave
+import com.delta_se.tegalur.data.model.*
 import com.delta_se.tegalur.data.response.ListItem
 import com.delta_se.tegalur.data.response.ObjectDetail
 import com.delta_se.tegalur.ui.fragments.TabSearchViewModel
+import com.delta_se.tegalur.utils.Helpers.toDataEventFromRoom
 import java.text.SimpleDateFormat
 
 object Helpers {
@@ -148,6 +146,66 @@ object Helpers {
             )
         }
         return pariwisata
+    }
+
+    fun DataPariwisata.toSimpan() : DataSave {
+        return DataSave(
+            pageid = buildString { append("00 ", this@toSimpan.id) },
+            type = "PARIWISATA"
+        )
+    }
+
+    fun List<ListItem>.toDataPariwisataFromRoom(): MutableList<Any> {
+        val pariwisata = mutableListOf<Any>()
+        this.forEach {
+            pariwisata.add(DataPariwisata(it.id, it.title, it.image, null, null, null, null, true ))
+        }
+        return pariwisata
+    }
+
+    fun DataPariwisata.toSimpanHolder(id: Int?) : DataSave{
+        Log.d("Helpers", "toSimpan: ${id}")
+        return DataSave(
+            id,
+            pageid = buildString {append( "00 ", this@toSimpanHolder.id )} ?: "",
+            type = "PARIWISATA"
+        )
+    }
+
+//    Penginapan
+
+    fun List<ListItem>.toDataPenginapan() : MutableList<Any>{
+        val penginapan = mutableListOf<Any>()
+        this.forEachIndexed { index, listItem ->
+            penginapan.add(
+                DataPenginapan(index, listItem.title, listItem.image, null, null, null, null, null,null,null, false)
+            )
+        }
+        return penginapan
+    }
+
+    fun DataPenginapan.toSimpan() : DataSave {
+        return DataSave(
+            pageid = buildString { append("00 ", this@toSimpan.id) },
+            type = "PENGINAPAN"
+        )
+    }
+
+    fun List<ListItem>.toDataPenginapanFromRoom(): MutableList<Any> {
+        val penginapan = mutableListOf<Any>()
+        this.forEach {
+            penginapan.add(DataPenginapan(it.id, it.title, it.image, null, null, null,null, null, null, null, true ))
+        }
+        return penginapan
+    }
+
+    fun DataPenginapan.toSimpanHolder(id: Int?) : DataSave{
+        Log.d("Helpers", "toSimpan: ${id}")
+        return DataSave(
+            id,
+            pageid = buildString {append( "00 ", this@toSimpanHolder.id )} ?: "",
+            type = "PENGINAPAN"
+        )
     }
 
 }

@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.delta_se.tegalur.R
-import com.delta_se.tegalur.data.model.DataBerita
-import com.delta_se.tegalur.data.model.DataEvent
-import com.delta_se.tegalur.data.model.DataSave
+import com.delta_se.tegalur.data.model.*
 import com.delta_se.tegalur.databinding.ItemCategoryBinding
 import com.delta_se.tegalur.ui.activity.DetailBerita
+import com.delta_se.tegalur.ui.activity.DetailPariwisata
+import com.delta_se.tegalur.ui.activity.DetailPenginapan
 
 class ListSimpanAdapter(
     private val listData: List<Any>,
@@ -78,6 +78,46 @@ class ListSimpanAdapter(
                         val moveWithObjectIntent = Intent(activity, DetailBerita::class.java)
                         moveWithObjectIntent.putExtra(DetailBerita.EXTRA_DATAEVENT, data)
                         moveWithObjectIntent.putExtra(DetailBerita.EXTRA_TYPE, "EVENT")
+                        activity.startActivity(moveWithObjectIntent)
+                    }
+                }
+            }
+            "PARIWISATA" -> {
+                val data : DataPariwisata = listData[position] as DataPariwisata
+                binding.apply {
+                    imageCategory.load(data.image){
+                        crossfade(true)
+                        transformations(RoundedCornersTransformation(10f))
+                    }
+                    titleCategory.text = data.title
+                    descCategory.text = data.content
+                    if (data.isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) { crossfade(true)}
+                    else imageSimpan.load(R.drawable.ic_item_mark) { crossfade(true)}
+
+                    itemSelect.setOnClickListener{
+                        val moveWithObjectIntent = Intent(activity, DetailPariwisata::class.java)
+                        moveWithObjectIntent.putExtra(DetailPariwisata.EXTRA_MYDATA, data)
+                        activity.startActivity(moveWithObjectIntent)
+                    }
+                }
+            }
+            "OLEH "-> {}
+            "KULINER" -> {}
+            "PENGINAPAN" -> {
+                val data : DataPenginapan = listData[position] as DataPenginapan
+                binding.apply {
+                    imageCategory.load(data.image){
+                        crossfade(true)
+                        transformations(RoundedCornersTransformation(10f))
+                    }
+                    titleCategory.text = data.title
+                    descCategory.text = data.content
+                    if (data.isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) { crossfade(true)}
+                    else imageSimpan.load(R.drawable.ic_item_mark) { crossfade(true)}
+
+                    itemSelect.setOnClickListener{
+                        val moveWithObjectIntent = Intent(activity, DetailPenginapan::class.java)
+                        moveWithObjectIntent.putExtra(DetailPenginapan.EXTRA_MYDATA, data)
                         activity.startActivity(moveWithObjectIntent)
                     }
                 }

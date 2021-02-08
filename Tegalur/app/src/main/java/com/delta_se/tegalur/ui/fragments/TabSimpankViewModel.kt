@@ -57,4 +57,37 @@ class TabSimpankViewModel : ViewModel() {
             _event.value = roomEvent
         }
     }
+
+    private val _pariwisata = MutableLiveData<List<ListItem>>()
+    val pariwisataSimpan : LiveData<List<ListItem>> get() = _pariwisata
+
+    private val roomPariwisata = mutableListOf<ListItem>()
+
+    fun getPariwisataFromRoom(id: Int) = viewModelScope.launch {
+        roomPariwisata.removeAll(roomPariwisata)
+        DestinationServices.getPariwisata {
+            it.data?.forEachIndexed { index, listItem ->
+                listItem.id = id
+                if (index == id && !roomPariwisata.contains(listItem)) roomPariwisata.add((listItem))
+            }
+            _pariwisata.value = roomPariwisata
+        }
+    }
+
+    private val _penginapan = MutableLiveData<List<ListItem>>()
+    val penginapanSimpan : LiveData<List<ListItem>> get() = _penginapan
+
+    private val roomPenginapan = mutableListOf<ListItem>()
+
+    fun getPenginapanFromRoom(id: Int) = viewModelScope.launch {
+        roomPenginapan.removeAll(roomPenginapan)
+        DestinationServices.getPenginapan {
+            it.data?.forEachIndexed { index, listItem ->
+                listItem.id = id
+                if (index == id && !roomPenginapan.contains(listItem)) roomPenginapan.add((listItem))
+            }
+            _penginapan.value = roomPenginapan
+        }
+    }
+
 }

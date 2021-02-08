@@ -19,14 +19,12 @@ import com.delta_se.tegalur.databinding.FragmentTabSearchBinding
 import com.delta_se.tegalur.ui.adapter.ListCategoryAdapter
 import com.delta_se.tegalur.ui.adapter.ListSimpanAdapter
 import com.delta_se.tegalur.utils.Helpers.toDataPariwisata
+import com.delta_se.tegalur.utils.Helpers.toDataPenginapan
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem
 
 class TabSearchFragment () : Fragment() {
 
     private lateinit var binding: FragmentTabSearchBinding
-
-    private var listBerita = ArrayList<DataBerita>()
-    private var listPariwisata = ArrayList<DataPariwisata>()
     private val model : TabSearchViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,24 +39,36 @@ class TabSearchFragment () : Fragment() {
         return inflater.inflate(R.layout.fragment_tab_search, container, false)
     }
 
-    private var dataRecycler = ArrayList<DataRecycler>()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentTabSearchBinding.bind(view)
-
         var index = FragmentPagerItem.getPosition(arguments)
         showFragment(index)
+    }
+
+    private fun convertPageIdToId(pageId: String) : Int{
+        val clear = pageId.split(" ").toTypedArray()
+        return clear[1].toInt()
     }
 
     fun showFragment(indeks : Int){
         when(indeks){
             0 -> {
-                val modeAdapter = "PARIWISATA"
-
+                model.getSavedTourism(requireActivity().application, requireActivity())
                 model.getPariwisata()
+                val modeAdapter = "PARIWISATA"
+//                var idPariw : Int
+//                model.saved.observe(viewLifecycleOwner){
+//                    it.forEach { dataSave ->
+//                        if (dataSave.type.equals(modeAdapter)){
+//                            model.getPariwisata()
+//                        }
+//
+//                    }
+//                }
+
                 model.pariwisata.observe(viewLifecycleOwner) {
-                    if (it != null) populateData(it.toDataPariwisata(), modeAdapter)
+                    populateData(it.toDataPariwisata(), modeAdapter)
                 }
             }
             1 -> {}
@@ -82,7 +92,15 @@ class TabSearchFragment () : Fragment() {
 //                    adapter = ListCategoryAdapter(dataRecycler, requireActivity(), "PARIWISATA")
 //                }
             }
-            3 -> {}
+            3 -> {
+                model.getSavedLodging(requireActivity().application, requireActivity())
+                model.getPenginapan()
+                val modeAdapter = "PENGINAPAN"
+
+                model.penginapan.observe(viewLifecycleOwner){
+                    populateData(it.toDataPenginapan(), modeAdapter)
+                }
+            }
         }
     }
 
@@ -90,7 +108,7 @@ class TabSearchFragment () : Fragment() {
         rvSearch.apply {
             layoutManager = LinearLayoutManager(activity)
             setHasFixedSize(true)
-            adapter = ListCategoryAdapter(it, requireActivity(), modeAdapter)
+            adapter = ListCategoryAdapter(it, context, modeAdapter, model)
         }
     }
 }
