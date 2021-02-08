@@ -51,9 +51,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        var lat:Double = data!!.lat
-        var lng:Double = data!!.lang
-        val location = LatLng(lat, lng)
+        var lat: Double? = data?.lat
+        var lng: Double? = data?.lang
+        val location = LatLng(lat!!, lng!!)
         mMap.addMarker(MarkerOptions().position(location).title(data?.title.toString()))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 16.0f))
         mMap.setOnMapLongClickListener { latLng ->

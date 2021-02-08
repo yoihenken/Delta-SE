@@ -5,8 +5,11 @@ import android.content.Intent
 import android.location.Geocoder
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
+import androidx.activity.viewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.observe
 import coil.load
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.model.DataPariwisata
@@ -17,6 +20,7 @@ import kotlinx.android.synthetic.main.content_scrolling_pariwisata.*
 class DetailPariwisata : AppCompatActivity() {
 
     private lateinit var binding : ActivityDetailPariwisataBinding
+    private val model : DetailPariwisataViewModel by viewModels()
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
@@ -41,6 +45,8 @@ class DetailPariwisata : AppCompatActivity() {
 
         supportActionBar?.title = myData?.title.toString()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        model.getPariwisataDetail(myData?.id!!)
 
         val geoCoder = Geocoder(this)
         var dataAddress = geoCoder.getFromLocationName(myData?.title.toString(),1)
@@ -67,14 +73,16 @@ class DetailPariwisata : AppCompatActivity() {
         }
 
 
-        binding.apply {
-            toolbarLayoutPariwisata.setExpandedTitleTextAppearance(R.style.ExpandedAppBar)
-            titlePariwisata.text = myData?.title
-            ivDetailPhoto.load(myData?.image){
-                crossfade(true)
+        model.pariwisata.observe(this){
+            binding.apply {
+                toolbarLayoutPariwisata.setExpandedTitleTextAppearance(R.style.ExpandedAppBar)
+                titlePariwisata.text = myData?.title
+                ivDetailPhoto.load(myData?.image){
+                    crossfade(true)
+                }
+                isiAlamat.text = it.address
+                isiDeskripsi.text = it.content
             }
-            isiAlamat.text = myData?.address
-            isiDeskripsi.text = myData?.content
         }
     }
 }

@@ -10,6 +10,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.marginTop
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.observe
 import coil.load
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.model.DataBerita
@@ -182,15 +183,15 @@ class DetailBerita : AppCompatActivity() {
 
         "BERITA" -> {
             model.getBeritaDetail(dataBerita?.page!!, dataBerita.id!!)
-            model.berita.observe(this, {
+            model.berita.observe(this) {
                 populateDataAdapter(it)
-            })
+            }
         }
         "EVENT" -> {
             model.getEventDetail(dataEvent?.page!!, dataEvent.id!!)
-            model.event.observe(this, {
+            model.event.observe(this) {
                 populateDataAdapter(it, null, dataEvent)
-            })
+            }
         }
         else -> {}
     }
@@ -198,10 +199,10 @@ class DetailBerita : AppCompatActivity() {
     private fun getDataFromDatabase(onDataResult : (data: List<DataSave>) -> Unit){
         lifecycleScope.launch {
             modelDataSave.getAllSimpan().collect {
-                it.observe(this@DetailBerita, { data ->
+                it.observe(this@DetailBerita) { data ->
                     onDataResult(data)
-//                    Log.d("DetailBerita", "getDataFromDatabase: getDataFromDatabase")
-                })
+            // Log.d("DetailBerita", "getDataFromDatabase: getDataFromDatabase")
+                }
             }
         }
     }

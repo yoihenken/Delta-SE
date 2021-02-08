@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.delta_se.tegalur.R
@@ -40,9 +41,9 @@ class EventFragment : Fragment() {
         model.getSavedEvent(requireActivity().application, requireActivity())
 
         model.getEvent(page)
-        model.event.observe(viewLifecycleOwner, {
+        model.event.observe(viewLifecycleOwner) {
             populateDataEvent(it)
-        })
+        }
 
         binding.apply {
             swipyEvent.setOnRefreshListener {

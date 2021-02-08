@@ -3,9 +3,11 @@ package com.delta_se.tegalur.utils
 import android.util.Log
 import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.data.model.DataEvent
+import com.delta_se.tegalur.data.model.DataPariwisata
 import com.delta_se.tegalur.data.model.DataSave
 import com.delta_se.tegalur.data.response.ListItem
 import com.delta_se.tegalur.data.response.ObjectDetail
+import com.delta_se.tegalur.ui.fragments.TabSearchViewModel
 import java.text.SimpleDateFormat
 
 object Helpers {
@@ -136,5 +138,16 @@ object Helpers {
         )
     }
 
+//    Pariwisata
+
+    fun List<ListItem>.toDataPariwisata() : MutableList<Any>{
+        val pariwisata = mutableListOf<Any>()
+        this.forEachIndexed { index, listItem ->
+            pariwisata.add(
+                DataPariwisata(index, listItem.title, listItem.image, null, null, null, null, false)
+            )
+        }
+        return pariwisata
+    }
 
 }

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.delta_se.tegalur.R
@@ -41,10 +42,10 @@ class BeritaFragment : Fragment() {
 
         model.getSavedNews(requireActivity().application, requireActivity())
         model.getBerita(page)
-        model.berita.observe(viewLifecycleOwner, {
+        model.berita.observe(viewLifecycleOwner) {
             Log.d("BeritaFragment", "Berita : $it")
             populateDataBerita(it)
-        })
+        }
 
         binding.apply {
             sweepBerita.setOnRefreshListener {

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
@@ -29,19 +30,19 @@ class ListEventHolder (itemView : View) : RecyclerView.ViewHolder(itemView) {
         titleList.text = data.title
         descList.text = data.date
 
-        model.saved.observe((context as Activity) as LifecycleOwner, {
+        model.saved.observe((context as Activity) as LifecycleOwner) {
             data.isSaved = false
             var isSaved : Boolean
             it.forEach { dataSave ->
                 isSaved = it.contains(data.toSimpanHolder(dataSave.id))
-//                Log.d("ListEventHolder", "saved1: $it")
-//                Log.d("ListEventHolder", "saved1: ${data.toSimpanHolder(dataSave.id)}")
-//                Log.d("ListEventHolder", "bindView: $isSaved")
+    //                Log.d("ListEventHolder", "saved1: $it")
+    //                Log.d("ListEventHolder", "saved1: ${data.toSimpanHolder(dataSave.id)}")
+    //                Log.d("ListEventHolder", "bindView: $isSaved")
                 if (isSaved) data.isSaved = true
             }
             if (data.isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) { crossfade(true) }
             else imageSimpan.load(R.drawable.ic_item_mark) { crossfade(true) }
-        })
+        }
 
         itemView.setOnClickListener{
             val moveWithObjectIntent = Intent(context, DetailBerita::class.java)

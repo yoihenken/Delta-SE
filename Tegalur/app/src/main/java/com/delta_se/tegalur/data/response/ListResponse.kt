@@ -7,6 +7,9 @@ data class ListResponse(
     @field:SerializedName("list")
     val list: List<ListItem>? = null,
 
+    @field:SerializedName("data")
+    val data: List<ListItem>? = null,
+
     @field:SerializedName("status")
     val status: Boolean? = null
 )

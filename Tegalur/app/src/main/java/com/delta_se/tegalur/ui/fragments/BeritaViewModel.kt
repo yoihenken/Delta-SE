@@ -39,12 +39,12 @@ class BeritaViewModel : ViewModel() {
 
     fun getSavedNews(application: Application, activity: Activity) = viewModelScope.launch {
         SimpanViewModel(application).getAllSimpan().collect {
-            it.observe(activity as LifecycleOwner,{ saved ->
+            it.observe(activity as LifecycleOwner) { saved ->
                 saved.forEach { item ->
                     if (item.type.equals("BERITA")) saveRoom.add(item)
                 }
                 _saved.value = saved
-            })
+            }
         }
     }
 }

@@ -31,9 +31,9 @@ class EventViewModel : ViewModel() {
 
     fun getSavedEvent(application: Application, activity: Activity) = viewModelScope.launch {
         SimpanViewModel(application).getAllSimpan().collect {
-            it.observe(activity as LifecycleOwner,{ saved ->
+            it.observe(activity as LifecycleOwner) { saved ->
                 _saved.value = saved
-            })
+            }
         }
     }
 }
