@@ -16,6 +16,7 @@ import com.delta_se.tegalur.data.model.DataPenginapan
 import com.delta_se.tegalur.data.model.DataSave
 import com.delta_se.tegalur.databinding.ActivityDetailPenginapanBinding
 import com.delta_se.tegalur.ui.fragments.SimpanViewModel
+import com.delta_se.tegalur.utils.Helpers.toMap
 import com.delta_se.tegalur.utils.Helpers.toSimpan
 import kotlinx.android.synthetic.main.content_detail_penginapan.*
 import kotlinx.android.synthetic.main.content_detail_penginapan.isiAlamat
@@ -65,7 +66,7 @@ class DetailPenginapan : AppCompatActivity() {
 
         binding.fabMapPeng.setOnClickListener {
             val moveWithObjectIntent = Intent(this, MapsActivity::class.java)
-            moveWithObjectIntent.putExtra(MapsActivity.EXTRA_MYDATA, myData)
+            moveWithObjectIntent.putExtra(MapsActivity.EXTRA_MYDATA, myData?.toMap())
             startActivity(moveWithObjectIntent)
         }
 

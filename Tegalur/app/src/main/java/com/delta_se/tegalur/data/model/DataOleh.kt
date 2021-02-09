@@ -5,8 +5,10 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DataOleh (
-    val id : Int? = 0,
-    val title : String? = null,
-    val image : String? = null,
-    val content : String? = null
+    var id : Int? = 0,
+    var title : String? = null,
+    var image : String? = null,
+    var content : String? = null,
+    var isSaved : Boolean = false
+
 ) : Parcelable
