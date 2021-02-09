@@ -18,6 +18,8 @@ import com.delta_se.tegalur.data.model.DataRecycler
 import com.delta_se.tegalur.databinding.FragmentTabSearchBinding
 import com.delta_se.tegalur.ui.adapter.ListCategoryAdapter
 import com.delta_se.tegalur.ui.adapter.ListSimpanAdapter
+import com.delta_se.tegalur.utils.Helpers.toDataKuliner
+import com.delta_se.tegalur.utils.Helpers.toDataOleh
 import com.delta_se.tegalur.utils.Helpers.toDataPariwisata
 import com.delta_se.tegalur.utils.Helpers.toDataPenginapan
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem
@@ -71,26 +73,21 @@ class TabSearchFragment () : Fragment() {
                     populateData(it.toDataPariwisata(), modeAdapter)
                 }
             }
-            1 -> {}
+            1 -> {
+                model.getSavedKul(requireActivity().application, requireActivity())
+                model.getKuliner()
+                val modeAdapter = "KULINER"
+                model.kuliner.observe(viewLifecycleOwner){
+                    populateData(it.toDataKuliner(), modeAdapter)
+                }
+            }
             2 -> {
-//                getDataPariwisata()
-//                dataRecycler.clear()
-//                for (item in listPariwisata) {
-//                    dataRecycler.add(
-//                            DataRecycler(
-//                                    item.id,
-//                                    item.title!!,
-//                                    item.image!!,
-//                                    item.address!!,
-//                                    item.isSaved
-//                            )
-//                    )
-//                }
-//                binding.rvSearch.apply {
-//                    layoutManager = LinearLayoutManager(activity)
-//                    setHasFixedSize(true)
-//                    adapter = ListCategoryAdapter(dataRecycler, requireActivity(), "PARIWISATA")
-//                }
+                model.getSavedOleh(requireActivity().application, requireActivity())
+                model.getOleh()
+                val modeAdapter = "OLEH"
+                model.oleh.observe(viewLifecycleOwner){
+                    populateData(it.toDataOleh(), modeAdapter)
+                }
             }
             3 -> {
                 model.getSavedLodging(requireActivity().application, requireActivity())

@@ -5,7 +5,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DataKuliner (
-    var id : Int? = 0,
+    var id : Int? = null,
     var title : String? = null,
     var image : String? = null,
     var address : String? = null,

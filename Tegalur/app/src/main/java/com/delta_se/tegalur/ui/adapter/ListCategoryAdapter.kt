@@ -13,10 +13,7 @@ import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.dummy.DataDummy
-import com.delta_se.tegalur.data.model.DataBerita
-import com.delta_se.tegalur.data.model.DataPariwisata
-import com.delta_se.tegalur.data.model.DataPenginapan
-import com.delta_se.tegalur.data.model.DataRecycler
+import com.delta_se.tegalur.data.model.*
 import com.delta_se.tegalur.databinding.ItemCategoryBinding
 import com.delta_se.tegalur.ui.activity.DetailBerita
 import com.delta_se.tegalur.ui.activity.DetailPariwisata
@@ -71,8 +68,60 @@ class ListCategoryAdapter(
                 }
             }
 
-            "OLEH" -> {}
-            "KULINER" -> {}
+            "OLEH" -> {
+                val data : DataOleh = listData[position] as  DataOleh
+                binding.apply {
+                    imageCategory.load(data.image) {
+                        crossfade(true)
+                        transformations(RoundedCornersTransformation(10f))
+                    }
+                    titleCategory.text = data.title
+
+                    model.savedOleh.observe( (context) as LifecycleOwner){
+                        data.isSaved = false
+                        var isSaved : Boolean
+                        it.forEach { dataSave ->
+                            isSaved = it.contains(data.toSimpanHolder(dataSave.id))
+                            if (isSaved) data.isSaved = true
+                        }
+                    }
+                    if (data.isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) { crossfade(true) }
+                    else imageSimpan.load(R.drawable.ic_item_mark) { crossfade(true) }
+                }
+                holder.itemView.setOnClickListener {
+                    val moveWithObjectIntent = Intent(context, DetailOleh::class.java)
+                    moveWithObjectIntent.putExtra(DetailOleh.EXTRA_MYDATA, data)
+                    context.startActivity(moveWithObjectIntent)
+                }
+            }
+
+            "KULINER" -> {
+                val data : DataKuliner = listData[position] as  DataKuliner
+                binding.apply {
+                    imageCategory.load(data.image) {
+                        crossfade(true)
+                        transformations(RoundedCornersTransformation(10f))
+                    }
+                    titleCategory.text = data.title
+
+                    model.savedKul.observe( (context) as LifecycleOwner){
+                        data.isSaved = false
+                        var isSaved : Boolean
+                        it.forEach { dataSave ->
+                            isSaved = it.contains(data.toSimpanHolder(dataSave.id))
+                            if (isSaved) data.isSaved = true
+                        }
+                    }
+                    if (data.isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) { crossfade(true) }
+                    else imageSimpan.load(R.drawable.ic_item_mark) { crossfade(true) }
+                }
+                holder.itemView.setOnClickListener {
+                    val moveWithObjectIntent = Intent(context, DetailKuliner::class.java)
+                    moveWithObjectIntent.putExtra(DetailKuliner.EXTRA_MYDATA, data)
+                    context.startActivity(moveWithObjectIntent)
+                }
+            }
+
             "PENGINAPAN" -> {
                 val data : DataPenginapan = listData[position] as DataPenginapan
                 binding.apply {

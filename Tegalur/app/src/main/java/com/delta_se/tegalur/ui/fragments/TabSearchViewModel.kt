@@ -43,6 +43,54 @@ class TabSearchViewModel : ViewModel(){
         }
     }
 
+    private val _kuliner = MutableLiveData<List<ListItem>>()
+    val kuliner : LiveData<List<ListItem>> get() = _kuliner
+
+    fun getKuliner() = viewModelScope.launch {
+        DestinationServices.getKuliner {
+            _kuliner.value = it.data
+        }
+    }
+
+    private val _savedKul = MutableLiveData<List<DataSave>>()
+    val savedKul : LiveData<List<DataSave>> get() = _savedKul
+
+    fun getSavedKul(application: Application, activity: Activity) = viewModelScope.launch {
+        roomSave.removeAll(roomSave)
+        SimpanViewModel(application).getAllSimpan().collect {
+            it.observe(activity as LifecycleOwner) { room ->
+                room.forEach { item ->
+                    if (item.type.equals("KULINER")) roomSave.add(item)
+                }
+                _savedKul.value = roomSave.distinct().toMutableList()
+            }
+        }
+    }
+
+    private val _oleh = MutableLiveData<List<ListItem>>()
+    val oleh : LiveData<List<ListItem>> get() = _oleh
+
+    fun getOleh() = viewModelScope.launch {
+        DestinationServices.getOleh {
+            _oleh.value = it.data
+        }
+    }
+
+    private val _savedOleh = MutableLiveData<List<DataSave>>()
+    val savedOleh : LiveData<List<DataSave>> get() = _savedOleh
+
+    fun getSavedOleh(application: Application, activity: Activity) = viewModelScope.launch {
+        roomSave.removeAll(roomSave)
+        SimpanViewModel(application).getAllSimpan().collect {
+            it.observe(activity as LifecycleOwner) { room ->
+                room.forEach { item ->
+                    if (item.type.equals("OLEH")) roomSave.add(item)
+                }
+                _savedKul.value = roomSave.distinct().toMutableList()
+            }
+        }
+    }
+
     private val _penginapan = MutableLiveData<List<ListItem>>()
     val penginapan : LiveData<List<ListItem>> get() = _penginapan
 

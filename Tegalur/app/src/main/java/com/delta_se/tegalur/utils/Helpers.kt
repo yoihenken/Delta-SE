@@ -190,6 +190,107 @@ object Helpers {
         )
     }
 
+//    Kuliner
+
+    fun List<ListItem>.toDataKuliner(): MutableList<Any> {
+        val kuliner = mutableListOf<Any>()
+        this.forEachIndexed { index, listItem ->
+            kuliner.add(
+                DataKuliner(
+                    index,
+                    listItem.title,
+                    listItem.image,
+                    null,
+                    null,
+                    false
+                )
+            )
+        }
+        return kuliner
+    }
+
+    fun DataKuliner.toSimpan(): DataSave {
+        return DataSave(
+            pageid = buildString { append("00 ", this@toSimpan.id) },
+            type = "KULINER"
+        )
+    }
+
+    fun List<ListItem>.toDataKulinerFromRoom(): MutableList<Any> {
+        val kuliner = mutableListOf<Any>()
+        this.forEach {
+            kuliner.add(
+                DataKuliner(
+                    it.id,
+                    it.title,
+                    it.image,
+                    null,
+                    null,
+                    true
+                )
+            )
+        }
+        return kuliner
+    }
+
+    fun DataKuliner.toSimpanHolder(id: Int?): DataSave {
+        Log.d("Helpers", "toSimpan: ${id}")
+        return DataSave(
+            id,
+            pageid = buildString { append("00 ", this@toSimpanHolder.id) },
+            type = "KULINER"
+        )
+    }
+
+//    Oleh
+    fun List<ListItem>.toDataOleh(): MutableList<Any> {
+        val oleh = mutableListOf<Any>()
+        this.forEachIndexed { index, listItem ->
+            oleh.add(
+                DataOleh(
+                    index,
+                    listItem.title,
+                    listItem.image,
+                    null,
+                    false
+                )
+            )
+        }
+        return oleh
+    }
+
+    fun DataOleh.toSimpan(): DataSave {
+        return DataSave(
+            pageid = buildString { append("00 ", this@toSimpan.id) },
+            type = "OLEH"
+        )
+    }
+
+    fun List<ListItem>.toDataOlehFromRoom(): MutableList<Any> {
+        val oleh = mutableListOf<Any>()
+        this.forEach {
+            oleh.add(
+                DataOleh(
+                    it.id,
+                    it.title,
+                    it.image,
+                    null,
+                    true
+                )
+            )
+        }
+        return oleh
+    }
+
+    fun DataOleh.toSimpanHolder(id: Int?): DataSave {
+        Log.d("Helpers", "toSimpan: ${id}")
+        return DataSave(
+            id,
+            pageid = buildString { append("00 ", this@toSimpanHolder.id) },
+            type = "OLEH"
+        )
+    }
+
 //    Penginapan
 
     fun List<ListItem>.toDataPenginapan(): MutableList<Any> {
