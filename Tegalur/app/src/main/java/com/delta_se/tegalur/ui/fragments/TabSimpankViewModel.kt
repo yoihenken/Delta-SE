@@ -74,6 +74,38 @@ class TabSimpankViewModel : ViewModel() {
         }
     }
 
+    private val _kuliner = MutableLiveData<List<ListItem>>()
+    val kulinerSimpan : LiveData<List<ListItem>> get() = _kuliner
+
+    private val roomKuliner = mutableListOf<ListItem>()
+
+    fun getKulinerFromRoom(id: Int) = viewModelScope.launch {
+        roomKuliner.removeAll(roomKuliner)
+        DestinationServices.getKuliner {
+            it.data?.forEachIndexed { index, listItem ->
+                listItem.id = id
+                if (index == id && !roomKuliner.contains(listItem)) roomKuliner.add((listItem))
+            }
+            _kuliner.value = roomKuliner
+        }
+    }
+
+    private val _oleh = MutableLiveData<List<ListItem>>()
+    val olehSimpan : LiveData<List<ListItem>> get() = _oleh
+
+    private val roomOleh = mutableListOf<ListItem>()
+
+    fun getOlehFromRoom(id: Int) = viewModelScope.launch {
+        roomOleh.removeAll(roomOleh)
+        DestinationServices.getOleh{
+            it.data?.forEachIndexed { index, listItem ->
+                listItem.id = id
+                if (index == id && !roomOleh.contains(listItem)) roomOleh.add((listItem))
+            }
+            _oleh.value = roomOleh
+        }
+    }
+
     private val _penginapan = MutableLiveData<List<ListItem>>()
     val penginapanSimpan : LiveData<List<ListItem>> get() = _penginapan
 

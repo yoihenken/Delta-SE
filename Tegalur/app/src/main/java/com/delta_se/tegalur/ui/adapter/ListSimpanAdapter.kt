@@ -13,9 +13,7 @@ import coil.transform.RoundedCornersTransformation
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.model.*
 import com.delta_se.tegalur.databinding.ItemCategoryBinding
-import com.delta_se.tegalur.ui.activity.DetailBerita
-import com.delta_se.tegalur.ui.activity.DetailPariwisata
-import com.delta_se.tegalur.ui.activity.DetailPenginapan
+import com.delta_se.tegalur.ui.activity.*
 
 class ListSimpanAdapter(
     private val listData: List<Any>,
@@ -101,8 +99,42 @@ class ListSimpanAdapter(
                     }
                 }
             }
-            "OLEH "-> {}
-            "KULINER" -> {}
+            "OLEH"-> {
+                val data : DataOleh = listData[position] as DataOleh
+                binding.apply {
+                    imageCategory.load(data.image) {
+                        crossfade(true)
+                        transformations(RoundedCornersTransformation(10f))
+                    }
+                    titleCategory.text = data.title
+                    if (data.isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) { crossfade(true)}
+                    else imageSimpan.load(R.drawable.ic_item_mark) { crossfade(true)}
+
+                    itemSelect.setOnClickListener{
+                        val moveWithObjectIntent = Intent(activity, DetailOleh::class.java)
+                        moveWithObjectIntent.putExtra(DetailOleh.EXTRA_DATA, data)
+                        activity.startActivity(moveWithObjectIntent)
+                    }
+                }
+            }
+            "KULINER" -> {
+                val data : DataKuliner = listData[position] as DataKuliner
+                binding.apply {
+                    imageCategory.load(data.image) {
+                        crossfade(true)
+                        transformations(RoundedCornersTransformation(10f))
+                    }
+                    titleCategory.text = data.title
+                    if (data.isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) { crossfade(true)}
+                    else imageSimpan.load(R.drawable.ic_item_mark) { crossfade(true)}
+
+                    itemSelect.setOnClickListener{
+                        val moveWithObjectIntent = Intent(activity, DetailKuliner::class.java)
+                        moveWithObjectIntent.putExtra(DetailKuliner.EXTRA_DATA, data)
+                        activity.startActivity(moveWithObjectIntent)
+                    }
+                }
+            }
             "PENGINAPAN" -> {
                 val data : DataPenginapan = listData[position] as DataPenginapan
                 binding.apply {

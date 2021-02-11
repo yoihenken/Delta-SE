@@ -16,6 +16,8 @@ import com.delta_se.tegalur.databinding.FragmentTabSimpankBinding
 import com.delta_se.tegalur.ui.adapter.ListSimpanAdapter
 import com.delta_se.tegalur.utils.Helpers.toDataBeritaFromRoom
 import com.delta_se.tegalur.utils.Helpers.toDataEventFromRoom
+import com.delta_se.tegalur.utils.Helpers.toDataKulinerFromRoom
+import com.delta_se.tegalur.utils.Helpers.toDataOlehFromRoom
 import com.delta_se.tegalur.utils.Helpers.toDataPariwisataFromRoom
 import com.delta_se.tegalur.utils.Helpers.toDataPenginapanFromRoom
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem
@@ -122,8 +124,38 @@ class TabSimpankFragment : Fragment() {
                     if (listItem != null) populateData(listItem.toDataPariwisataFromRoom(), modeAdapter)
                 }
             }
-            3->{}
-            4->{}
+            3->{
+                val modeAdapter = "KULINER"
+                var idKul : Int? = null
+                model.saved.observe(viewLifecycleOwner){
+                    if (it.isEmpty()) binding.rvSimpan.adapter = null
+                    it.forEach { dataSave->
+                        if (dataSave.type.equals(modeAdapter)){
+                            idKul = convertPageIdToId(dataSave.pageid!!)
+                            model.getKulinerFromRoom(idKul!!)
+                        }else binding.rvSimpan.adapter = null
+                    }
+                }
+                model.kulinerSimpan.observe(viewLifecycleOwner){ listItem ->
+                    if (listItem != null) populateData(listItem.toDataKulinerFromRoom(), modeAdapter)
+                }
+            }
+            4->{
+                val modeAdapter = "OLEH"
+                var idOl : Int? = null
+                model.saved.observe(viewLifecycleOwner){
+                    if (it.isEmpty()) binding.rvSimpan.adapter = null
+                    it.forEach { dataSave->
+                        if (dataSave.type.equals(modeAdapter)){
+                            idOl = convertPageIdToId(dataSave.pageid!!)
+                            model.getOlehFromRoom(idOl!!)
+                        }else binding.rvSimpan.adapter = null
+                    }
+                }
+                model.olehSimpan.observe(viewLifecycleOwner){ listItem ->
+                    if (listItem != null) populateData(listItem.toDataOlehFromRoom(), modeAdapter)
+                }
+            }
             5->{
                 val modeAdapter = "PENGINAPAN"
                 var idPeng : Int? = null

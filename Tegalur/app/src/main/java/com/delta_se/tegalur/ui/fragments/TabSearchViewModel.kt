@@ -86,7 +86,7 @@ class TabSearchViewModel : ViewModel(){
                 room.forEach { item ->
                     if (item.type.equals("OLEH")) roomSave.add(item)
                 }
-                _savedKul.value = roomSave.distinct().toMutableList()
+                _savedOleh.value = roomSave.distinct().toMutableList()
             }
         }
     }
