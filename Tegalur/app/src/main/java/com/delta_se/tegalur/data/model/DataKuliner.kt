@@ -10,5 +10,7 @@ data class DataKuliner (
     var image : String? = null,
     var address : String? = null,
     var content : String? = null,
+    var lat : Double? = null,
+    var lang : Double? = null,
     var isSaved : Boolean = false
 ) : Parcelable
