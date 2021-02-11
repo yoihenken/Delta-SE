@@ -1,6 +1,5 @@
 package com.delta_se.tegalur.ui.adapter
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -12,10 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.delta_se.tegalur.R
-import com.delta_se.tegalur.data.dummy.DataDummy
 import com.delta_se.tegalur.data.model.*
 import com.delta_se.tegalur.databinding.ItemCategoryBinding
-import com.delta_se.tegalur.ui.activity.DetailBerita
+import com.delta_se.tegalur.ui.activity.DetailKuliner
+import com.delta_se.tegalur.ui.activity.DetailOleh
 import com.delta_se.tegalur.ui.activity.DetailPariwisata
 import com.delta_se.tegalur.ui.activity.DetailPenginapan
 import com.delta_se.tegalur.ui.fragments.TabSearchViewModel
@@ -90,7 +89,7 @@ class ListCategoryAdapter(
                 }
                 holder.itemView.setOnClickListener {
                     val moveWithObjectIntent = Intent(context, DetailOleh::class.java)
-                    moveWithObjectIntent.putExtra(DetailOleh.EXTRA_MYDATA, data)
+                    moveWithObjectIntent.putExtra(DetailOleh.EXTRA_DATA, data)
                     context.startActivity(moveWithObjectIntent)
                 }
             }
@@ -117,7 +116,7 @@ class ListCategoryAdapter(
                 }
                 holder.itemView.setOnClickListener {
                     val moveWithObjectIntent = Intent(context, DetailKuliner::class.java)
-                    moveWithObjectIntent.putExtra(DetailKuliner.EXTRA_MYDATA, data)
+                    moveWithObjectIntent.putExtra(DetailKuliner.EXTRA_DATA, data)
                     context.startActivity(moveWithObjectIntent)
                 }
             }
