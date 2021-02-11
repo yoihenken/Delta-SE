@@ -202,6 +202,8 @@ object Helpers {
                     listItem.image,
                     null,
                     null,
+                    null,
+                    null,
                     false
                 )
             )
@@ -224,6 +226,8 @@ object Helpers {
                     it.id,
                     it.title,
                     it.image,
+                    null,
+                    null,
                     null,
                     null,
                     true
@@ -357,5 +361,7 @@ object Helpers {
     fun DataPenginapan.toMap(): DataMap = DataMap(this.title, this.address, this.lat, this.lang)
 
     fun DataPariwisata.toMap(): DataMap = DataMap(this.title, this.address, this.lat, this.lang)
+
+    fun DataKuliner.toMap(): DataMap = DataMap(this.title, this.address, this.lat, this.lang)
 
 }
