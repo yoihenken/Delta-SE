@@ -5,11 +5,12 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DataPariwisata (
-    var title : String,
-    var image : String,
-    var address : String,
-    var content : String,
-    var lat: Double,
-    var lang: Double,
-    var isSaved : Boolean?
+    val id : Int? = null,
+    var title : String? = null,
+    var image : String? = null,
+    var address : String? = null,
+    var content : String? = null,
+    var lat: Double? = null,
+    var lang: Double? = null,
+    var isSaved : Boolean = false
 ) : Parcelable

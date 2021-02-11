@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ui.DetailPariwisata"
+    tools:context=".ui.activity.DetailPariwisata"
     tools:showIn="@layout/activity_detail_pariwisata"
     android:paddingTop="16dp">
 
@@ -103,6 +103,8 @@
             android:text="Hotel Sankita bisa dikatakan sebagai hotel yang tergolong mewah di Guci. Belokasi di dataran tinggi Guci Tegal dan berada di kaki gunung Slamet, menyuguhkan pemandangan pegunungan yang eksotis sangat cocok untuk  melepas lelah setelah berwisata atau setelah menempuh perjalanan yang panjang."
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:justificationMode="inter_word"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/titleDeskripsi"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

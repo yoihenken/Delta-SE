@@ -5,12 +5,15 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DataPenginapan(
-    var title : String,
-    var image : String,
-    var address : String,
-    var phone : Int,
-    var price : Double,
-    var website : String,
-    var content : String,
-    var isSaved : Boolean?
+    val id : Int? = null,
+    var title : String? = null,
+    var image : String? = null,
+    var address : String? = null,
+    var phone : Int? = null,
+    var price : String? = null,
+    var website : String? = null,
+    var content : String? = null,
+    var lat : Double? = null,
+    var lang : Double? = null,
+    var isSaved : Boolean = false
 ) : Parcelable

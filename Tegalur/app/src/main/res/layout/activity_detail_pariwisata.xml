@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.DetailPariwisata">
+    tools:context=".ui.activity.DetailPariwisata"
+    android:id="@+id/coordinatorPariwisata">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -43,16 +44,35 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_scrolling_pariwisata" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="30dp"
+        app:fabCustomSize="45dp"
+        app:maxImageSize="20dp"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
-        app:tint="@android:color/white"
-        app:srcCompat="@drawable/ic_place" />
+        app:srcCompat="@drawable/ic_item_mark"
+        app:tint="?attr/iconTint"
+        app:backgroundTint="?attr/colorBackgroundFloating"/>
+
+    <include android:id="@+id/csPariwisata" layout="@layout/content_scrolling_pariwisata" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/efabPariwisata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="40dp"
+        android:text="LIHAT PETA"
+        android:textColor="?attr/iconTint"
+        app:backgroundTint="?attr/colorBackgroundFloating"
+        app:icon="@drawable/ic_place"
+        app:iconTint="?attr/iconTint"
+        app:layout_anchor="@id/csPariwisata"
+        app:layout_anchorGravity="bottom|end" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

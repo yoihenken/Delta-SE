@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/ic_pariwisata"
-            app:tint="?attr/colorControlNormal" />
+            app:tint="?android:attr/textColorPrimary" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/ic_kuliner"
-            app:tint="?attr/colorControlNormal"/>
+            app:tint="?android:attr/textColorPrimary"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/ic_oleh"
-            app:tint="?attr/colorControlNormal"/>
+            app:tint="?android:attr/textColorPrimary"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/ic_penginapan"
-            app:tint="?attr/colorControlNormal"/>
+            app:tint="?android:attr/textColorPrimary"/>
 
         <TextView
             android:layout_width="wrap_content"

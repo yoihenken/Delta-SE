@@ -6,25 +6,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.delta_se.tegalur.R
-import com.delta_se.tegalur.SearchActivity
 import com.delta_se.tegalur.data.dummy.DataDummy
 import com.delta_se.tegalur.data.model.DataBerita
 import com.delta_se.tegalur.data.model.DataPariwisata
 import com.delta_se.tegalur.data.model.DataRecycler
 import com.delta_se.tegalur.databinding.FragmentTabSearchBinding
 import com.delta_se.tegalur.ui.adapter.ListCategoryAdapter
+import com.delta_se.tegalur.ui.adapter.ListSimpanAdapter
+import com.delta_se.tegalur.utils.Helpers.toDataKuliner
+import com.delta_se.tegalur.utils.Helpers.toDataOleh
+import com.delta_se.tegalur.utils.Helpers.toDataPariwisata
+import com.delta_se.tegalur.utils.Helpers.toDataPenginapan
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem
 
 class TabSearchFragment () : Fragment() {
 
     private lateinit var binding: FragmentTabSearchBinding
-
-    private var listBerita = ArrayList<DataBerita>()
-    private var listPariwisata = ArrayList<DataPariwisata>()
-
-    companion object {}
+    private val model : TabSearchViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,83 +41,71 @@ class TabSearchFragment () : Fragment() {
         return inflater.inflate(R.layout.fragment_tab_search, container, false)
     }
 
-    private var dataRecycler = ArrayList<DataRecycler>()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentTabSearchBinding.bind(view)
-
         var index = FragmentPagerItem.getPosition(arguments)
         showFragment(index)
+    }
+
+    private fun convertPageIdToId(pageId: String) : Int{
+        val clear = pageId.split(" ").toTypedArray()
+        return clear[1].toInt()
     }
 
     fun showFragment(indeks : Int){
         when(indeks){
             0 -> {
-                getDataBerita()
-                dataRecycler.clear()
-                for (item in listBerita) {
-                    dataRecycler.add(
-                            DataRecycler(
-                                    item.title,
-                                    item.image,
-                                    item.date,
-                                    item.isSaved
-                            )
-                    )
-                }
-                binding.rvSearch.apply {
-                    layoutManager = LinearLayoutManager(activity)
-                    setHasFixedSize(true)
-//                    adapter = ListBeritaAdapter(listBerita)
-                    adapter = ListCategoryAdapter(dataRecycler, requireActivity(), "BERITA")
+                model.getSavedTourism(requireActivity().application, requireActivity())
+                model.getPariwisata()
+                val modeAdapter = "PARIWISATA"
+//                var idPariw : Int
+//                model.saved.observe(viewLifecycleOwner){
+//                    it.forEach { dataSave ->
+//                        if (dataSave.type.equals(modeAdapter)){
+//                            model.getPariwisata()
+//                        }
+//
+//                    }
+//                }
 
+                model.pariwisata.observe(viewLifecycleOwner) {
+                    populateData(it.toDataPariwisata(), modeAdapter)
                 }
             }
-            1 -> {}
+            1 -> {
+                model.getSavedKul(requireActivity().application, requireActivity())
+                model.getKuliner()
+                val modeAdapter = "KULINER"
+                model.kuliner.observe(viewLifecycleOwner){
+                    populateData(it.toDataKuliner(), modeAdapter)
+                }
+            }
             2 -> {
-                getDataPariwisata()
-                dataRecycler.clear()
-                for (item in listPariwisata) {
-                    dataRecycler.add(
-                            DataRecycler(
-                                    item.title,
-                                    item.image,
-                                    item.address,
-                                    item.isSaved
-                            )
-                    )
-                }
-                binding.rvSearch.apply {
-                    layoutManager = LinearLayoutManager(activity)
-                    setHasFixedSize(true)
-                    adapter = ListCategoryAdapter(dataRecycler, requireActivity(), "PARIWISATA")
+                model.getSavedOleh(requireActivity().application, requireActivity())
+                model.getOleh()
+                val modeAdapter = "OLEH"
+                model.oleh.observe(viewLifecycleOwner){
+                    populateData(it.toDataOleh(), modeAdapter)
                 }
             }
+            3 -> {
+                model.getSavedLodging(requireActivity().application, requireActivity())
+                model.getPenginapan()
+                val modeAdapter = "PENGINAPAN"
 
+                model.penginapan.observe(viewLifecycleOwner){
+                    populateData(it.toDataPenginapan(), modeAdapter)
+                }
+            }
         }
     }
 
-    private fun getDataBerita() : ArrayList<DataBerita> {
-        val dataBerita : ArrayList<DataBerita> = DataDummy().getDataBerita()
-        listBerita.addAll(dataBerita)
-        return listBerita
+    private fun populateData(it: List<Any>, modeAdapter : String) = with(binding) {
+        rvSearch.apply {
+            layoutManager = LinearLayoutManager(activity)
+            setHasFixedSize(true)
+            adapter = ListCategoryAdapter(it, context, modeAdapter, model)
+        }
     }
-
-    private fun getDataEvent(){}
-
-    private fun getDataPariwisata() : ArrayList<DataPariwisata> {
-        val dataPariwisata : ArrayList<DataPariwisata> = DataDummy().getPariwisata()
-        listPariwisata.addAll(dataPariwisata)
-        return listPariwisata
-    }
-
-    private fun getDataKuliner(){}
-
-    private fun getDataOleh(){}
-
-    private fun getDataPenginapan(){}
-
-
-
 }

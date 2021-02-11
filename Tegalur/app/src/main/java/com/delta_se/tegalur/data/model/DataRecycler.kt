@@ -5,8 +5,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DataRecycler (
-    var title : String,
-    var image : String,
-    var desc : String,
-    var isSaved : Boolean?
+    var id : Int? = 0,
+    var title : String?= null,
+    var image : String?= null,
+    var desc : String?= null,
+    var isSaved : Boolean = false
 ) : Parcelable

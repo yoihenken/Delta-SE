@@ -1,13 +1,14 @@
 package com.delta_se.tegalur.ui.activity
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import com.delta_se.tegalur.R
+import com.delta_se.tegalur.data.model.DataMap
 import com.delta_se.tegalur.data.model.DataPariwisata
 import com.delta_se.tegalur.databinding.ActivityMapsBinding
-import com.delta_se.tegalur.ui.DetailPariwisata
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -21,8 +22,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding : ActivityMapsBinding
-
-    val data by getParcelableExtra<DataPariwisata>(DetailPariwisata.EXTRA_MYDATA)
+    private lateinit var data : DataMap
 
     companion object {
         const val EXTRA_MYDATA = "extra_mydata"
@@ -37,13 +37,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        data = intent.getParcelableExtra<DataMap>(EXTRA_MYDATA) ?: DataMap()
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         binding.apply {
-            gmapsTitle.text = data?.title.toString()
+            gmapsTitle.text = data?.title
             gmapsBack.setOnClickListener {
                 finish()
             }
@@ -52,15 +53,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        var lat:Double = data!!.lat
-        var lng:Double = data!!.lang
-        val location = LatLng(lat, lng)
+        var lat: Double? = data?.lat
+        var lng: Double? = data?.lang
+        val location = LatLng(lat!!, lng!!)
         mMap.addMarker(MarkerOptions().position(location).title(data?.title.toString()))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 16.0f))
         mMap.setOnMapLongClickListener { latLng ->
             val markerOptions = MarkerOptions()
             markerOptions.position(latLng)
-            markerOptions.draggable(true)
+            markerOptions.draggable(false)
             markerOptions.title(data?.title.toString())
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
             mMap.addMarker(markerOptions)

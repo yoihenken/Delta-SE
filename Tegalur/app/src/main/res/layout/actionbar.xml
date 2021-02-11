@@ -17,16 +17,16 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="?android:attr/colorBackground">
 
-        <ImageButton
+        <ImageView
             android:id="@+id/searchView"
-            android:layout_width="31dp"
-            android:layout_height="36dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_margin="2dp"
             android:src="@drawable/ic_search"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/transparent"
-            app:tint="?attr/colorControlNormal"/>
+            app:tint="?android:attr/textColorPrimary"/>
 
         <EditText
             android:id="@+id/cariText"
