@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.model.DataSave
@@ -85,7 +86,7 @@ class TabSimpankFragment : Fragment() {
                 }
 
                 model.beritaSimpan.observe(viewLifecycleOwner) { listItem ->
-                    if (listItem != null) populateData(listItem.toDataBeritaFromRoom(), modeAdapter)
+                    if (listItem != null) populateDataList(listItem.toDataBeritaFromRoom(), modeAdapter)
                 }
             }
             1 -> {
@@ -104,7 +105,7 @@ class TabSimpankFragment : Fragment() {
                     }
                 }
                 model.eventSimpan.observe(viewLifecycleOwner) { listItem ->
-                    if (listItem != null) populateData(listItem.toDataEventFromRoom(), modeAdapter)
+                    if (listItem != null) populateDataList(listItem.toDataEventFromRoom(), modeAdapter)
                 }
             }
             2->{
@@ -121,7 +122,7 @@ class TabSimpankFragment : Fragment() {
                     }
                 }
                 model.pariwisataSimpan.observe(viewLifecycleOwner){ listItem ->
-                    if (listItem != null) populateData(listItem.toDataPariwisataFromRoom(), modeAdapter)
+                    if (listItem != null) populateDataCategory(listItem.toDataPariwisataFromRoom(), modeAdapter)
                 }
             }
             3->{
@@ -137,7 +138,7 @@ class TabSimpankFragment : Fragment() {
                     }
                 }
                 model.kulinerSimpan.observe(viewLifecycleOwner){ listItem ->
-                    if (listItem != null) populateData(listItem.toDataKulinerFromRoom(), modeAdapter)
+                    if (listItem != null) populateDataCategory(listItem.toDataKulinerFromRoom(), modeAdapter)
                 }
             }
             4->{
@@ -153,7 +154,7 @@ class TabSimpankFragment : Fragment() {
                     }
                 }
                 model.olehSimpan.observe(viewLifecycleOwner){ listItem ->
-                    if (listItem != null) populateData(listItem.toDataOlehFromRoom(), modeAdapter)
+                    if (listItem != null) populateDataCategory(listItem.toDataOlehFromRoom(), modeAdapter)
                 }
             }
             5->{
@@ -170,7 +171,7 @@ class TabSimpankFragment : Fragment() {
                     }
                 }
                 model.penginapanSimpan.observe(viewLifecycleOwner){ listItem ->
-                    if (listItem != null) populateData(listItem.toDataPenginapanFromRoom(), modeAdapter)
+                    if (listItem != null) populateDataCategory(listItem.toDataPenginapanFromRoom(), modeAdapter)
                 }
             }
         }
@@ -180,9 +181,19 @@ class TabSimpankFragment : Fragment() {
         rvSimpan.adapter = null
     }
 
-    private fun populateData(it: List<Any>, modeAdapter : String) = with(binding) {
+    private fun populateDataList(it: List<Any>, modeAdapter : String) = with(binding) {
         rvSimpan.apply {
             layoutManager = LinearLayoutManager(activity)
+            setHasFixedSize(true)
+            itemAnimator = DefaultItemAnimator()
+            adapter = ListSimpanAdapter(it, requireActivity(), modeAdapter)
+            Log.d("TabSimpankFragment", "populateData: $it")
+        }
+    }
+
+    private fun populateDataCategory(it: List<Any>, modeAdapter : String) = with(binding) {
+        rvSimpan.apply {
+            layoutManager = GridLayoutManager(activity, 2)
             setHasFixedSize(true)
             itemAnimator = DefaultItemAnimator()
             adapter = ListSimpanAdapter(it, requireActivity(), modeAdapter)

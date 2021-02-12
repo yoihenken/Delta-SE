@@ -13,6 +13,7 @@ import coil.transform.RoundedCornersTransformation
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.model.*
 import com.delta_se.tegalur.databinding.ItemCategoryBinding
+import com.delta_se.tegalur.databinding.ItemListBinding
 import com.delta_se.tegalur.ui.activity.*
 
 class ListSimpanAdapter(
@@ -23,12 +24,18 @@ class ListSimpanAdapter(
 
     class ListSimpanHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    private lateinit var binding : ItemCategoryBinding
+    private lateinit var bindingList : ItemListBinding
+    private lateinit var bindingCategory : ItemCategoryBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListSimpanHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
-        binding = ItemCategoryBinding.bind(view)
-        return ListSimpanHolder(binding.root)
+        if (modeAdapter == "BERITA" || modeAdapter == "EVENT") {
+            bindingList = ItemListBinding.bind(view)
+            return ListSimpanHolder(bindingList.root)
+        }else {
+            bindingCategory = ItemCategoryBinding.bind(view)
+            return ListSimpanHolder(bindingCategory.root)
+        }
     }
 
     override fun onBindViewHolder(holder: ListSimpanHolder, position: Int) {
@@ -36,13 +43,13 @@ class ListSimpanAdapter(
             "BERITA" -> {
                 val data: DataBerita = listData[position] as DataBerita
                 Log.d("ListSimpanAdapter", "dataBerita: ${data}")
-                binding.apply {
-                    imageCategory.load(data.image) {
+                bindingList.apply {
+                    imageList.load(data.image) {
                         crossfade(true)
                         transformations(RoundedCornersTransformation(10f))
                     }
-                    titleCategory.text = data.title
-                    descCategory.text = data.date
+                    titleList.text = data.title
+                    descList.text = data.date
                     if (data.isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) {
                         crossfade(
                             true
@@ -62,13 +69,13 @@ class ListSimpanAdapter(
             }
             "EVENT"-> {
                 val data : DataEvent = listData[position] as DataEvent
-                binding.apply {
-                    imageCategory.load(data.image){
+                bindingList.apply {
+                    imageList.load(data.image){
                         crossfade(true)
                         transformations(RoundedCornersTransformation(10f))
                     }
-                    titleCategory.text = data.title
-                    descCategory.text = data.date
+                    titleList.text = data.title
+                    descList.text = data.date
                     if (data.isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) { crossfade(true)}
                     else imageSimpan.load(R.drawable.ic_item_mark) { crossfade(true)}
 
@@ -82,13 +89,12 @@ class ListSimpanAdapter(
             }
             "PARIWISATA" -> {
                 val data : DataPariwisata = listData[position] as DataPariwisata
-                binding.apply {
+                bindingCategory.apply {
                     imageCategory.load(data.image){
                         crossfade(true)
                         transformations(RoundedCornersTransformation(10f))
                     }
                     titleCategory.text = data.title
-                    descCategory.text = data.content
                     if (data.isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) { crossfade(true)}
                     else imageSimpan.load(R.drawable.ic_item_mark) { crossfade(true)}
 
@@ -101,7 +107,7 @@ class ListSimpanAdapter(
             }
             "OLEH"-> {
                 val data : DataOleh = listData[position] as DataOleh
-                binding.apply {
+                bindingCategory.apply {
                     imageCategory.load(data.image) {
                         crossfade(true)
                         transformations(RoundedCornersTransformation(10f))
@@ -119,7 +125,7 @@ class ListSimpanAdapter(
             }
             "KULINER" -> {
                 val data : DataKuliner = listData[position] as DataKuliner
-                binding.apply {
+                bindingCategory.apply {
                     imageCategory.load(data.image) {
                         crossfade(true)
                         transformations(RoundedCornersTransformation(10f))
@@ -137,13 +143,12 @@ class ListSimpanAdapter(
             }
             "PENGINAPAN" -> {
                 val data : DataPenginapan = listData[position] as DataPenginapan
-                binding.apply {
+                bindingCategory.apply {
                     imageCategory.load(data.image){
                         crossfade(true)
                         transformations(RoundedCornersTransformation(10f))
                     }
                     titleCategory.text = data.title
-                    descCategory.text = data.content
                     if (data.isSaved) imageSimpan.load(R.drawable.ic_item_active_mark) { crossfade(true)}
                     else imageSimpan.load(R.drawable.ic_item_mark) { crossfade(true)}
 
