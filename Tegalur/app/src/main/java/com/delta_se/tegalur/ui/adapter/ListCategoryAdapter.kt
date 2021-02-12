@@ -44,10 +44,9 @@ class ListCategoryAdapter(
                 binding.apply {
                     imageCategory.load(data.image) {
                         crossfade(true)
-                        transformations(RoundedCornersTransformation(10f))
+                        transformations(RoundedCornersTransformation(20f))
                     }
                     titleCategory.text = data.title
-                    descCategory.text = data.address
 
                     model.savedPariw.observe( (context) as LifecycleOwner){
                         data.isSaved = false
@@ -72,7 +71,7 @@ class ListCategoryAdapter(
                 binding.apply {
                     imageCategory.load(data.image) {
                         crossfade(true)
-                        transformations(RoundedCornersTransformation(10f))
+                        transformations(RoundedCornersTransformation(20f))
                     }
                     titleCategory.text = data.title
 
@@ -99,7 +98,7 @@ class ListCategoryAdapter(
                 binding.apply {
                     imageCategory.load(data.image) {
                         crossfade(true)
-                        transformations(RoundedCornersTransformation(10f))
+                        transformations(RoundedCornersTransformation(20f))
                     }
                     titleCategory.text = data.title
 
@@ -126,9 +125,8 @@ class ListCategoryAdapter(
                 binding.apply {
                     imageCategory.load(data.image) {
                         crossfade(true)
-                        transformations(RoundedCornersTransformation(10f))}
+                        transformations(RoundedCornersTransformation(20f))}
                     titleCategory.text = data.title
-                    descCategory.text = data.address
                     model.savedPeng.observe(context as LifecycleOwner){
                         data.isSaved = false
                         var isSaved = false

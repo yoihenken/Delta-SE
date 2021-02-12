@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.delta_se.tegalur.R
 import com.delta_se.tegalur.data.dummy.DataDummy
@@ -59,16 +60,6 @@ class TabSearchFragment () : Fragment() {
                 model.getSavedTourism(requireActivity().application, requireActivity())
                 model.getPariwisata()
                 val modeAdapter = "PARIWISATA"
-//                var idPariw : Int
-//                model.saved.observe(viewLifecycleOwner){
-//                    it.forEach { dataSave ->
-//                        if (dataSave.type.equals(modeAdapter)){
-//                            model.getPariwisata()
-//                        }
-//
-//                    }
-//                }
-
                 model.pariwisata.observe(viewLifecycleOwner) {
                     populateData(it.toDataPariwisata(), modeAdapter)
                 }
@@ -103,7 +94,7 @@ class TabSearchFragment () : Fragment() {
 
     private fun populateData(it: List<Any>, modeAdapter : String) = with(binding) {
         rvSearch.apply {
-            layoutManager = LinearLayoutManager(activity)
+            layoutManager = GridLayoutManager(activity, 2)
             setHasFixedSize(true)
             adapter = ListCategoryAdapter(it, context, modeAdapter, model)
         }
