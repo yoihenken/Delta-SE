@@ -4,6 +4,7 @@ import android.content.Intent
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -48,7 +49,6 @@ class DetailKuliner : AppCompatActivity() {
         supportActionBar?.title = dataKuliner.title
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        geoCoder()
         model.getKulinerDetail(dataKuliner.id!!)
         getDataFromDatabase {
             val simpan = it.find { sim ->
@@ -96,21 +96,25 @@ class DetailKuliner : AppCompatActivity() {
                 }
             }
         }
+        geoCoder()
     }
 
     fun geoCoder(){
         val geoCoder = Geocoder(this)
-        val dataAddress = geoCoder.getFromLocationName(dataKuliner?.title.toString(), 1)
+        val dataAddress = geoCoder.getFromLocationName(dataKuliner.title.toString(), 1)
 
-        dataKuliner.lat = dataAddress[0].latitude
-        dataKuliner.lang = dataAddress[0].longitude
+        if(dataAddress.equals("")){
+            dataKuliner.lat = dataAddress[0].latitude
+            dataKuliner.lang = dataAddress[0].longitude
 
-        var buttonFloatMap = findViewById<ExtendedFloatingActionButton>(R.id.efabPariwisata)
-        buttonFloatMap.setOnClickListener { view ->
-            Log.d("DetailPariwisata", "setOnClickListener: ${dataKuliner.toMap()}")
-            startActivity(Intent(this, MapsActivity::class.java).apply {
-                putExtra(MapsActivity.EXTRA_MYDATA, dataKuliner.toMap())
-            })
+            binding.efabKuliner.setOnClickListener { view ->
+                Log.d("DetailPariwisata", "setOnClickListener: ${dataKuliner.toMap()}")
+                startActivity(Intent(this, MapsActivity::class.java).apply {
+                    putExtra(MapsActivity.EXTRA_MYDATA, dataKuliner.toMap())
+                })
+            }
+        } else {
+            binding.efabKuliner.visibility = View.GONE
         }
     }
 

@@ -56,10 +56,12 @@
         app:layout_anchorGravity="bottom|end"
         app:srcCompat="@drawable/ic_item_mark"
         app:tint="?attr/iconTint"
+        app:fabCustomSize="45dp"
+        app:maxImageSize="20dp"
         app:backgroundTint="?attr/colorBackgroundFloating" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/efabPariwisata"
+        android:id="@+id/efabKuliner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -70,6 +72,6 @@
         app:icon="@drawable/ic_place"
         app:iconTint="?attr/iconTint"
         app:layout_anchor="@id/categoryKuliner"
-        app:layout_anchorGravity="bottom|end" />
+        app:layout_anchorGravity="bottom|end"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
