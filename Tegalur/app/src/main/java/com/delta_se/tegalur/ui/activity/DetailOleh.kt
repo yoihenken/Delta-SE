@@ -26,6 +26,11 @@ class DetailOleh : AppCompatActivity() {
     private lateinit var modelDataSave : SimpanViewModel
     private val model : DetailOlehViewModel by viewModels()
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailOlehBinding.inflate(layoutInflater)
