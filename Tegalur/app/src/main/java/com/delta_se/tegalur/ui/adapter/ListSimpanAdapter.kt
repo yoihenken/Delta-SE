@@ -28,13 +28,14 @@ class ListSimpanAdapter(
     private lateinit var bindingCategory : ItemCategoryBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListSimpanHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
-        if (modeAdapter == "BERITA" || modeAdapter == "EVENT") {
-            bindingList = ItemListBinding.bind(view)
-            return ListSimpanHolder(bindingList.root)
-        }else {
-            bindingCategory = ItemCategoryBinding.bind(view)
-            return ListSimpanHolder(bindingCategory.root)
+        val viewList = LayoutInflater.from(parent.context).inflate(R.layout.item_list, parent, false)
+        val viewCategory = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
+        return if (modeAdapter.equals("BERITA") || modeAdapter.equals("EVENT")) {
+            bindingList = ItemListBinding.bind(viewList)
+            ListSimpanHolder(bindingList.root)
+        } else {
+            bindingCategory = ItemCategoryBinding.bind(viewCategory)
+            ListSimpanHolder(bindingCategory.root)
         }
     }
 
