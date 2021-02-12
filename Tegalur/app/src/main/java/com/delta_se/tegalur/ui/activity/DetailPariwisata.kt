@@ -6,6 +6,7 @@ import android.location.Geocoder
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -53,21 +54,6 @@ class DetailPariwisata : AppCompatActivity() {
 
         supportActionBar?.title = myData?.title.toString()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-//        Geo Coder
-        val geoCoder = Geocoder(this)
-        var dataAddress = geoCoder.getFromLocationName(myData?.title.toString(), 1)
-
-        myData?.lat = dataAddress[0].latitude
-        myData?.lang = dataAddress[0].longitude
-
-        var buttonFloatMap = findViewById<ExtendedFloatingActionButton>(R.id.efabPariwisata)
-        buttonFloatMap.setOnClickListener { view ->
-            Log.d("DetailPariwisata", "setOnClickListener: ${myData?.toMap()}")
-            startActivity(Intent(this, MapsActivity::class.java).apply {
-                putExtra(MapsActivity.EXTRA_MYDATA, myData?.toMap())
-            })
-        }
 
         model.getPariwisataDetail(myData?.id!!)
 
@@ -118,6 +104,7 @@ class DetailPariwisata : AppCompatActivity() {
                 isiDeskripsi.text = it.content
             }
         }
+        geoCoder(myData)
     }
 
     private fun getDataFromDatabase(onDataResult: (data: List<DataSave>) -> Unit) {
@@ -127,6 +114,26 @@ class DetailPariwisata : AppCompatActivity() {
                     onDataResult(data)
                 }
             }
+        }
+    }
+
+    private fun geoCoder(myData : DataPariwisata?){
+        //        Geo Coder
+        val geoCoder = Geocoder(this)
+        var dataAddress = geoCoder.getFromLocationName(myData?.title.toString(), 1)
+
+        if (dataAddress.isNotEmpty()){
+            myData?.lat = dataAddress[0].latitude
+            myData?.lang = dataAddress[0].longitude
+
+            binding.efabPariwisata.setOnClickListener{
+                Log.d("DetailPariwisata", "setOnClickListener: ${myData?.toMap()}")
+                startActivity(Intent(this, MapsActivity::class.java).apply {
+                    putExtra(MapsActivity.EXTRA_MYDATA, myData?.toMap())
+                })
+            }
+        } else {
+            binding.efabPariwisata.visibility = View.GONE
         }
     }
 

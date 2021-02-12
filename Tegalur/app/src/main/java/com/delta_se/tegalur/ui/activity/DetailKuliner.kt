@@ -103,7 +103,7 @@ class DetailKuliner : AppCompatActivity() {
         val geoCoder = Geocoder(this)
         val dataAddress = geoCoder.getFromLocationName(dataKuliner.title.toString(), 1)
 
-        if(dataAddress.equals("")){
+        if(dataAddress.isNotEmpty()){
             dataKuliner.lat = dataAddress[0].latitude
             dataKuliner.lang = dataAddress[0].longitude
 

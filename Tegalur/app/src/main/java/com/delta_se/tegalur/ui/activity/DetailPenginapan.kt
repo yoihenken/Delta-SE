@@ -5,6 +5,8 @@ import android.content.Intent
 import android.location.Geocoder
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
@@ -55,20 +57,6 @@ class DetailPenginapan : AppCompatActivity() {
 
         supportActionBar?.title = myData?.title.toString()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-
-//        Geo Coder
-        val geocoder = Geocoder(this)
-        var dataAddress = geocoder.getFromLocationName(myData?.title.toString(), 1)
-
-        myData?.lat = dataAddress[0].latitude
-        myData?.lang = dataAddress[0].longitude
-
-        binding.fabMapPeng.setOnClickListener {
-            val moveWithObjectIntent = Intent(this, MapsActivity::class.java)
-            moveWithObjectIntent.putExtra(MapsActivity.EXTRA_MYDATA, myData?.toMap())
-            startActivity(moveWithObjectIntent)
-        }
 
         model.getPenginapanDetail(myData?.id!!)
 
@@ -124,6 +112,7 @@ class DetailPenginapan : AppCompatActivity() {
                 isiDeskripsi.text = it.content
             }
         }
+        geoCoder(myData)
     }
 
     private fun getDataFromDatabase(onDataResult : (data : List<DataSave>) -> Unit){
@@ -133,6 +122,25 @@ class DetailPenginapan : AppCompatActivity() {
                     onDataResult(data)
                 }
             }
+        }
+    }
+
+    fun geoCoder(myData : DataPenginapan?){
+        //        Geo Coder
+        val geocoder = Geocoder(this)
+        val dataAddress = geocoder.getFromLocationName(myData?.title.toString(), 1)
+        Log.d("DetailPenginapan", dataAddress.toString())
+        if (dataAddress.isNotEmpty()){
+            myData?.lat = dataAddress[0].latitude
+            myData?.lang = dataAddress[0].longitude
+
+            binding.fabMapPeng.setOnClickListener {
+                val moveWithObjectIntent = Intent(this, MapsActivity::class.java)
+                moveWithObjectIntent.putExtra(MapsActivity.EXTRA_MYDATA, myData?.toMap())
+                startActivity(moveWithObjectIntent)
+            }
+        } else {
+            binding.fabMapPeng.visibility = View.GONE
         }
     }
 }
