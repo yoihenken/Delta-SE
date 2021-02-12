@@ -21,7 +21,16 @@
             android:layout_marginEnd="16dp"
             android:background="@drawable/ic_back_grey"/>
 
-        <include layout="@layout/actionbar"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kategori"
+            android:textSize="24sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_margin="15dp"
+            android:textStyle="bold"/>
+
+        <include layout="@layout/actionbar" android:visibility="gone"/>
     </Toolbar>
 
     <com.ogaclejapan.smarttablayout.SmartTabLayout
