@@ -11,10 +11,10 @@ android {
 
     defaultConfig {
         applicationId "com.delta_se.tegalur"
-        minSdkVersion 25
+        minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
